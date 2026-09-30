@@ -11,7 +11,7 @@ const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linu
 const only = process.argv[2];
 
 (async () => {
-  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'manifest.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(process.env.MANIFEST || path.join(ROOT, 'build', 'manifest.json'), 'utf8'));
   fs.mkdirSync(PREVIEWS, { recursive: true });
   const browser = await chromium.launch({ executablePath: CHROME, args: ['--allow-file-access-from-files'] });
   for (const d of manifest) {

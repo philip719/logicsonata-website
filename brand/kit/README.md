@@ -23,6 +23,7 @@ python3 tools/build_foundations.py <folder with TTFs>    # swatches, fonts, grap
 python3 tools/build_print.py && node tools/render_print.js   # print PDFs and digital PNGs
 python3 tools/build_backgrounds.py                       # slide, card and cover backgrounds
 python3 tools/build_pptx.py && python3 tools/build_docx.py   # PowerPoint and Word templates
+python3 tools/build_guide.py && MANIFEST=build/manifest-guide.json node tools/render_print.js   # brand guidelines PDF
 ```
 
 The kit is written to `out/` (ignored by git); zip that folder to share it.
