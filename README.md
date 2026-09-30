@@ -26,6 +26,8 @@ running JavaScript, and the site runs on standard Hostinger shared hosting with 
 | `public/.htaccess` | Hostinger rules: clean URLs, 301s from the old `.html` URLs, www redirect, caching, security headers |
 | `src/app/llms.txt/route.ts` | Generates `/llms.txt`, the plain-text company summary for AI assistants |
 | `scripts/extract-logo.py` | Regenerates the transparent logo and favicons from `brand/` |
+| `brand/kit/` | Generator for the full brand kit: vector logos, stationery, Office templates, social images (see its README) |
+| `public/brand/` | Hosted brand files, such as the email signature logo |
 
 ## Languages
 

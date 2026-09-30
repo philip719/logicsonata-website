@@ -11,3 +11,7 @@ tools/hero-video/out/
 tools/product-visuals/node_modules
 tools/product-visuals/out/
 tools/whitepapers/.cache/
+
+# Brand kit build output
+brand/kit/out/
+brand/kit/build/
