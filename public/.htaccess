@@ -26,6 +26,11 @@ ErrorDocument 404 /404.html
   RewriteRule ^en/?$ https://www.logicsonata.com/ [R=301,L]
   RewriteRule ^en/(.+)$ https://www.logicsonata.com/$1 [R=301,L]
 
+  # Earlier language prefixes: /zh, /ms and /vi became /cn, /my and /vn
+  RewriteRule ^zh(/.*)?$ https://www.logicsonata.com/cn$1 [R=301,L]
+  RewriteRule ^ms(/.*)?$ https://www.logicsonata.com/my$1 [R=301,L]
+  RewriteRule ^vi(/.*)?$ https://www.logicsonata.com/vn$1 [R=301,L]
+
   # Strip trailing slashes from page URLs: /about/ -> /about
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.+)/$ https://www.logicsonata.com/$1 [R=301,L]

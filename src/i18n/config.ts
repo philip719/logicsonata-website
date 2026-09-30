@@ -1,23 +1,25 @@
 // Supported languages. English lives at the site root (/about); every other
-// language lives under its own prefix (/zh/about, /th/about ...).
+// language lives under its own prefix (/cn/about, /th/about ...).
+// Prefixes use the familiar market codes (CN, MY, VN); htmlLang and hreflang
+// keep the standard language codes that browsers and search engines expect.
 
-export const LOCALES = ['en', 'zh', 'id', 'ms', 'th', 'vi'] as const;
+export const LOCALES = ['en', 'cn', 'id', 'my', 'th', 'vn'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
 export const PREFIXED_LOCALES = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
 
 export const LOCALE_META: Record<Locale, { name: string; short: string; htmlLang: string; hreflang: string; ogLocale: string }> = {
   en: { name: 'English', short: 'EN', htmlLang: 'en', hreflang: 'en', ogLocale: 'en_SG' },
-  zh: { name: '简体中文', short: '中文', htmlLang: 'zh-Hans', hreflang: 'zh-Hans', ogLocale: 'zh_CN' },
+  cn: { name: '简体中文', short: 'CN', htmlLang: 'zh-Hans', hreflang: 'zh-Hans', ogLocale: 'zh_CN' },
   id: { name: 'Bahasa Indonesia', short: 'ID', htmlLang: 'id', hreflang: 'id', ogLocale: 'id_ID' },
-  ms: { name: 'Bahasa Melayu', short: 'MS', htmlLang: 'ms', hreflang: 'ms', ogLocale: 'ms_MY' },
-  th: { name: 'ไทย', short: 'ไทย', htmlLang: 'th', hreflang: 'th', ogLocale: 'th_TH' },
-  vi: { name: 'Tiếng Việt', short: 'VI', htmlLang: 'vi', hreflang: 'vi', ogLocale: 'vi_VN' },
+  my: { name: 'Bahasa Melayu', short: 'MY', htmlLang: 'ms', hreflang: 'ms', ogLocale: 'ms_MY' },
+  th: { name: 'ไทย', short: 'TH', htmlLang: 'th', hreflang: 'th', ogLocale: 'th_TH' },
+  vn: { name: 'Tiếng Việt', short: 'VN', htmlLang: 'vi', hreflang: 'vi', ogLocale: 'vi_VN' },
 };
 
 export const isLocale = (v: string): v is Locale => (LOCALES as readonly string[]).includes(v);
 
-/** Localised path: lp('zh', '/about') → '/zh/about'; lp('en', '/about') → '/about'. Hashes are kept. */
+/** Localised path: lp('cn', '/about') → '/cn/about'; lp('en', '/about') → '/about'. Hashes are kept. */
 export function lp(lang: Locale, path: string): string {
   if (!path.startsWith('/')) return path;
   if (lang === DEFAULT_LOCALE) return path;
@@ -26,7 +28,7 @@ export function lp(lang: Locale, path: string): string {
   return `/${lang}${path}`;
 }
 
-/** Strips a language prefix: '/zh/about' → '/about', '/zh' → '/'. */
+/** Strips a language prefix: '/cn/about' → '/about', '/cn' → '/'. */
 export function basePath(pathname: string): string {
   const [, first, ...rest] = pathname.split('/');
   if (first && isLocale(first) && first !== DEFAULT_LOCALE) return `/${rest.join('/')}`.replace(/\/$/, '') || '/';
@@ -36,11 +38,11 @@ export function basePath(pathname: string): string {
 /** Maps a browser language tag (navigator.languages) to a supported locale. */
 export function matchLocale(tag: string): Locale | null {
   const t = tag.toLowerCase();
-  if (t.startsWith('zh')) return 'zh';
+  if (t.startsWith('zh')) return 'cn';
   if (t.startsWith('id') || t.startsWith('in')) return 'id';
-  if (t.startsWith('ms')) return 'ms';
+  if (t.startsWith('ms')) return 'my';
   if (t.startsWith('th')) return 'th';
-  if (t.startsWith('vi')) return 'vi';
+  if (t.startsWith('vi')) return 'vn';
   if (t.startsWith('en')) return 'en';
   return null;
 }
@@ -48,11 +50,11 @@ export function matchLocale(tag: string): Locale | null {
 // Shown in the suggested language itself, so visitors can read the offer.
 export const SUGGEST: Record<Locale, { text: string; go: string; stay: string }> = {
   en: { text: 'This page is also available in English.', go: 'View in English', stay: 'Dismiss' },
-  zh: { text: '本页面提供简体中文版本。', go: '查看中文版', stay: '关闭' },
+  cn: { text: '本页面提供简体中文版本。', go: '查看中文版', stay: '关闭' },
   id: { text: 'Halaman ini tersedia dalam Bahasa Indonesia.', go: 'Lihat dalam Bahasa Indonesia', stay: 'Tutup' },
-  ms: { text: 'Halaman ini tersedia dalam Bahasa Melayu.', go: 'Lihat dalam Bahasa Melayu', stay: 'Tutup' },
+  my: { text: 'Halaman ini tersedia dalam Bahasa Melayu.', go: 'Lihat dalam Bahasa Melayu', stay: 'Tutup' },
   th: { text: 'หน้านี้มีให้บริการเป็นภาษาไทย', go: 'ดูเป็นภาษาไทย', stay: 'ปิด' },
-  vi: { text: 'Trang này có phiên bản tiếng Việt.', go: 'Xem bằng tiếng Việt', stay: 'Đóng' },
+  vn: { text: 'Trang này có phiên bản tiếng Việt.', go: 'Xem bằng tiếng Việt', stay: 'Đóng' },
 };
 
 export const LANG_STORAGE_KEY = 'ls_lang';

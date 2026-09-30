@@ -1,4 +1,4 @@
-// Usage: node scripts/check-translations.mjs <lang>   (zh, id, ms, th or vi)
+// Usage: node scripts/check-translations.mjs <lang>   (cn, id, my, th or vn)
 // Compiles the English and <lang> dictionaries and verifies the translation:
 // same shape, identical identifiers, preserved markup, no dashes, no leftovers.
 import { execSync } from 'node:child_process';

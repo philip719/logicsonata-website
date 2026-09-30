@@ -2,7 +2,7 @@ import { SiteShell, siteMetadata, siteViewport } from '@/components/SiteShell';
 import { PREFIXED_LOCALES } from '@/i18n/config';
 import { type LangParams, localeFrom } from '@/i18n/params';
 
-// Root layout for the translated sites (/zh, /id, /ms, /th, /vi).
+// Root layout for the translated sites (/cn, /id, /my, /th, /vn).
 export const dynamicParams = false;
 export const viewport = siteViewport;
 

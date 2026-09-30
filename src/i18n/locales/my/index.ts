@@ -13,4 +13,4 @@ import { services } from './services';
 import { solutions } from './solutions';
 import { whitepapers } from './whitepapers';
 
-export const ms: Dict = { common, data, home, solutions, services, about, partners, careers, contact, invest, whitepapers, productPage, products };
+export const my: Dict = { common, data, home, solutions, services, about, partners, careers, contact, invest, whitepapers, productPage, products };

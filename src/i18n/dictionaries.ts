@@ -1,16 +1,16 @@
 import { type Locale, LOCALES } from './config';
 import { en } from './locales/en';
-import { zh } from './locales/zh';
+import { cn } from './locales/cn';
 import { id } from './locales/id';
-import { ms } from './locales/ms';
+import { my } from './locales/my';
 import { th } from './locales/th';
-import { vi } from './locales/vi';
+import { vn } from './locales/vn';
 
 export type Dict = typeof en;
 
 // Every language has the same shape as English (enforced by TypeScript in each
 // locale's index.ts); this registry is filled in as locales are added.
-const DICTS: Partial<Record<Locale, Dict>> = { en, zh, id, ms, th, vi };
+const DICTS: Partial<Record<Locale, Dict>> = { en, cn, id, my, th, vn };
 
 export function getDict(lang: Locale): Dict {
   return DICTS[lang] ?? en;
