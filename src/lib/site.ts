@@ -4,12 +4,13 @@ export const SITE = {
   tagline: 'Intelligence. Harmony. Impact.',
   // Existing Formspree form, so consultation requests keep landing in the same inbox.
   formEndpoint: 'https://formspree.io/f/mlgqveyn',
-  careersFormUrl:
-    'https://docs.google.com/forms/d/e/1FAIpQLSfRCqXIUmQtD6SmTCMEBghBM8DPDTQvMVsj2MytQ-zRn04yHw/viewform?embedded=true',
+  // Job applications post here; the PHP script on Hostinger emails them to emails.careers.
+  careersEndpoint: '/api/apply.php',
   emails: {
     sales: 'sales@logicsonata.com',
     partners: 'partner@logicsonata.com',
     investors: 'investment@logicsonata.com',
+    careers: 'careers@logicsonata.com',
   },
   primaryCtaHref: '/contact',
 } as const;

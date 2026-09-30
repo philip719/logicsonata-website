@@ -77,9 +77,16 @@ npm run build    # writes the static site to ./out
   (Bing's index also feeds ChatGPT search and Microsoft Copilot).
 - Test structured data with Google's Rich Results Test (FAQ, JobPosting, Organization, Breadcrumbs).
 - Send a test enquiry through `/contact` and confirm it arrives via Formspree.
+- Submit a test job application with a small PDF through `/careers` and confirm it reaches `careers@logicsonata.com`.
 
 ## Forms
 
 - **Consultation form** (`/contact`) posts to the existing Formspree endpoint set in `src/lib/site.ts`. Every form also sends a `language`
   field, and leads from translated pages carry the language code in the email subject (for example `[TH]`).
-- **Job applications** (`/careers`) use the existing embedded Google Form.
+- **Job applications** (`/careers`) use the site's own form. It posts to `public/api/apply.php`, a small PHP
+  script that runs on the Hostinger plan and emails each application, with the CV attached, to
+  `careers@logicsonata.com`. The script accepts PDF or Word files up to 5 MB, checks the real file type,
+  blocks header injection and spam bots, limits each visitor to 5 applications per hour, and stores nothing
+  on the server. The mailbox `careers@logicsonata.com` must exist in Hostinger Email, because it is also the
+  sender address (this keeps the messages out of spam). To change the inbox, edit `TO_ADDRESS` and
+  `FROM_ADDRESS` at the top of `apply.php`.

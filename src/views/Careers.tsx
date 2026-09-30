@@ -1,8 +1,10 @@
+import { CareersForm } from '@/components/CareersForm';
 import { Icon } from '@/components/Icon';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
 import { Rich } from '@/components/Rich';
-import { PageHero, SectionHead } from '@/components/ui';
-import type { Locale } from '@/i18n/config';
+import { Corners, PageHero, SectionHead } from '@/components/ui';
+import { WithEmail } from '@/components/LeadForm';
+import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { en } from '@/i18n/locales/en';
 import { pageMeta } from '@/i18n/seo';
@@ -50,7 +52,12 @@ export function careersMeta(lang: Locale) {
 }
 
 export function CareersView({ lang }: { lang: Locale }) {
-  const { careers: t } = getDict(lang);
+  const { careers: t, data } = getDict(lang);
+  // Submitted position values stay in English for the inbox; labels are translated.
+  const positions = t.roles.items.map((r, i) => {
+    const e = en.careers.roles.items[i];
+    return { id: r.id, value: `${e.title} (${e.country})`, label: `${r.title} · ${r.country}` };
+  });
 
   return (
     <>
@@ -80,7 +87,7 @@ export function CareersView({ lang }: { lang: Locale }) {
                     <h3>{r.title}</h3>
                     <p className="role-loc">{r.location}</p>
                   </div>
-                  <a href="#apply" className="btn btn-ghost">
+                  <a href={`#apply-${r.id}`} className="btn btn-ghost">
                     {t.roles.applyRole}
                   </a>
                 </div>
@@ -116,11 +123,32 @@ export function CareersView({ lang }: { lang: Locale }) {
       </section>
 
       <section className="section section-alt" id="apply">
-        <div className="container" style={{ maxWidth: 760 }}>
-          <SectionHead eyebrow={t.apply.eyebrow} title={t.apply.title} lead={t.apply.lead} align="center" />
-          <iframe src={SITE.careersFormUrl} className="embed-frame" title={t.apply.frameTitle} loading="lazy">
-            {t.apply.loading}
-          </iframe>
+        <div className="container contact-grid">
+          <div>
+            <SectionHead eyebrow={t.apply.eyebrow} title={t.apply.title} lead={t.apply.lead} />
+            <ul className="apply-notes" data-reveal>
+              <li>
+                <Icon name="lock" size={18} />
+                <span>{t.apply.privacy}</span>
+              </li>
+              <li>
+                <Icon name="users" size={18} />
+                <span>
+                  <WithEmail text={t.apply.emailAlt} email={SITE.emails.careers} />
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className="panel">
+            <Corners />
+            <CareersForm
+              lang={lang}
+              t={t.apply.form}
+              countries={data.markets.map((m) => m.name)}
+              positions={positions}
+              returnPath={lp(lang, '/careers')}
+            />
+          </div>
         </div>
       </section>
     </>
