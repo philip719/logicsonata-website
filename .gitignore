@@ -15,3 +15,4 @@ tools/whitepapers/.cache/
 # Brand kit build output
 brand/kit/out/
 brand/kit/build/
+__pycache__/
