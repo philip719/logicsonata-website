@@ -12,7 +12,7 @@ Primary call to action: Book a Private AI Consultation at https://www.logicsonat
 
 ## What a Logic Sonata solution includes
 
-1. Hardware: compact AI supercomputers (such as NVIDIA DGX Spark), multi-GPU servers or managed private GPU cloud.
+1. Hardware: compact AI workstations (such as NVIDIA DGX Spark or AMD Ryzen AI Max+ systems), multi-GPU servers or managed private GPU cloud. Logic Sonata is hardware-neutral.
 2. Software and models: open, model-independent AI software with no lock-in to one provider.
 3. Company knowledge: documents, SOPs and data prepared as a clean, permissioned knowledge base.
 4. Access controls: role-based permissions, single sign-on and a full audit trail.
@@ -33,9 +33,14 @@ Each product is available on-premise, hosted or hybrid.
 
 ## On-premise hardware
 
-Smaller teams can start with a compact AI supercomputer such as NVIDIA DGX Spark: GB10 Grace Blackwell
-superchip, up to 1 petaFLOP of FP4 AI performance, 128 GB unified memory, models up to 200 billion
-parameters, up to 4 TB NVMe storage and ConnectX-7 networking in a 150 x 150 mm desktop unit.
+Logic Sonata is hardware-neutral and sizes the platform to each workload. Smaller teams often start with a
+compact AI workstation:
+
+- NVIDIA DGX Spark: GB10 Grace Blackwell superchip, 128 GB unified memory, up to 1 petaFLOP of FP4 AI
+  performance, ConnectX-7 networking to link two units for larger models.
+- AMD Ryzen AI Max+ 395 systems: 16-core Zen 5 CPU, Radeon 8060S GPU and XDNA 2 NPU, up to 128 GB unified
+  memory with up to 96 GB assignable to the GPU.
+
 Larger rollouts use multi-GPU servers or a private cloud cluster.
 
 ## Services

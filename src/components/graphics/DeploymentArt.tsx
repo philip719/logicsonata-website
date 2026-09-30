@@ -2,7 +2,7 @@ import { boxFaces, makeIso, pts, type Projector } from '@/lib/iso';
 
 type Variant = 'hosted' | 'onprem' | 'hybrid';
 
-const GOLD = { top: '#e6cc96', left: '#9c7d4a', right: '#7d6238' };
+const APPLIANCE = { top: '#c3c8cf', left: '#7d838c', right: '#5d626a' };
 const RACK = { top: '#3a3d46', left: '#1c1e24', right: '#24262d' };
 
 function Floor({ iso, size }: { iso: Projector; size: number }) {
@@ -86,7 +86,7 @@ export function DeploymentArt({ variant }: { variant: Variant }) {
     return (
       <svg viewBox="0 0 280 200" className="dep-svg" role="img" aria-label={labels.onprem}>
         <Floor iso={iso} size={120} />
-        <Solid iso={iso} x={45} y={45} z={0} w={30} d={30} h={11} fill={GOLD} />
+        <Solid iso={iso} x={45} y={45} z={0} w={30} d={30} h={11} fill={APPLIANCE} />
         <circle cx={iso(60, 60, 30)[0]} cy={iso(60, 60, 30)[1]} r={9} className="dep-pulse" />
         <Building iso={iso} />
       </svg>
@@ -102,7 +102,7 @@ export function DeploymentArt({ variant }: { variant: Variant }) {
       <g>
         <polygon points={boxFaces(iso, 10, 10, 0, 60, 60, 40).left} className="dep-wall" />
         <polygon points={boxFaces(iso, 10, 10, 0, 60, 60, 40).right} className="dep-wall" />
-        <Solid iso={iso} x={28} y={28} z={0} w={22} d={22} h={9} fill={GOLD} />
+        <Solid iso={iso} x={28} y={28} z={0} w={22} d={22} h={9} fill={APPLIANCE} />
         <polygon points={boxFaces(iso, 10, 10, 0, 60, 60, 40).top} className="dep-roof" />
       </g>
       <Boundary iso={iso} x={110} y={0} size={48} />

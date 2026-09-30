@@ -1,5 +1,5 @@
-// Offline renderer for the Logic Sonata hero video: a compact AI supercomputer
-// (DGX Spark class) exploding outward into its components and reassembling.
+// Offline renderer for the Logic Sonata hero video: a vendor-neutral private AI
+// appliance (compact AI workstation class) exploding into its components and reassembling.
 // window.renderAt(t) draws the frame at time t (seconds) of an 8 s seamless loop.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
@@ -57,22 +57,32 @@ function canvasTex(size, draw, srgb = true, repeat = [1, 1]) {
   return t;
 }
 
-function foamDraw(ctx, s, bump) {
-  const r = rng(7);
-  ctx.fillStyle = bump ? '#ffffff' : '#c9a86e';
-  ctx.fillRect(0, 0, s, s);
-  for (let i = 0; i < 2600; i++) {
-    const x = r() * s, y = r() * s, rad = 2 + r() * 6;
-    if (!bump) {
-      ctx.fillStyle = `rgba(255,236,190,${0.35 + r() * 0.3})`;
-      ctx.beginPath(); ctx.arc(x - 1, y - 1, rad + 1.2, 0, Math.PI * 2); ctx.fill();
+function meshDraw(ctx, w, h, bump) {
+  ctx.fillStyle = bump ? '#ffffff' : '#2c2f36';
+  ctx.fillRect(0, 0, w, h);
+  const pitch = 22;
+  for (let row = 0, y = pitch / 2; y < h; row++, y += pitch * 0.866) {
+    for (let x = (row % 2 ? pitch / 2 : 0) + pitch / 2; x < w; x += pitch) {
+      if (!bump) {
+        ctx.fillStyle = 'rgba(210,214,222,0.18)';
+        ctx.beginPath(); ctx.arc(x - 1, y - 1, 7.4, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = bump ? '#000000' : '#07080a';
+      ctx.beginPath(); ctx.arc(x, y, 6.6, 0, Math.PI * 2); ctx.fill();
     }
-    ctx.fillStyle = bump ? '#000' : `rgba(38,26,10,${0.75 + r() * 0.25})`;
-    ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
   }
 }
-const foamMap = canvasTex(512, (c, s) => foamDraw(c, s, false), true, [2.6, 0.8]);
-const foamBump = canvasTex(512, (c, s) => foamDraw(c, s, true), false, [2.6, 0.8]);
+function rectTex(w, h, draw, srgb) {
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  t.anisotropy = 8;
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const meshMap = rectTex(1024, 304, (c, w, h) => meshDraw(c, w, h, false), true);
+const meshBump = rectTex(1024, 304, (c, w, h) => meshDraw(c, w, h, true), false);
 
 const brushed = canvasTex(512, (ctx, s) => {
   const r = rng(3);
@@ -121,9 +131,12 @@ const ssdLabel = canvasTex(256, (ctx, s) => {
 
 // ---------- materials ----------
 const M = {
-  gold: new THREE.MeshPhysicalMaterial({ color: '#d4b27a', metalness: 1, roughness: 0.3, roughnessMap: brushed, clearcoat: 0.25, clearcoatRoughness: 0.4 }),
-  goldInner: new THREE.MeshStandardMaterial({ color: '#8a6d42', metalness: 1, roughness: 0.55 }),
-  foam: new THREE.MeshStandardMaterial({ color: '#ffffff', map: foamMap, bumpMap: foamBump, bumpScale: 2.2, metalness: 0.85, roughness: 0.55 }),
+  shell: new THREE.MeshPhysicalMaterial({ color: '#8c929b', metalness: 1, roughness: 0.3, roughnessMap: brushed, clearcoat: 0.3, clearcoatRoughness: 0.35 }),
+  shellInner: new THREE.MeshStandardMaterial({ color: '#3a3d44', metalness: 1, roughness: 0.55 }),
+  mesh: new THREE.MeshStandardMaterial({ color: '#ffffff', map: meshMap, bumpMap: meshBump, bumpScale: 1.4, metalness: 0.75, roughness: 0.42 }),
+  accent: new THREE.MeshStandardMaterial({ color: '#3a0906', emissive: '#ff3b30', emissiveIntensity: 2.4 }),
+  fanBlade: new THREE.MeshStandardMaterial({ color: '#6b717b', metalness: 0.6, roughness: 0.35 }),
+  fanHub: new THREE.MeshStandardMaterial({ color: '#2a2d33', metalness: 0.5, roughness: 0.4 }),
   pcb: new THREE.MeshStandardMaterial({ map: pcbMap, metalness: 0.25, roughness: 0.55 }),
   chip: new THREE.MeshStandardMaterial({ color: '#16171b', metalness: 0.35, roughness: 0.3 }),
   substrate: new THREE.MeshStandardMaterial({ color: '#1f2b25', metalness: 0.2, roughness: 0.5 }),
@@ -160,34 +173,36 @@ function part(name, offset, delay) {
 
 // Base plate with rubber feet
 const base = part('base', [0, -78, 0], 0.14);
-base.add(at(rbox(150, 4, 150, M.gold, 3), 0, 2, 0));
+base.add(at(rbox(150, 4, 150, M.shell, 3), 0, 2, 0));
 for (const [x, z] of [[-55, -55], [55, -55], [-55, 55], [55, 55]]) {
   base.add(at(new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 2.4, 32), M.rubber), x, -1.2, z));
 }
 
 // Side walls
 const left = part('left', [-72, 0, 0], 0.08);
-left.add(at(rbox(4, 42, 150, M.gold, 1.6), -73, 25, 0));
+left.add(at(rbox(4, 42, 150, M.shell, 1.6), -73, 25, 0));
 const right = part('right', [72, 0, 0], 0.08);
-right.add(at(rbox(4, 42, 150, M.gold, 1.6), 73, 25, 0));
+right.add(at(rbox(4, 42, 150, M.shell, 1.6), 73, 25, 0));
 
-// Front metal-foam panel
+// Front perforated panel with the brand accent light
 const front = part('front', [0, 0, 82], 0.03);
-front.add(at(rbox(142, 42, 4, M.foam, 1.2), 0, 25, 73));
+front.add(at(rbox(142, 42, 4, M.mesh, 1.2), 0, 25, 73));
+front.add(at(box(118, 1.2, 0.8), 0, 7.2, 75.3));
+front.children[front.children.length - 1].material = M.accent;
 
-// Rear panel: metal foam with the I/O cut-outs
+// Rear panel: perforated, with the I/O cut-outs
 const rear = part('rear', [0, 0, -82], 0.03);
-rear.add(at(rbox(142, 42, 4, M.foam, 1.2), 0, 25, -73));
+rear.add(at(rbox(142, 42, 4, M.mesh, 1.2), 0, 25, -73));
 [[-52, 9, 7], [-38, 9, 7], [-24, 9, 7], [-6, 14, 11], [16, 16, 12], [38, 16, 12], [58, 12, 8]].forEach(([x, w, h]) => {
   rear.add(at(box(w, h, 1.5, M.port), x, 20, -75.4));
 });
 
 // Top cover
-const top = part('top', [0, 118, 0], 0);
-top.add(at(rbox(150, 4, 150, M.gold, 3), 0, 48, 0));
-top.add(at(box(140, 0.6, 140, M.goldInner), 0, 45.7, 0));
+const top = part('top', [0, 146, 0], 0);
+top.add(at(rbox(150, 4, 150, M.shell, 3), 0, 48, 0));
+top.add(at(box(140, 0.6, 140, M.shellInner), 0, 45.7, 0));
 
-// Mainboard with GB10, memory, ConnectX-7 and passives
+// Mainboard with the AI superchip, memory, network controller and passives
 const board = part('board', [0, 8, 0], 0.18);
 board.add(at(box(138, 1.6, 138, M.pcb), 0, 10, 0));
 board.add(at(box(46, 1.4, 46, M.substrate), 0, 11.5, 0));
@@ -218,6 +233,32 @@ const chamber = part('chamber', [0, 52, 0], 0.1);
 chamber.add(at(rbox(118, 3, 118, M.copper, 1.2), 0, 16.5, 0));
 const fins = part('fins', [0, 84, 0], 0.05);
 for (let i = 0; i < 22; i++) fins.add(at(box(1.3, 22, 110, M.fin), -55 + i * 5.24, 29.5, 0));
+
+// Cooling fan above the fin stack (spins with the loop)
+const fan = part('fan', [0, 100, 0], 0.02);
+const fanRing = new THREE.Mesh(new THREE.TorusGeometry(37, 2.4, 16, 96), M.fanBlade);
+fanRing.rotation.x = Math.PI / 2;
+fan.add(at(fanRing, 0, 43, 0));
+for (const [x, z] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+  const strut = box(16, 2, 3.4, M.fanBlade);
+  strut.position.set(x * 33, 43, z * 33);
+  strut.rotation.y = -Math.atan2(z, x);
+  fan.add(strut);
+}
+const rotor = new THREE.Group();
+rotor.position.set(0, 43, 0);
+rotor.add(new THREE.Mesh(new THREE.CylinderGeometry(11, 11, 5, 48), M.fanHub));
+rotor.add(at(new THREE.Mesh(new THREE.CylinderGeometry(4, 4, 5.4, 32), M.accent), 0, 0, 0));
+for (let i = 0; i < 9; i++) {
+  const arm = new THREE.Group();
+  arm.rotation.y = (i / 9) * Math.PI * 2;
+  const blade = box(24, 1.4, 11, M.fanBlade);
+  blade.position.x = 23;
+  blade.rotation.x = 0.6;
+  arm.add(blade);
+  rotor.add(arm);
+}
+fan.add(rotor);
 
 // Floor glow
 const glow = new THREE.Mesh(
@@ -268,13 +309,13 @@ function labelOpacity(t) {
 
 // ---------- labels ----------
 const LABELS = [
-  { part: 'top', local: [-64, 50, 60], side: 'left', title: 'Gold metal chassis', sub: '150 × 150 × 50.5 mm' },
-  { part: 'fins', local: [58, 38, -30], side: 'right', title: 'Vapor-chamber cooling', sub: 'Built for sustained load' },
-  { part: 'board', local: [0, 14.4, 0], side: 'left', title: 'GB10 Grace Blackwell', sub: 'Up to 1 PFLOP FP4 AI' },
-  { part: 'board', local: [35, 12.2, 24], side: 'right', title: '128 GB unified memory', sub: 'Up to 200B-parameter models' },
-  { part: 'ssd', local: [50, 12.8, 50], side: 'right', title: 'Up to 4 TB NVMe', sub: 'Your data stays on-site' },
-  { part: 'board', local: [-42, 13.2, 46], side: 'left', title: 'ConnectX-7 networking', sub: 'Cluster two units' },
-  { part: 'front', local: [-40, 12, 75], side: 'left', title: 'Metal-foam panels', sub: 'Front and rear airflow' },
+  { part: 'top', local: [-64, 50, 60], side: 'left', title: 'Aluminium chassis', sub: 'Compact desktop footprint' },
+  { part: 'fan', local: [30, 44, -20], side: 'right', title: 'Fan and vapor chamber', sub: 'Built for sustained load' },
+  { part: 'board', local: [0, 14.4, 0], side: 'left', title: 'AI superchip', sub: 'CPU, GPU and AI engines' },
+  { part: 'board', local: [35, 12.2, 24], side: 'right', title: 'Up to 128 GB memory', sub: 'Unified, for large models' },
+  { part: 'ssd', local: [50, 12.8, 50], side: 'right', title: 'Local NVMe storage', sub: 'Your data stays on-site' },
+  { part: 'board', local: [-42, 13.2, 46], side: 'left', title: 'High-speed networking', sub: 'Link units as you grow' },
+  { part: 'front', local: [-40, 12, 75], side: 'left', title: 'Perforated airflow panels', sub: 'Front and rear intake' },
 ];
 const overlay = document.getElementById('overlay');
 const stage = document.getElementById('stage');
@@ -345,8 +386,8 @@ window.renderAt = (t) => {
 
   const yaw = THREE.MathUtils.degToRad(36 + 9 * Math.sin(phase));
   const pitch = THREE.MathUtils.degToRad(23 + 3 * Math.cos(phase));
-  const dist = 1360 - 250 * (1 - avg);
-  const target = new THREE.Vector3(0, 28 + 10 * avg, 0);
+  const dist = 1450 - 300 * (1 - avg);
+  const target = new THREE.Vector3(0, 28 + 16 * avg, 0);
   camera.position.set(
     target.x + dist * Math.cos(pitch) * Math.sin(yaw),
     target.y + dist * Math.sin(pitch),
@@ -354,6 +395,7 @@ window.renderAt = (t) => {
   );
   camera.lookAt(target);
 
+  rotor.rotation.y = -phase;
   M.die.emissiveIntensity = 1.3 + 0.3 * avg + 0.15 * Math.sin(phase * 2);
 
   scene.updateMatrixWorld(true);

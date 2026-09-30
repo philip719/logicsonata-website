@@ -1,6 +1,6 @@
 /* ==========================================================================
    Logic Sonata design system
-   Dark, technical, avant-garde. Brand red on near-black, gold for hardware.
+   Dark, technical, avant-garde. Brand red on near-black.
    ========================================================================== */
 
 :root {
@@ -16,7 +16,6 @@
   --red: #ff3b30;
   --red-2: #ff6a5f;
   --red-soft: rgba(255, 59, 48, 0.14);
-  --gold: #d6b47a;
 
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
@@ -1694,7 +1693,7 @@ a.card:hover {
 
 @media (max-width: 960px) {
   .hardware {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1721,6 +1720,37 @@ a.card:hover {
   color: var(--dim);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 8px 0 24px;
+}
+
+.compare-table {
+  min-width: 480px;
+  margin: 0;
+}
+
+.compare-table thead th {
+  width: auto;
+  padding-top: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text);
+}
+
+.compare-table th[scope='row'] {
+  width: 24%;
+}
+
+.compare-table td {
+  width: 38%;
+  padding-right: 16px;
+  color: var(--muted);
 }
 
 .fine-print {

@@ -14,21 +14,20 @@ export const metadata: Metadata = {
   openGraph: { url: '/solutions' },
 };
 
-const HARDWARE_SPECS: Array<[string, string]> = [
-  ['Superchip', 'NVIDIA GB10 Grace Blackwell'],
-  ['AI performance', 'Up to 1 petaFLOP (FP4)'],
-  ['Memory', '128 GB unified LPDDR5x'],
-  ['Model size', 'Up to 200B parameters on one unit'],
-  ['Storage', 'Up to 4 TB NVMe'],
-  ['Networking', 'ConnectX-7, link two units for larger models'],
-  ['Footprint', '150 × 150 mm, fits on a desk'],
+// Two compact platforms we deploy, from each manufacturer's published figures.
+const PLATFORMS: Array<[string, string, string]> = [
+  ['Processor', 'GB10 Grace Blackwell superchip: 20-core Arm CPU with Blackwell GPU', 'Ryzen AI Max+ 395: 16-core Zen 5 CPU, Radeon 8060S GPU, XDNA 2 NPU'],
+  ['Unified memory', '128 GB', 'Up to 128 GB, with up to 96 GB assignable to the GPU'],
+  ['AI performance', 'Up to 1 petaFLOP (FP4)', '50+ TOPS NPU plus a 40-core GPU'],
+  ['Networking', 'ConnectX-7 at 200 Gb/s, link two units for larger models', 'Varies by system manufacturer'],
+  ['Best fit', 'CUDA software ecosystem and the largest local models', 'x86 compatibility and cost-efficient local inference'],
 ];
 
 const TIERS = [
   {
-    name: 'Compact AI supercomputer',
+    name: 'Compact AI workstation',
     fit: 'Pilots and smaller teams',
-    detail: 'A desktop unit such as NVIDIA DGX Spark. Designed for the office, powerful enough for serious models.',
+    detail: 'A desktop unit such as NVIDIA DGX Spark or an AMD Ryzen AI Max+ system. Designed for the office, powerful enough for serious models.',
     icon: 'chip' as const,
   },
   {
@@ -134,11 +133,11 @@ export default function SolutionsPage() {
             <div className="panel panel-graphic panel-photo" data-reveal>
               <Corners />
               <img
-                src="/images/hero-spark-exploded.webp"
+                src="/images/hero-appliance-exploded.webp"
                 width={1200}
                 height={900}
                 loading="lazy"
-                alt="Exploded view of an NVIDIA DGX Spark: gold chassis, metal-foam panels, vapor-chamber cooling, GB10 Grace Blackwell superchip, 128 GB unified memory, NVMe storage and ConnectX-7 networking"
+                alt="Exploded view of a compact private AI appliance: aluminium chassis, perforated airflow panels, fan and vapor-chamber cooling, AI superchip, unified memory, NVMe storage and high-speed networking"
               />
             </div>
             <div data-reveal>
@@ -146,21 +145,34 @@ export default function SolutionsPage() {
                 index="02"
                 eyebrow="Hardware"
                 title="Data-centre AI that fits on a desk."
-                lead="For many teams, private AI starts with a compact AI supercomputer such as NVIDIA DGX Spark. We supply, configure and support it as part of your solution."
+                lead="We are hardware-neutral. For many teams, private AI starts with a compact AI workstation on NVIDIA or AMD silicon, and we recommend the platform that fits your models, software and budget. We supply, configure and support it as part of your solution."
               />
-              <table className="spec-table">
-                <tbody>
-                  {HARDWARE_SPECS.map(([k, v]) => (
-                    <tr key={k}>
-                      <th scope="row">{k}</th>
-                      <td>{v}</td>
+              <div className="table-scroll">
+                <table className="spec-table compare-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <span className="visually-hidden">Specification</span>
+                      </th>
+                      <th scope="col">NVIDIA DGX Spark</th>
+                      <th scope="col">AMD Ryzen AI Max+</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {PLATFORMS.map(([k, nvidia, amd]) => (
+                      <tr key={k}>
+                        <th scope="row">{k}</th>
+                        <td>{nvidia}</td>
+                        <td>{amd}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <p className="fine-print">
-                Illustrative render with a simplified internal layout. Specifications are the manufacturer’s published
-                figures for NVIDIA DGX Spark. NVIDIA and DGX Spark are trademarks of NVIDIA Corporation.
+                Illustrative render of a generic appliance with a simplified internal layout. Specifications are each
+                manufacturer’s published figures. NVIDIA and DGX Spark are trademarks of NVIDIA Corporation. AMD and
+                Ryzen are trademarks of Advanced Micro Devices, Inc.
               </p>
             </div>
           </div>

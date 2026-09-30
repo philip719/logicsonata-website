@@ -18,13 +18,13 @@ export const SITE = {
   primaryCta: { label: 'Book a Private AI Consultation', href: '/contact' },
 } as const;
 
-export const SPARK_SPECS = [
-  'GB10 Grace Blackwell superchip',
-  'Up to 1 PFLOP FP4 AI compute',
-  '128 GB unified memory',
-  'Models up to 200B parameters',
-  'Up to 4 TB NVMe storage',
-  'ConnectX-7 networking',
+export const HARDWARE_SPECS = [
+  'AI superchip: CPU, GPU and NPU',
+  'Up to 128 GB unified memory',
+  'Large language models run locally',
+  'Local NVMe storage',
+  'Fan and vapor-chamber cooling',
+  'Scales from one unit to a cluster',
 ];
 
 export const MARKETS = [
@@ -237,7 +237,7 @@ export const FAQ = [
   },
   {
     q: 'What hardware do you deploy on-premise?',
-    a: 'We size hardware to your workload. Smaller teams can start with a compact AI supercomputer such as NVIDIA DGX Spark, which combines a Grace Blackwell superchip with 128 GB of unified memory in a desktop-sized unit. Larger rollouts use multi-GPU servers or a private cloud cluster.',
+    a: 'We are hardware-neutral and size the platform to your workload. Smaller teams often start with a compact AI workstation such as NVIDIA DGX Spark or an AMD Ryzen AI Max+ system, both of which offer up to 128 GB of unified memory in a desktop-sized unit. Larger rollouts use multi-GPU servers or a private cloud cluster.',
   },
   {
     q: 'Which countries do you serve?',

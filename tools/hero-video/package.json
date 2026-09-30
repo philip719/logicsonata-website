@@ -1,7 +1,7 @@
 {
   "name": "logicsonata-hero-video",
   "private": true,
-  "description": "Offline renderer for the homepage DGX Spark exploded-view video",
+  "description": "Offline renderer for the homepage private AI appliance exploded-view video",
   "scripts": {
     "serve": "node server.js",
     "frames": "rm -rf frames frames-nl && mkdir frames frames-nl && node capture.js frames 30 frames 1 && node capture.js frames 30 frames-nl 0",
