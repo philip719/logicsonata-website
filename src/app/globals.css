@@ -526,6 +526,13 @@ p {
   color: var(--dim);
 }
 
+.hero-visual-caption {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--dim);
+  text-align: right;
+}
+
 .hero-video-wrap,
 .hero-video-layers {
   position: relative;

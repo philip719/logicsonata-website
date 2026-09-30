@@ -159,8 +159,8 @@ export default function SolutionsPage() {
                 </tbody>
               </table>
               <p className="fine-print">
-                Specifications are the manufacturer’s published figures for NVIDIA DGX Spark. NVIDIA and DGX Spark are
-                trademarks of NVIDIA Corporation.
+                Illustrative render with a simplified internal layout. Specifications are the manufacturer’s published
+                figures for NVIDIA DGX Spark. NVIDIA and DGX Spark are trademarks of NVIDIA Corporation.
               </p>
             </div>
           </div>

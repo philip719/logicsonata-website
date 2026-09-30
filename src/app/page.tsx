@@ -127,6 +127,7 @@ export default function Home() {
               <span className="hero-visual-tag mono">FIG. 01 / DGX SPARK, EXPLODED</span>
               <HeroVideo />
             </div>
+            <p className="hero-visual-caption mono">Illustrative render · internal layout simplified</p>
             <ul className="spec-chips" aria-label="Hardware highlights">
               {SPARK_SPECS.map((s) => (
                 <li key={s}>{s}</li>
