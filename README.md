@@ -13,7 +13,9 @@ running JavaScript, and the site runs on standard Hostinger shared hosting with 
 | --- | --- |
 | `src/lib/site.ts` | **Most content lives here**: products, prices, FAQ, markets, stack layers, industries, emails, form endpoint |
 | `src/app/*/page.tsx` | One file per page (home, solutions, services, about, partners, invest, careers, contact) |
-| `src/components/graphics/` | Hand-built SVG illustrations (exploded DGX Spark hero, stack, deployment, data flow, map) |
+| `src/components/HeroVideo.tsx` | Homepage hero video (DGX Spark exploding into parts), with mobile cut and reduced-motion still |
+| `tools/hero-video/` | The 3D renderer that produces the hero video (see its README) |
+| `src/components/graphics/` | Hand-built SVG illustrations (stack, deployment, data flow, map) |
 | `src/app/globals.css` | Design system: colours, type, layout, animation |
 | `public/.htaccess` | Hostinger rules: clean URLs, 301s from the old `.html` URLs, www redirect, caching, security headers |
 | `public/llms.txt` | Plain-text company summary for AI assistants |

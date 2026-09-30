@@ -462,9 +462,9 @@ p {
 .hero-inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   align-items: center;
-  gap: 40px;
+  gap: 32px;
   padding-top: clamp(48px, 7vw, 96px);
   padding-bottom: clamp(56px, 7vw, 96px);
 }
@@ -508,6 +508,12 @@ p {
   position: relative;
 }
 
+@media (min-width: 1025px) {
+  .hero-visual {
+    margin-right: calc(var(--gutter) * -0.75);
+  }
+}
+
 .hero-visual-frame {
   position: relative;
 }
@@ -520,79 +526,31 @@ p {
   color: var(--dim);
 }
 
-.spark {
+.hero-video-wrap,
+.hero-video-layers {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.hero-video-layers > *,
+.hero-video-poster {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  overflow: visible;
+  height: 100%;
 }
 
-.spark-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 600;
-  fill: var(--text);
-}
-
-.spark-sub {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: var(--muted);
-  letter-spacing: 0.02em;
-}
-
-.spark-layer {
-  animation: spark-explode 1.9s var(--ease) 0.25s both;
-}
-
-.spark-float {
-  animation: spark-float 7s ease-in-out infinite;
-  animation-delay: var(--float-delay);
-}
-
-.spark-callout {
-  animation: fade-in 0.8s ease 1.9s both;
-}
-
-.spark-guides {
-  animation: fade-in 1.2s ease 1.4s both;
-}
-
-.spark-ping {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ping 2.6s ease-out infinite;
-}
-
-.spark-die {
-  animation: die-pulse 3.2s ease-in-out infinite;
-}
-
-@keyframes spark-explode {
-  from {
-    transform: translateY(var(--collapse));
-  }
-  to {
-    transform: none;
-  }
-}
-
-@keyframes spark-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.hero-video,
+.hero-video-poster {
+  display: block;
+  object-fit: cover;
+  /* Feather the edges so the render melts into the page background. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3.5%, #000 96.5%, transparent),
+    linear-gradient(180deg, transparent, #000 12%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 3.5%, #000 96.5%, transparent),
+    linear-gradient(180deg, transparent, #000 12%, #000 86%, transparent);
+  mask-composite: intersect;
 }
 
 @keyframes ping {
@@ -615,6 +573,25 @@ p {
   50% {
     opacity: 0.72;
   }
+}
+
+@media (max-width: 720px) {
+  .hero-video-wrap,
+  .hero-video-layers {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Keep the home hero's grid and glow behind the headline, not behind the video. */
+.hero .hero-grid-bg {
+  mask-image: radial-gradient(ellipse 40% 75% at 16% 45%, #000 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 40% 75% at 16% 45%, #000 20%, transparent 70%);
+}
+
+.hero .hero-glow {
+  right: auto;
+  left: -420px;
+  top: -380px;
 }
 
 .spec-chips {
@@ -648,10 +625,6 @@ p {
 }
 
 @media (max-width: 720px) {
-  .spark-callout {
-    display: none;
-  }
-
   .spec-chips {
     display: flex;
   }
@@ -1419,6 +1392,16 @@ a.card:hover {
 .market-list .mono {
   font-size: 11px;
   color: var(--red);
+}
+
+.panel-photo {
+  padding: 0;
+  overflow: hidden;
+}
+
+.panel-photo img {
+  width: 100%;
+  height: auto;
 }
 
 .panel-map {

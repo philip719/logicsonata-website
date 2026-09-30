@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { DataFlow } from '@/components/graphics/DataFlow';
 import { DeploymentArt } from '@/components/graphics/DeploymentArt';
-import { ExplodedSpark, SPARK_SPECS } from '@/components/graphics/ExplodedSpark';
 import { RegionMap } from '@/components/graphics/RegionMap';
 import { StackDiagram } from '@/components/graphics/StackDiagram';
+import { HeroVideo } from '@/components/HeroVideo';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { Corners, CtaBand, Eyebrow, SectionHead } from '@/components/ui';
-import { FAQ, INDUSTRIES, MARKETS, PROCESS, PRODUCTS, SITE, STACK } from '@/lib/site';
+import { FAQ, INDUSTRIES, MARKETS, PROCESS, PRODUCTS, SITE, SPARK_SPECS, STACK } from '@/lib/site';
 
 const DEPLOYMENTS = [
   {
@@ -124,8 +124,8 @@ export default function Home() {
           </div>
           <div className="hero-visual">
             <div className="hero-visual-frame">
-              <span className="hero-visual-tag mono">FIG. 01 / COMPACT AI SUPERCOMPUTER</span>
-              <ExplodedSpark />
+              <span className="hero-visual-tag mono">FIG. 01 / DGX SPARK, EXPLODED</span>
+              <HeroVideo />
             </div>
             <ul className="spec-chips" aria-label="Hardware highlights">
               {SPARK_SPECS.map((s) => (

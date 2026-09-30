@@ -18,6 +18,15 @@ export const SITE = {
   primaryCta: { label: 'Book a Private AI Consultation', href: '/contact' },
 } as const;
 
+export const SPARK_SPECS = [
+  'GB10 Grace Blackwell superchip',
+  'Up to 1 PFLOP FP4 AI compute',
+  '128 GB unified memory',
+  'Models up to 200B parameters',
+  'Up to 4 TB NVMe storage',
+  'ConnectX-7 networking',
+];
+
 export const MARKETS = [
   { name: 'Singapore', code: 'SG', city: 'Singapore', lon: 103.82, lat: 1.35 },
   { name: 'Vietnam', code: 'VN', city: 'Ho Chi Minh City', lon: 106.7, lat: 10.8 },

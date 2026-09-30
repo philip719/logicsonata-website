@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { DeploymentArt } from '@/components/graphics/DeploymentArt';
-import { ExplodedSpark } from '@/components/graphics/ExplodedSpark';
 import { Icon } from '@/components/Icon';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
 import { Corners, CtaBand, PageHero, SectionHead } from '@/components/ui';
@@ -132,9 +131,15 @@ export default function SolutionsPage() {
       <section className="section section-alt" id="hardware">
         <div className="container">
           <div className="hardware">
-            <div className="panel panel-graphic" data-reveal>
+            <div className="panel panel-graphic panel-photo" data-reveal>
               <Corners />
-              <ExplodedSpark />
+              <img
+                src="/images/hero-spark-exploded.webp"
+                width={1200}
+                height={900}
+                loading="lazy"
+                alt="Exploded view of an NVIDIA DGX Spark: gold chassis, metal-foam panels, vapor-chamber cooling, GB10 Grace Blackwell superchip, 128 GB unified memory, NVMe storage and ConnectX-7 networking"
+              />
             </div>
             <div data-reveal>
               <SectionHead

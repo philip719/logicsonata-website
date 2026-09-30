@@ -4,3 +4,7 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+tools/hero-video/node_modules/
+tools/hero-video/frames/
+tools/hero-video/frames-nl/
+tools/hero-video/out/
