@@ -1,0 +1,98 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Security Center</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .side { width: 250px; flex: none; background: #0e0f14; border-right: 1px solid var(--line); padding: 18px 12px; display: flex; flex-direction: column; gap: 2px; overflow: hidden; }
+  .brand { display: flex; gap: 10px; align-items: center; padding: 0 8px 14px; font: 600 15px 'SG'; }
+  .brand small { display: block; font: 10.5px 'JB'; color: var(--dim); font-weight: 400; }
+  .grp { font: 500 10px 'JB'; color: var(--dim); letter-spacing: .12em; text-transform: uppercase; padding: 12px 10px 5px; }
+  .it { padding: 7px 10px; border-radius: 7px; font-size: 13px; color: var(--muted); }
+  .it.on { background: rgba(255,59,48,.12); color: var(--text); box-shadow: inset 2px 0 0 var(--red); }
+  .main { flex: 1; padding: 22px 28px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .hd { display: flex; justify-content: space-between; align-items: flex-end; }
+  .hd .k { font: 500 11px 'JB'; color: var(--red); letter-spacing: .14em; }
+  .hd h1 { margin: 4px 0 0; font: 700 26px 'SG'; }
+  .hd .who { text-align: right; font-size: 12.5px; color: var(--muted); } .hd .who b { color: var(--text); }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi { border: 1px solid var(--line2); border-radius: 12px; padding: 14px 16px; background: #14151a; }
+  .kpi .v { font: 700 28px 'SG'; } .kpi .l { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .kpi .d { font: 11px 'JB'; margin-top: 8px; }
+  .grid2 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; min-height: 0; flex: 1; }
+  .card { border: 1px solid var(--line2); border-radius: 12px; background: #14151a; padding: 16px 18px; display: flex; flex-direction: column; min-height: 0; }
+  .card h3 { margin: 0 0 12px; font: 600 14.5px 'SG'; display: flex; justify-content: space-between; }
+  .card h3 span { font: 11px 'JB'; color: var(--dim); font-weight: 400; }
+  .chart { flex: 1; display: flex; align-items: flex-end; gap: 7px; padding-top: 8px; border-bottom: 1px solid var(--line); }
+  .bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; }
+  .bar i { display: block; border-radius: 3px 3px 0 0; }
+  .legend { display: flex; gap: 16px; margin-top: 10px; font: 11px 'JB'; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th { text-align: left; font: 500 10.5px 'JB'; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; padding: 0 0 8px; }
+  td { padding: 9px 0; border-top: 1px solid var(--line); color: #dddcd8; vertical-align: top; }
+  td small { display: block; font: 10.5px 'JB'; color: var(--dim); }
+  .pol { display: flex; flex-direction: column; gap: 10px; }
+  .pol div { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; font-size: 13px; }
+</style></head>
+<body>
+<div class="backdrop"></div>
+<div class="win">
+  <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url"><span class="lock">●</span> https://ai.apparel-demo.local/security/</div><div style="width:60px"></div></div>
+  <div class="app">
+    <aside class="side">
+      <div class="brand"><img class="logo-mark" src="logo-mark.png" alt=""><div>Security Center<small>Private AI appliance</small></div></div>
+      <div class="it on">Overview</div><div class="it">Policies</div><div class="it">Access requests</div><div class="it">Temporary access</div><div class="it">Security events</div>
+      <div class="grp">Observability</div><div class="it">AI activity</div><div class="it">Traces</div><div class="it">Model usage</div><div class="it">Performance</div>
+      <div class="grp">Audit</div><div class="it">Timeline</div><div class="it">Reports</div>
+      <div class="grp">Appliance</div><div class="it">Health</div><div class="it">Backup and restore</div><div class="it">Updates</div>
+    </aside>
+    <main class="main">
+      <div class="hd">
+        <div><div class="k">LOGIC SONATA CONTROL PLANE</div><h1>Overview</h1></div>
+        <div class="who">Signed in as <b>security.admin</b><br><span class="badge green" style="margin-top:6px">● All enforcement healthy</span></div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="v">1,284</div><div class="l">Governed requests today</div><div class="d" style="color:var(--green)">▲ 12% vs last week</div></div>
+        <div class="kpi"><div class="v">37</div><div class="l">Policy denials today</div><div class="d" style="color:var(--amber)">HR · Finance · Executive</div></div>
+        <div class="kpi"><div class="v">3</div><div class="l">Pending access requests</div><div class="d" style="color:var(--muted)">Oldest 2 h ago</div></div>
+        <div class="kpi"><div class="v">0</div><div class="l">External data transfers</div><div class="d" style="color:var(--green)">Egress locked to approved list</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Requests and denials <span>last 14 days</span></h3>
+          <div class="chart" id="chart"></div>
+          <div class="legend"><span><span class="dot" style="background:#6d7280"></span> Allowed</span><span><span class="dot" style="background:var(--red)"></span> Denied by policy</span></div>
+        </div>
+        <div class="card">
+          <h3>Active policies <span>Open Policy Agent</span></h3>
+          <div class="pol">
+            <div>hr-payroll-restricted <span class="badge red">deny · 21</span></div>
+            <div>finance-budget-restricted <span class="badge red">deny · 11</span></div>
+            <div>board-strategy-executive-only <span class="badge red">deny · 5</span></div>
+            <div>production-quality-open <span class="badge green">allow</span></div>
+            <div>prompt-injection-guard <span class="badge amber">2 flagged</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="flex:none">
+        <h3>Recent security events <span>audit timeline</span></h3>
+        <table>
+          <tr><th>Time</th><th>User and role</th><th>Event</th><th>Decision</th></tr>
+          <tr><td>10:41</td><td>mai.tran<small>Standard user · Quality</small></td><td>Retrieval request for HR payroll summary</td><td><span class="badge red">Denied</span></td></tr>
+          <tr><td>10:37</td><td>line.manager<small>Manager · Production</small></td><td>Temporary access to Finance budget requested</td><td><span class="badge amber">Awaiting approval</span></td></tr>
+          <tr><td>10:22</td><td>ingestion-service<small>System</small></td><td>Uploaded document contained hidden instructions; quarantined</td><td><span class="badge amber">Flagged</span></td></tr>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+<script>
+  const allowed = [62, 70, 58, 81, 77, 40, 35, 88, 92, 85, 96, 44, 38, 100];
+  const denied = [4, 6, 3, 7, 5, 2, 1, 8, 6, 5, 9, 3, 2, 7];
+  const chart = document.getElementById('chart');
+  allowed.forEach((a, i) => {
+    const b = document.createElement('div');
+    b.className = 'bar';
+    b.innerHTML = `<i style="height:${denied[i] * 2.2}px;background:#ff3b30"></i><i style="height:${a * 1.35}px;background:#5b606d"></i>`;
+    chart.appendChild(b);
+  });
+</script>
+</body></html>

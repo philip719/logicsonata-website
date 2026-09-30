@@ -9,7 +9,7 @@ import { PRODUCTS, SITE } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Private AI Products and Hardware',
   description:
-    'Private knowledge assistants, coding assistants, AI agents and image generation, deployed on-premise, hosted or hybrid on hardware sized to your business. Pricing from US$5k.',
+    'Private knowledge assistants, live vision AI, coding assistants, AI agents and image generation, deployed on-premise, hosted or hybrid on hardware sized to your business.',
   alternates: { canonical: '/solutions' },
   openGraph: { url: '/solutions' },
 };
@@ -46,7 +46,7 @@ const TIERS = [
 
 const EXTENDED = [
   { name: 'Private Translation', detail: 'Multilingual translation for documents, communications and technical content.', icon: 'translate' as const },
-  { name: 'Private Vision AI', detail: 'Visual inspection, image analysis and document processing for industry workflows.', icon: 'eye' as const },
+  { name: 'Private Document AI', detail: 'Extraction from invoices, forms, certificates and scanned documents into your systems.', icon: 'policy' as const },
   { name: 'Private Voice AI', detail: 'Speech recognition, transcription and internal voice assistants.', icon: 'wave' as const },
 ];
 
@@ -66,7 +66,7 @@ export default function SolutionsPage() {
               '@type': 'Service',
               name: p.name,
               description: p.summary,
-              url: `${SITE.url}/solutions#${p.id}`,
+              url: `${SITE.url}/solutions/${p.id}`,
               provider: { '@id': `${SITE.url}/#org` },
             },
           })),
@@ -99,27 +99,36 @@ export default function SolutionsPage() {
           <div className="product-list">
             {PRODUCTS.map((p) => (
               <article key={p.id} id={p.id} className="product-row" data-reveal>
-                <div>
-                  <span className="card-icon">
-                    <Icon name={p.icon} />
-                  </span>
-                  <h2>{p.name}</h2>
+                <Link href={`/solutions/${p.id}`} className="product-thumb" tabIndex={-1} aria-hidden="true">
+                  <img src={p.visuals.ui.src} alt="" width={p.visuals.ui.width} height={p.visuals.ui.height} loading="lazy" />
+                </Link>
+                <div className="product-body">
                   <span className="mono card-code">{p.code}</span>
-                </div>
-                <div>
-                  <p className="lead">{p.summary}</p>
-                </div>
-                <div className="product-price">
+                  <h2>
+                    <Link href={`/solutions/${p.id}`} className="card-title-link">
+                      {p.name}
+                    </Link>
+                  </h2>
+                  <p className="product-tagline">{p.tagline}</p>
+                  <p>{p.summary}</p>
                   <ul className="check-list">
-                    {p.uses.map((u) => (
-                      <li key={u}>
+                    {p.highlights.map((h) => (
+                      <li key={h}>
                         <Icon name="check" size={16} />
-                        {u}
+                        {h}
                       </li>
                     ))}
                   </ul>
-                  <span className="mono">{p.price}</span>
-                  <small>On-premise, hosted or hybrid</small>
+                  <div className="btn-row">
+                    <Link href={`/solutions/${p.id}`} className="btn btn-primary btn-sm">
+                      Explore {p.code}
+                      <Icon name="arrow" size={15} />
+                    </Link>
+                    <Link href={`/whitepapers/${p.id}`} className="btn btn-ghost btn-sm">
+                      <Icon name="book" size={15} />
+                      Download whitepaper
+                    </Link>
+                  </div>
                 </div>
               </article>
             ))}

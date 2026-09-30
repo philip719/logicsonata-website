@@ -17,7 +17,12 @@ export function Footer() {
           <div className="footer-cols">
             <div>
               <h2 className="footer-h">Solutions</h2>
-              <Link href="/solutions">Private AI products</Link>
+              <Link href="/solutions">All products</Link>
+              <Link href="/solutions/knowledge-assistant">Knowledge Assistant</Link>
+              <Link href="/solutions/vision-intelligence">Vision Intelligence</Link>
+              <Link href="/solutions/coding-assistant">Coding Assistant</Link>
+              <Link href="/solutions/agent-platform">AI Agents</Link>
+              <Link href="/solutions/image-studio">Image Studio</Link>
               <Link href="/solutions#hardware">AI hardware</Link>
               <Link href="/services">Services</Link>
               <Link href="/services#support">Support tiers</Link>
@@ -38,7 +43,8 @@ export function Footer() {
             <div>
               <h2 className="footer-h">Get in touch</h2>
               <Link href="/contact">Book a consultation</Link>
-              <Link href="/#faq">Common questions</Link>
+              <Link href="/whitepapers">Whitepapers</Link>
+              <a href={`mailto:${SITE.emails.sales}`}>{SITE.emails.sales}</a>
               <a href={`mailto:${SITE.emails.partners}`}>{SITE.emails.partners}</a>
               <a href={`mailto:${SITE.emails.investors}`}>{SITE.emails.investors}</a>
             </div>

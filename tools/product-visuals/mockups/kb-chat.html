@@ -1,0 +1,107 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Knowledge Assistant chat</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .side { width: 270px; flex: none; background: #0e0f14; border-right: 1px solid var(--line); display: flex; flex-direction: column; padding: 18px 14px; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 10px; font: 600 15px 'SG'; padding: 0 6px 6px; }
+  .brand small { display: block; font: 11px 'JB'; color: var(--dim); font-weight: 400; }
+  .new { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line2); border-radius: 9px; font-size: 13.5px; }
+  .hist-h { font: 500 10.5px 'JB'; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; padding: 8px 8px 0; }
+  .hist { display: flex; flex-direction: column; gap: 2px; }
+  .hist div { padding: 9px 10px; border-radius: 8px; font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hist div.on { background: rgba(255,255,255,.06); color: var(--text); }
+  .me { margin-top: auto; display: flex; gap: 10px; align-items: center; padding: 12px 8px 4px; border-top: 1px solid var(--line); }
+  .av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #1f6f78, #2f4f7a); display: grid; place-items: center; font: 600 13px 'SG'; }
+  .me b { display: block; font-size: 13px; } .me span { font: 11px 'JB'; color: var(--dim); }
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .top { height: 58px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; border-bottom: 1px solid var(--line); }
+  .model { display: flex; align-items: center; gap: 10px; font: 600 14px 'SG'; }
+  .model small { font: 11px 'JB'; color: var(--dim); font-weight: 400; }
+  .msgs { flex: 1; padding: 26px 80px 10px; display: flex; flex-direction: column; gap: 22px; overflow: hidden; }
+  .u { align-self: flex-end; max-width: 64%; background: #23242c; border: 1px solid var(--line); padding: 13px 16px; border-radius: 14px 14px 4px 14px; font-size: 14.5px; line-height: 1.55; }
+  .a { display: flex; gap: 14px; max-width: 86%; }
+  .a .ai { width: 30px; height: 30px; flex: none; border-radius: 8px; background: #17181e; border: 1px solid var(--line2); display: grid; place-items: center; }
+  .a .ai img { width: 18px; }
+  .a .body { font-size: 14.5px; line-height: 1.65; color: #e7e6e2; }
+  .a .body ul { margin: 8px 0 0; padding-left: 20px; } .a .body li { margin: 4px 0; }
+  sup.c { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px; margin-left: 3px; border-radius: 5px; background: rgba(255,59,48,.16); color: #ff7a70; font: 500 10.5px 'JB'; vertical-align: 2px; }
+  .srcs { display: flex; gap: 10px; margin-top: 14px; }
+  .src { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border: 1px solid var(--line2); border-radius: 10px; background: #141519; font-size: 12.5px; }
+  .src .n { font: 500 11px 'JB'; color: #ff7a70; }
+  .src small { display: block; font: 10.5px 'JB'; color: var(--dim); }
+  .meta { display: flex; gap: 8px; margin-top: 12px; }
+  .deny { border: 1px solid rgba(255,59,48,.45); background: linear-gradient(180deg, rgba(255,59,48,.10), rgba(255,59,48,.03)); border-radius: 12px; padding: 16px 18px; max-width: 640px; }
+  .deny h4 { margin: 0 0 6px; display: flex; gap: 8px; align-items: center; font: 600 15px 'SG'; color: #ff7a70; }
+  .deny p { margin: 0; font-size: 14px; color: #e3d9d8; line-height: 1.55; }
+  .deny .row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .deny .ref { font: 11px 'JB'; color: var(--dim); }
+  .btn { padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line2); font-size: 12.5px; color: var(--text); }
+  .input { margin: 8px 80px 22px; border: 1px solid var(--line2); border-radius: 14px; background: #15161b; padding: 14px 16px; }
+  .input .ph { color: var(--dim); font-size: 14.5px; }
+  .input .foot { display: flex; justify-content: space-between; margin-top: 12px; font: 11px 'JB'; color: var(--dim); }
+  .send { width: 30px; height: 30px; border-radius: 8px; background: var(--red); display: grid; place-items: center; color: #0a0a0b; font-weight: 700; }
+</style></head>
+<body>
+<div class="backdrop"></div>
+<div class="win">
+  <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url"><span class="lock">●</span> https://ai.apparel-demo.local/chat</div><div style="width:60px"></div></div>
+  <div class="app">
+    <aside class="side">
+      <div class="brand"><img class="logo-mark" src="logo-mark.png" alt=""><div>Private AI<small>Knowledge Assistant</small></div></div>
+      <div class="new">＋ New question</div>
+      <div class="hist-h">Today</div>
+      <div class="hist">
+        <div class="on">AQL for knitwear final inspection</div>
+        <div>Polo collar construction spec</div>
+        <div>Buyer B packing and labelling rules</div>
+      </div>
+      <div class="hist-h">This week</div>
+      <div class="hist">
+        <div>Needle breakage procedure</div>
+        <div>Annual leave policy</div>
+        <div>Shade band approval steps</div>
+        <div>Fabric shrinkage test method</div>
+      </div>
+      <div class="me"><div class="av">MT</div><div><b>Mai Tran</b><span>Standard user · Quality</span></div></div>
+    </aside>
+    <main class="main">
+      <div class="top">
+        <div class="model"><span class="dot" style="background:var(--green)"></span>Private model <small>· running on this appliance</small></div>
+        <div style="display:flex;gap:8px"><span class="badge grey">Apparel tenant</span><span class="badge green">● Governed</span></div>
+      </div>
+      <div class="msgs">
+        <div class="u">What AQL level do we use for final inspection of knitwear orders, and what counts as a major defect?</div>
+        <div class="a">
+          <div class="ai"><img src="logo-mark.png" alt=""></div>
+          <div class="body">
+            Final inspection of knitwear uses <b>AQL 2.5 for major defects</b> and <b>4.0 for minor defects</b>, at General Inspection Level II.<sup class="c">1</sup> Major defects are those likely to cause a return or complaint, including:
+            <ul>
+              <li>Holes, open seams or broken stitches in visible areas<sup class="c">2</sup></li>
+              <li>Shade variation visible at arm’s length between panels<sup class="c">2</sup></li>
+              <li>Wrong size, care or country-of-origin labels<sup class="c">1</sup></li>
+            </ul>
+            <div class="srcs">
+              <div class="src"><span class="n">[1]</span><div>QA-SOP-014 Final Inspection<small>Quality · p.3 §2.1 · rev. 07</small></div></div>
+              <div class="src"><span class="n">[2]</span><div>Buyer Quality Manual v3<small>Sales · §4.2 Defect classes</small></div></div>
+            </div>
+            <div class="meta"><span class="badge grey">2 sources · permission-checked</span><span class="badge grey">1.8 s</span></div>
+          </div>
+        </div>
+        <div class="u">Show me the payroll summary for the sewing department.</div>
+        <div class="a">
+          <div class="ai"><img src="logo-mark.png" alt=""></div>
+          <div class="deny">
+            <h4>🔒 Request denied by policy</h4>
+            <p>HR payroll content is restricted for your role (Standard user). No payroll documents were retrieved, and this request has been recorded in the audit log.</p>
+            <div class="row"><span class="ref">policy: hr-payroll-restricted · ref DEN-0930-0412</span><span class="btn">Request access</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="input">
+        <div class="ph">Ask about SOPs, specifications, buyer requirements or policies…</div>
+        <div class="foot"><span>🔒 Answers are generated on this appliance. Sources are permission-checked.</span><span class="send">↑</span></div>
+      </div>
+    </main>
+  </div>
+</div>
+</body></html>

@@ -22,7 +22,8 @@ const AI_CRAWLERS = [
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: '*', allow: '/' }, ...AI_CRAWLERS.map((userAgent) => ({ userAgent, allow: '/' }))],
+    // Whitepaper PDFs are reached through their sign-up pages, not search results.
+    rules: [{ userAgent: '*', allow: '/', disallow: '/whitepapers/files/' }, ...AI_CRAWLERS.map((userAgent) => ({ userAgent, allow: '/', disallow: '/whitepapers/files/' }))],
     sitemap: `${SITE.url}/sitemap.xml`,
   };
 }

@@ -99,7 +99,11 @@ export function ConsultationForm() {
       </button>
       {status === 'error' && (
         <p className="form-error" role="alert">
-          Something went wrong sending your request. Please try again in a moment.
+          Something went wrong sending your request. Please try again, or email us at{' '}
+          <a className="email-link" href={`mailto:${SITE.emails.sales}`}>
+            {SITE.emails.sales}
+          </a>
+          .
         </p>
       )}
       <p className="form-note">

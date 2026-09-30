@@ -1,0 +1,13 @@
+{
+  "name": "logicsonata-product-visuals",
+  "private": true,
+  "description": "Renders the product illustrations (3D scenes and UI mockups) used on the website",
+  "scripts": {
+    "serve": "node server.js",
+    "render": "node capture.js"
+  },
+  "dependencies": {
+    "playwright-core": "^1.56.0",
+    "three": "^0.180.0"
+  }
+}

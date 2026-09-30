@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Image Studio</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .canvas { flex: 1; position: relative; background-color: #121317;
+    background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px); background-size: 22px 22px; overflow: hidden; }
+  .bar { height: 50px; flex: none; display: flex; align-items: center; gap: 14px; padding: 0 18px; border-bottom: 1px solid var(--line); background: #0f1015; font: 600 14px 'SG'; }
+  .bar .sp { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .run { padding: 7px 14px; border-radius: 8px; background: var(--red); color: #0a0a0b; font: 600 13px 'Inter'; }
+  .node { position: absolute; width: 250px; border-radius: 10px; background: #1b1c22; border: 1px solid rgba(255,255,255,.14); box-shadow: 0 14px 40px -18px #000; font-size: 12px; }
+  .node .h { padding: 8px 12px; border-radius: 10px 10px 0 0; font: 600 12.5px 'SG'; display: flex; justify-content: space-between; }
+  .node .h small { font: 10px 'JB'; opacity: .7; font-weight: 400; }
+  .node .b { padding: 10px 12px; display: flex; flex-direction: column; gap: 7px; color: var(--muted); }
+  .kv { display: flex; justify-content: space-between; padding: 5px 8px; border-radius: 6px; background: #14151a; font: 11px 'JB'; }
+  .kv b { color: var(--text); font-weight: 500; }
+  .txt { padding: 8px; border-radius: 6px; background: #14151a; font-size: 12px; line-height: 1.5; color: #dcdad5; }
+  .h.m { background: #2a2140; } .h.c { background: #2a3322; } .h.i { background: #20303a; } .h.s { background: #3a2323; } .h.o { background: #2d2a1d; }
+  svg.w { position: absolute; inset: 0; pointer-events: none; }
+  .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .grid4 canvas { width: 100%; aspect-ratio: 1; border-radius: 4px; display: block; }
+  .sketch { width: 100%; aspect-ratio: 1.3; border-radius: 6px; background: #f1efe9; display: block; }
+  .panel { width: 330px; flex: none; background: #0f1015; border-left: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .panel h3 { margin: 0; font: 600 14px 'SG'; }
+  .gal { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .gal canvas { width: 100%; aspect-ratio: 1; border-radius: 6px; display: block; }
+  .q { border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; font: 11.5px 'JB'; color: var(--muted); }
+</style></head>
+<body>
+<div class="backdrop"></div>
+<div class="win">
+  <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url"><span class="lock">●</span> https://studio.design.local/workflow/print-explorer</div><div style="width:60px"></div></div>
+  <div class="bar"><img class="logo-mark" src="logo-mark.png" alt="">Private Image Studio <span style="color:var(--dim);font:12px 'JB';font-weight:400">· workflow: Print explorer</span>
+    <div class="sp"><span class="badge green">● GPU on this appliance</span><span class="run">▶ Queue prompt</span></div></div>
+  <div class="app">
+    <div class="canvas" id="cv">
+      <svg class="w" id="wires" viewBox="0 0 1158 866"></svg>
+      <div class="node" style="left:24px;top:30px"><div class="h m">Load model <small>checkpoint</small></div><div class="b"><div class="kv">model <b>curated-textile-xl</b></div><div class="kv">licence <b>commercial ✓</b></div></div></div>
+      <div class="node" style="left:24px;top:190px"><div class="h s">Brand style adapter <small>LoRA</small></div><div class="b"><div class="kv">adapter <b>house-prints-v4</b></div><div class="kv">strength <b>0.80</b></div><div class="kv">trained <b>on-premise</b></div></div></div>
+      <div class="node" style="left:24px;top:390px"><div class="h i">Load sketch <small>image</small></div><div class="b"><canvas class="sketch" id="sketch" width="440" height="340"></canvas></div></div>
+      <div class="node" style="left:320px;top:40px;width:270px"><div class="h c">Prompt <small>positive</small></div><div class="b"><div class="txt">Batik-inspired kawung motif, indigo and cream, seamless repeat, textile print, soft hand-drawn lines</div></div></div>
+      <div class="node" style="left:320px;top:250px;width:270px"><div class="h c">Prompt <small>negative</small></div><div class="b"><div class="txt">blurry, text, watermark, photographic noise</div></div></div>
+      <div class="node" style="left:320px;top:420px;width:270px"><div class="h i">Sketch control <small>ControlNet</small></div><div class="b"><div class="kv">mode <b>line art</b></div><div class="kv">strength <b>0.65</b></div></div></div>
+      <div class="node" style="left:630px;top:170px;width:240px"><div class="h o">Sampler <small>KSampler</small></div><div class="b"><div class="kv">steps <b>28</b></div><div class="kv">cfg <b>5.5</b></div><div class="kv">seed <b>840211</b></div><div class="kv">batch <b>4</b></div></div></div>
+      <div class="node" style="left:900px;top:120px;width:236px"><div class="h m">Preview <small>output</small></div><div class="b"><div class="grid4"><canvas id="o1" width="300" height="300"></canvas><canvas id="o2" width="300" height="300"></canvas><canvas id="o3" width="300" height="300"></canvas><canvas id="o4" width="300" height="300"></canvas></div><div class="kv">time <b>6.4 s · 4 images</b></div></div></div>
+    </div>
+    <aside class="panel">
+      <h3>Recent outputs</h3>
+      <div class="gal"><canvas id="g1" width="300" height="300"></canvas><canvas id="g2" width="300" height="300"></canvas><canvas id="g3" width="300" height="300"></canvas><canvas id="g4" width="300" height="300"></canvas></div>
+      <h3>Templates</h3>
+      <div class="q">▸ Print explorer</div><div class="q">▸ Sketch to render</div><div class="q">▸ Colourway generator</div><div class="q">▸ Product on background</div>
+      <div class="q" style="margin-top:auto">🔒 Prompts, sketches and outputs stay on this appliance</div>
+    </aside>
+  </div>
+</div>
+<script type="module">
+  import { drawPattern } from '../patterns.js';
+  const draw = (id, name) => { const c = document.getElementById(id); drawPattern(c.getContext('2d'), c.width, name); };
+  draw('o1', 'batik'); draw('o2', 'ikat'); draw('o3', 'deco'); draw('o4', 'batik');
+  // Variation for the 4th output: recolour batik to a terracotta colourway
+  { const c = document.getElementById('o4'); const x = c.getContext('2d'); x.globalCompositeOperation = 'multiply'; x.fillStyle = '#e0a07a'; x.fillRect(0, 0, 300, 300); }
+  draw('g1', 'tropical'); draw('g2', 'floral'); draw('g3', 'brush'); draw('g4', 'deco');
+  // Line sketch of a shirt with a motif hint
+  const s = document.getElementById('sketch').getContext('2d');
+  s.strokeStyle = '#2b2d33'; s.lineWidth = 3; s.lineJoin = 'round';
+  s.beginPath(); s.moveTo(150, 40); s.lineTo(110, 60); s.lineTo(60, 120); s.lineTo(100, 150); s.lineTo(125, 125); s.lineTo(125, 300); s.lineTo(315, 300); s.lineTo(315, 125); s.lineTo(340, 150); s.lineTo(380, 120); s.lineTo(330, 60); s.lineTo(290, 40); s.quadraticCurveTo(220, 90, 150, 40); s.stroke();
+  s.lineWidth = 2; for (let i = 0; i < 5; i++) for (let j = 0; j < 4; j++) { const x = 160 + i * 30, y = 150 + j * 35; s.beginPath(); s.ellipse(x, y, 9, 5, Math.PI / 4, 0, Math.PI * 2); s.stroke(); }
+  // Wires
+  const cv = document.getElementById('cv').getBoundingClientRect();
+  const nodes = [...document.querySelectorAll('.node')].map((n) => n.getBoundingClientRect());
+  const port = (i, side) => { const r = nodes[i]; return side === 'out' ? [r.right - cv.left, r.top - cv.top + 40] : [r.left - cv.left, r.top - cv.top + 40]; };
+  const links = [[0, 6, '#b48cff'], [1, 6, '#ff7a70'], [3, 6, '#9ad29a'], [4, 6, '#9ad29a'], [2, 5, '#7fb4ff'], [5, 6, '#7fb4ff'], [6, 7, '#f2c46d']];
+  document.getElementById('wires').innerHTML = links.map(([a, b, c]) => {
+    const [x1, y1] = port(a, 'out'); const [x2, y2] = port(b, 'in');
+    return `<path d="M${x1} ${y1} C ${x1 + 60} ${y1}, ${x2 - 60} ${y2}, ${x2} ${y2}" stroke="${c}" stroke-width="3" fill="none" opacity=".85"/>`;
+  }).join('');
+  window.sceneReady = true;
+</script>
+</body></html>

@@ -1,4 +1,13 @@
-# Logic Sonata
+import { PRODUCTS } from '@/lib/products';
+import { ROUTES } from '@/lib/routes';
+import { SITE } from '@/lib/site';
+
+export const dynamic = 'force-static';
+
+// Plain-text company summary for AI assistants and answer engines.
+// Generated from the same data as the site so it never drifts.
+
+const INTRO = `# Logic Sonata
 
 > Logic Sonata delivers secure private AI solutions for businesses in Singapore, Vietnam, Indonesia,
 > Malaysia and Thailand. Each solution combines hardware, software, company knowledge, access controls,
@@ -20,18 +29,9 @@ Primary call to action: Book a Private AI Consultation at https://www.logicsonat
 6. Training: role-based workshops for managers, HR, sales, operations and finance.
 7. Ongoing support: monitoring, model updates, knowledge refreshes and quarterly business reviews.
 
-## Products
+`;
 
-Each product is available on-premise, hosted or hybrid.
-
-- Private Knowledge Assistant (PAI-KB): question answering across HR, SOP, compliance and finance documents. From US$5k setup.
-- Enterprise Knowledge Assistant (PAI-KB-ENT): department workspaces, role-based access and an admin dashboard. From US$15k setup.
-- Private Coding Assistant (PAI-CODE): repo-aware AI pair programming with IDE and Git integration. From US$10k setup.
-- Private AI Agent Platform (PAI-AGENT): agents that draft reports and summarise documents, with human approval on every action. From US$15k setup.
-- Private Image Generation Studio (PAI-IMG): concept, marketing and packaging imagery in a private studio. Contact for pricing.
-- Extended capabilities: private translation, private vision AI and private voice AI.
-
-## On-premise hardware
+const HARDWARE = `## On-premise hardware
 
 Logic Sonata is hardware-neutral and sizes the platform to each workload. Smaller teams often start with a
 compact AI workstation:
@@ -43,7 +43,9 @@ compact AI workstation:
 
 Larger rollouts use multi-GPU servers or a private cloud cluster.
 
-## Services
+`;
+
+const SERVICES = `## Services
 
 1. AI Privacy and Readiness Assessment: risk mapping and a 30/60/90-day roadmap. The usual first engagement.
 2. Private AI Pilot Implementation: one working use case, proven before full rollout.
@@ -52,14 +54,18 @@ Larger rollouts use multi-GPU servers or a private cloud cluster.
 5. AI Training and Adoption: role-based workshops.
 6. Managed Private AI Support: monitoring, model updates, knowledge base refreshes and quarterly reviews.
 
-## Managed support tiers (monthly, USD)
+`;
 
-- Basic: 10 to 30 users, $1k to 3k, next-business-day response.
-- Business: 30 to 150 users, $3k to 8k, same-business-day response.
-- Enterprise: 150+ users, $8k to 20k, 4 to 8 hour urgent response, dedicated support manager.
-- Premium: mission-critical, $20k+, dedicated technical lead, custom SLA, on-site option.
+const SUPPORT = `## Managed support tiers
 
-## Customers
+- Basic: 10 to 30 users, next-business-day response.
+- Business: 30 to 150 users, same-business-day response.
+- Enterprise: 150+ users, 4 to 8 hour urgent response, dedicated support manager.
+- Premium: mission-critical, custom SLA, dedicated technical lead, on-site option.
+
+`;
+
+const CUSTOMERS = `## Customers
 
 Core customers: manufacturers, retailers, design companies, suppliers and regional business groups.
 Any company that wants to use AI while keeping its data private is a good fit.
@@ -75,19 +81,34 @@ Logic Sonata is not a reseller of public AI services. It combines AI models, sec
 company data, software integration and business-process understanding into complete private AI
 solutions, with one partner accountable for the whole stack.
 
-## Pages
+`;
 
-- https://www.logicsonata.com/ : overview, the private AI stack, deployment models, products, industries, markets, FAQ.
-- https://www.logicsonata.com/solutions : products in detail, on-premise hardware, deployment models.
-- https://www.logicsonata.com/services : services, managed support tiers and process.
-- https://www.logicsonata.com/about : purpose, principles and who we serve.
-- https://www.logicsonata.com/partners : partner programme for resellers, integrators and MSPs.
-- https://www.logicsonata.com/invest : market thesis and strategic investment.
-- https://www.logicsonata.com/careers : open sales and pre-sales roles in Vietnam and Indonesia.
-- https://www.logicsonata.com/contact : book a private AI consultation.
+function products() {
+  const lines = ['## Products', '', 'Each product is available on-premise, hosted or hybrid.', ''];
+  for (const p of PRODUCTS) {
+    lines.push(`### ${p.name} (${p.code})`, '', p.tagline, '', p.summary, '');
+    lines.push(`Built on: ${p.builtOn}`, '');
+    lines.push('Use cases: ' + p.useCases.map((u) => u.title).join('; ') + '.', '');
+    lines.push(`Page: ${SITE.url}/solutions/${p.id}`, `Whitepaper: ${SITE.url}/whitepapers/${p.id}`, '');
+  }
+  return lines.join('\n');
+}
 
-## Contact
+function pages() {
+  const lines = ['## Pages', ''];
+  for (const r of ROUTES) lines.push(`- ${SITE.url}${r.path === '/' ? '/' : r.path}`);
+  return lines.join('\n') + '\n\n';
+}
 
-Consultations: https://www.logicsonata.com/contact
-Partner enquiries: partner@logicsonata.com
-Investor enquiries: investment@logicsonata.com
+const CONTACT = `## Contact
+
+Consultations: ${SITE.url}/contact
+Sales: ${SITE.emails.sales}
+Partner enquiries: ${SITE.emails.partners}
+Investor relations: ${SITE.emails.investors}
+`;
+
+export function GET() {
+  const body = [INTRO, products(), '\n', HARDWARE, SERVICES, SUPPORT, CUSTOMERS, pages(), CONTACT].join('');
+  return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+}

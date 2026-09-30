@@ -12,6 +12,7 @@ export const SITE = {
   careersFormUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSfRCqXIUmQtD6SmTCMEBghBM8DPDTQvMVsj2MytQ-zRn04yHw/viewform?embedded=true',
   emails: {
+    sales: 'sales@logicsonata.com',
     partners: 'partner@logicsonata.com',
     investors: 'investment@logicsonata.com',
   },
@@ -40,19 +41,9 @@ export const NAV = [
   { label: 'Services', href: '/services' },
   { label: 'About', href: '/about' },
   { label: 'Partners', href: '/partners' },
-  { label: 'Invest', href: '/invest' },
+  { label: 'Investors', href: '/invest' },
   { label: 'Careers', href: '/careers' },
 ] as const;
-
-export type Product = {
-  id: string;
-  code: string;
-  name: string;
-  summary: string;
-  uses: string[];
-  price: string;
-  icon: IconName;
-};
 
 export type IconName =
   | 'book'
@@ -87,58 +78,7 @@ export type IconName =
   | 'check'
   | 'arrow';
 
-export const PRODUCTS: Product[] = [
-  {
-    id: 'knowledge-assistant',
-    code: 'PAI-KB',
-    name: 'Private Knowledge Assistant',
-    summary:
-      'Ask questions across your HR, SOP, compliance and finance documents in a private assistant that never touches the public internet.',
-    uses: ['Policy and SOP answers in seconds', 'New-hire onboarding', 'Compliance and audit lookups'],
-    price: 'From US$5k setup',
-    icon: 'book',
-  },
-  {
-    id: 'enterprise-knowledge-assistant',
-    code: 'PAI-KB-ENT',
-    name: 'Enterprise Knowledge Assistant',
-    summary:
-      'Department workspaces, role-based access and an admin dashboard, so every team gets answers while management keeps control.',
-    uses: ['Separate workspaces per department', 'Role-based document permissions', 'Usage and audit dashboard'],
-    price: 'From US$15k setup',
-    icon: 'grid',
-  },
-  {
-    id: 'coding-assistant',
-    code: 'PAI-CODE',
-    name: 'Private Coding Assistant',
-    summary:
-      'Repo-aware AI pair programming with IDE and Git integration. Your source code never reaches a public model.',
-    uses: ['Code completion and review', 'Legacy code explanation', 'Test and documentation drafting'],
-    price: 'From US$10k setup',
-    icon: 'code',
-  },
-  {
-    id: 'agent-platform',
-    code: 'PAI-AGENT',
-    name: 'Private AI Agent Platform',
-    summary:
-      'Agents that draft reports, summarise documents and prepare responses across operations, sales and finance, with human approval on every action.',
-    uses: ['Daily production and sales reports', 'RFQ and tender preparation', 'Email and document triage'],
-    price: 'From US$15k setup',
-    icon: 'agent',
-  },
-  {
-    id: 'image-studio',
-    code: 'PAI-IMG',
-    name: 'Private Image Generation Studio',
-    summary:
-      'On-brand concept, marketing and packaging imagery generated in a private studio. Nothing trains a public model on your designs.',
-    uses: ['Product and packaging concepts', 'Campaign visuals', 'Design iteration without IP leakage'],
-    price: 'Contact us for pricing',
-    icon: 'image',
-  },
-];
+export { PRODUCTS } from './products';
 
 export const STACK = [
   {
@@ -252,7 +192,7 @@ export const FAQ = [
     a: 'Most customers start with an AI Privacy and Readiness Assessment, which produces a 30/60/90-day roadmap. The pilot then covers one working use case, so you prove value with real users before committing to a full rollout.',
   },
   {
-    q: 'What does ongoing support cost?',
-    a: 'Managed support runs in four tiers: Basic for 10 to 30 users at US$1k to 3k per month, Business for 30 to 150 users at US$3k to 8k per month, Enterprise for 150+ users at US$8k to 20k per month, and Premium for mission-critical deployments from US$20k per month.',
+    q: 'How does ongoing support work?',
+    a: 'Every deployment moves into a managed support tier sized to your users and how critical the system is, from monthly health checks to a dedicated technical lead with a custom service level. We recommend the right tier during the assessment.',
   },
 ] as const;

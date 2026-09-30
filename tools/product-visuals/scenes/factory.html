@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Factory floor scene</title>
+<style>
+  @font-face { font-family: JB; src: url(/fonts/jetbrains-mono-latin-500-normal.woff2); }
+  html,body{margin:0;background:#0b0c11;overflow:hidden}
+  #stage{position:relative}
+  #osd{position:absolute;left:18px;top:14px;font:500 15px JB,monospace;color:#f2f1ee;text-shadow:0 1px 2px #000;letter-spacing:.04em}
+  #osd b{color:#ff3b30;font-weight:500}
+  .cctv canvas{filter:saturate(.72) contrast(1.06) brightness(1.02)}
+</style>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+// Illustrative garment production floor: sewing stations with operators, one idle
+// station, one operator away, and a queue of bundles between stations.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { rng } from '../patterns.js';
+
+const cctv = new URLSearchParams(location.search).has('cctv');
+const W = cctv ? 1280 : 1600, H = cctv ? 720 : 1000;
+const stage = document.getElementById('stage');
+if (cctv) stage.classList.add('cctv');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H);
+renderer.setPixelRatio(1);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+stage.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#1c1d22');
+scene.fog = new THREE.Fog('#1c1d22', 16, 36);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.45;
+
+const r = rng(9);
+const std = (color, rough = 0.7, metal = 0) => new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: metal });
+function add(mesh, x, y, z, parent = scene) {
+  mesh.position.set(x, y, z);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+const box = (w, h, d, m) => new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
+
+// Floor with painted walkway
+const floorTex = document.createElement('canvas');
+floorTex.width = floorTex.height = 512;
+{
+  const c = floorTex.getContext('2d');
+  c.fillStyle = '#6b6e73'; c.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 9000; i++) { const v = 90 + r() * 40; c.fillStyle = `rgba(${v},${v},${v + 4},0.25)`; c.fillRect(r() * 512, r() * 512, 2, 2); }
+}
+const ft = new THREE.CanvasTexture(floorTex);
+ft.wrapS = ft.wrapT = THREE.RepeatWrapping; ft.repeat.set(12, 8); ft.colorSpace = THREE.SRGBColorSpace;
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), new THREE.MeshStandardMaterial({ map: ft, roughness: 0.85 }));
+floor.rotation.x = -Math.PI / 2;
+floor.receiveShadow = true;
+scene.add(floor);
+const yellow = new THREE.MeshStandardMaterial({ color: '#e1b12c', roughness: 0.6 });
+for (const z of [2.35, 3.95]) {
+  const line = new THREE.Mesh(new THREE.PlaneGeometry(26, 0.09), yellow);
+  line.rotation.x = -Math.PI / 2; line.position.set(0, 0.005, z); scene.add(line);
+}
+
+// Walls, windows and pillars
+const wallMat = std('#5d6066', 0.92);
+add(box(40, 7, 0.3, wallMat), 0, 3.5, -6.5);
+add(box(0.3, 7, 30, wallMat), -13.5, 3.5, 4);
+add(box(0.3, 7, 30, wallMat), 13.5, 3.5, 4);
+const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), std('#2b2d33', 0.95));
+ceiling.rotation.x = Math.PI / 2;
+ceiling.position.set(0, 5.4, 4);
+scene.add(ceiling);
+for (let i = -6; i <= 6; i++) add(box(0.12, 0.35, 30, std('#3a3d44', 0.8)), i * 2.2, 5.2, 4);
+const glow = new THREE.MeshStandardMaterial({ color: '#cfd9e6', emissive: '#cfd9e6', emissiveIntensity: 0.55 });
+for (let i = -5; i <= 5; i++) add(box(2.2, 1.1, 0.05, glow), i * 3.2, 4.4, -6.33);
+const pillarMat = std('#a3a6ab', 0.8);
+for (const x of [-8.5, 0, 8.5]) add(box(0.5, 7, 0.5, pillarMat), x, 3.5, -2.8);
+
+// Overhead light fixtures
+const fixture = new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#fff6e8', emissiveIntensity: 1.6 });
+for (let row = 0; row < 3; row++) for (let i = -3; i <= 3; i++) add(box(1.6, 0.06, 0.18, fixture), i * 3, 4.2, -4.4 + row * 2.2);
+
+// Materials for stations and people
+const tableTop = std('#c9b89a', 0.6);
+const steel = std('#7d828a', 0.4, 0.8);
+const machineMat = std('#ece8de', 0.35, 0.1);
+const skin = ['#c68d67', '#a8744f', '#e0b08a', '#8d5a3b'];
+const uniforms = ['#1f6f78', '#2f4f7a', '#1f6f78', '#5a6470', '#2f4f7a'];
+const fabricCols = ['#c0392b', '#2c3e70', '#e3d7c3', '#3b7d5b', '#d8a14a', '#1f2a44'];
+
+function person(x, z, { seated = true, facing = 0, uniform = '#1f6f78', skinTone = '#c68d67', walking = false } = {}) {
+  const g = new THREE.Group();
+  const u = std(uniform, 0.8);
+  const s = std(skinTone, 0.6);
+  const hair = std('#1b1b1f', 0.7);
+  if (seated) {
+    add(new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.05, 20), std('#303238', 0.6)), 0, 0.5, 0.05, g);
+    add(new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.5, 8), steel), 0, 0.25, 0.05, g);
+    const torso = add(new THREE.Mesh(new THREE.CapsuleGeometry(0.17, 0.36, 6, 14), u), 0, 0.93, 0.02, g);
+    torso.rotation.x = -0.22;
+    add(new THREE.Mesh(new THREE.SphereGeometry(0.115, 20, 16), s), 0, 1.36, -0.08, g);
+    add(new THREE.Mesh(new THREE.SphereGeometry(0.12, 20, 16, 0, Math.PI * 2, 0, Math.PI / 2.2), hair), 0, 1.38, -0.07, g);
+    for (const side of [-1, 1]) {
+      const arm = add(new THREE.Mesh(new THREE.CapsuleGeometry(0.05, 0.36, 4, 10), u), side * 0.2, 1.0, -0.2, g);
+      arm.rotation.x = -1.1;
+      add(new THREE.Mesh(new THREE.CapsuleGeometry(0.065, 0.3, 4, 10), std('#2b2d33', 0.8)), side * 0.1, 0.58, -0.16, g).rotation.x = Math.PI / 2;
+    }
+  } else {
+    const torso = add(new THREE.Mesh(new THREE.CapsuleGeometry(0.18, 0.5, 6, 14), u), 0, 1.2, 0, g);
+    torso.rotation.x = walking ? 0.08 : 0;
+    add(new THREE.Mesh(new THREE.SphereGeometry(0.12, 20, 16), s), 0, 1.72, 0, g);
+    add(new THREE.Mesh(new THREE.SphereGeometry(0.125, 20, 16, 0, Math.PI * 2, 0, Math.PI / 2.2), hair), 0, 1.74, 0.01, g);
+    for (const side of [-1, 1]) {
+      const leg = add(new THREE.Mesh(new THREE.CapsuleGeometry(0.07, 0.6, 4, 10), std('#2b2d33', 0.8)), side * 0.1, 0.42, 0, g);
+      leg.rotation.x = walking ? side * 0.3 : 0;
+      const arm = add(new THREE.Mesh(new THREE.CapsuleGeometry(0.05, 0.45, 4, 10), u), side * 0.24, 1.2, 0, g);
+      arm.rotation.x = walking ? -side * 0.35 : 0.1;
+    }
+  }
+  g.position.set(x, 0, z);
+  g.rotation.y = facing;
+  scene.add(g);
+  return g;
+}
+
+function station(x, z, { occupied = true, pile = 0 } = {}) {
+  const g = new THREE.Group();
+  add(box(1.25, 0.05, 0.72, tableTop), 0, 0.76, 0, g);
+  for (const [lx, lz] of [[-0.58, -0.32], [0.58, -0.32], [-0.58, 0.32], [0.58, 0.32]]) add(box(0.04, 0.74, 0.04, steel), lx, 0.37, lz, g);
+  // Sewing machine
+  add(box(0.46, 0.14, 0.2, machineMat), -0.05, 0.86, -0.05, g);
+  add(box(0.09, 0.24, 0.16, machineMat), 0.14, 1.0, -0.05, g);
+  add(box(0.34, 0.08, 0.14, machineMat), 0.0, 1.13, -0.05, g);
+  add(box(0.03, 0.12, 0.03, steel), -0.14, 1.03, -0.05, g);
+  // Lamp
+  add(new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 0.4, 6), steel), 0.5, 0.98, -0.25, g);
+  const lampHead = add(new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.1, 16, 1, true), std('#2b2d33', 0.5)), 0.44, 1.17, -0.18, g);
+  lampHead.rotation.z = 0.8;
+  // Fabric on the table
+  const fc = fabricCols[(r() * fabricCols.length) | 0];
+  add(box(0.4, 0.015, 0.32, std(fc, 0.95)), -0.3, 0.79, 0.12, g).rotation.y = r() * 0.4;
+  // Bundle pile next to the station
+  for (let k = 0; k < pile; k++) {
+    add(box(0.38, 0.09, 0.28, std(fabricCols[(k + 2) % fabricCols.length], 0.95)), 0.95, 0.05 + k * 0.09, 0.1 + (k % 2) * 0.03, g).rotation.y = (r() - 0.5) * 0.4;
+  }
+  g.position.set(x, 0, z);
+  scene.add(g);
+  if (occupied) person(x - 0.05, z + 0.55, { uniform: uniforms[(r() * uniforms.length) | 0], skinTone: skin[(r() * skin.length) | 0] });
+  return g;
+}
+
+// Three lines of five stations; line B, station 4 is idle with a queue in front of it.
+const lines = [-2.9, -0.6, 1.5];
+lines.forEach((z, li) => {
+  for (let i = 0; i < 5; i++) {
+    const x = -5.2 + i * 2.3;
+    const idle = li === 1 && i === 3;
+    const pile = li === 1 && i === 2 ? 6 : r() > 0.6 ? 2 : 0;
+    station(x, z, { occupied: !idle, pile });
+  }
+});
+
+// Operator walking away from the line, supervisor with a tablet, and a bundle cart
+person(1.6, 3.15, { seated: false, walking: true, facing: 1.2, uniform: '#1f6f78', skinTone: '#a8744f' });
+person(-6.8, 3.05, { seated: false, facing: -0.9, uniform: '#3a3d44', skinTone: '#e0b08a' });
+const cart = new THREE.Group();
+add(box(0.9, 0.05, 0.55, steel), 0, 0.35, 0, cart);
+add(box(0.9, 0.05, 0.55, steel), 0, 0.8, 0, cart);
+for (let k = 0; k < 4; k++) add(box(0.36, 0.1, 0.26, std(fabricCols[k], 0.95)), -0.2 + (k % 2) * 0.4, 0.43 + Math.floor(k / 2) * 0.45, 0, cart);
+for (const [lx, lz] of [[-0.43, -0.25], [0.43, -0.25], [-0.43, 0.25], [0.43, 0.25]]) add(box(0.03, 0.8, 0.03, steel), lx, 0.4, lz, cart);
+cart.position.set(-2.3, 0, 3.1);
+cart.rotation.y = 0.2;
+scene.add(cart);
+
+// Lighting
+scene.add(new THREE.HemisphereLight('#f4f1ea', '#34363b', 0.7));
+const sun = new THREE.DirectionalLight('#fff1dc', 1.75);
+sun.position.set(-6, 12, 7);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 10, bottom: -10, near: 1, far: 40 });
+sun.shadow.radius = 4;
+sun.shadow.bias = -0.0005;
+scene.add(sun);
+
+// Camera: a showcase angle for the photo, a high corner CCTV angle for the feed
+const camera = new THREE.PerspectiveCamera(cctv ? 54 : 36, W / H, 0.1, 100);
+if (cctv) {
+  camera.position.set(-6.4, 4.3, 5.4);
+  camera.lookAt(0.8, 0.5, -0.8);
+} else {
+  camera.position.set(8.2, 4.6, 7.4);
+  camera.lookAt(-1.0, 0.5, -0.9);
+}
+
+renderer.render(scene, camera);
+
+if (cctv) {
+  const osd = document.createElement('div');
+  osd.id = 'osd';
+  osd.innerHTML = '<b>●</b> CAM 04 · LINE B · 2026-09-30 10:42:17';
+  stage.appendChild(osd);
+}
+document.fonts.ready.then(() => (window.sceneReady = true));
+</script>
+</body>
+</html>

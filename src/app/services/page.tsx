@@ -48,10 +48,10 @@ const SERVICES: Array<{ name: string; detail: string; icon: IconName }> = [
 ];
 
 const TIERS = [
-  { name: 'Basic', users: '10 to 30 users', price: '$1k to 3k', detail: 'Monthly health checks, minor prompt tuning and knowledge base refresh. Next-business-day response.' },
-  { name: 'Business', users: '30 to 150 users', price: '$3k to 8k', detail: 'Priority support, weekly checks and a quarterly business review. Same-business-day response.' },
-  { name: 'Enterprise', users: '150+ users', price: '$8k to 20k', detail: 'Dedicated support manager, security patch coordination and governance reporting. 4 to 8 hour urgent response.', featured: true },
-  { name: 'Premium', users: 'Mission-critical', price: '$20k+', detail: 'Dedicated technical lead, custom SLA, on-site option and a monthly steering committee.' },
+  { name: 'Basic', users: '10 to 30 users', response: 'Next business day', detail: 'Monthly health checks, minor prompt tuning and knowledge base refresh.' },
+  { name: 'Business', users: '30 to 150 users', response: 'Same business day', detail: 'Priority support, weekly checks and a quarterly business review.' },
+  { name: 'Enterprise', users: '150+ users', response: '4 to 8 hours urgent', detail: 'Dedicated support manager, security patch coordination and governance reporting.', featured: true },
+  { name: 'Premium', users: 'Mission-critical', response: 'Custom SLA', detail: 'Dedicated technical lead, on-site option and a monthly steering committee.' },
 ];
 
 export default function ServicesPage() {
@@ -114,7 +114,7 @@ export default function ServicesPage() {
             index="02"
             eyebrow="Managed support"
             title="Long-term reliability, not one-off help desks."
-            lead="Every deployment renews into one of four managed support tiers. Prices are monthly, in US dollars."
+            lead="Every deployment renews into one of four managed support tiers, sized to your users and how critical the system is."
           />
           <div className="cards cards-4 tier-grid">
             {TIERS.map((t) => (
@@ -122,9 +122,9 @@ export default function ServicesPage() {
                 {t.featured && <span className="tier-badge">MOST COMMON</span>}
                 <h3 className="h3">{t.name}</h3>
                 <span className="tier-users">{t.users}</span>
-                <span className="tier-price">
-                  {t.price}
-                  <span>/mo</span>
+                <span className="tier-response">
+                  <span className="mono">Response</span>
+                  {t.response}
                 </span>
                 <p>{t.detail}</p>
               </article>

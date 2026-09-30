@@ -1,0 +1,89 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Vision Intelligence</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .main { flex: 1; display: grid; grid-template-columns: 1fr 400px; min-width: 0; }
+  .left { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; border-right: 1px solid var(--line); min-width: 0; }
+  .bar { display: flex; justify-content: space-between; align-items: center; }
+  .bar h2 { margin: 0; font: 600 16px 'SG'; display: flex; gap: 10px; align-items: center; }
+  .feed { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line2); aspect-ratio: 16 / 9; }
+  .feed img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .box { position: absolute; border: 2px solid; border-radius: 4px; }
+  .box span { position: absolute; left: -2px; top: -24px; padding: 3px 7px; font: 500 11px 'JB'; white-space: nowrap; border-radius: 4px 4px 4px 0; color: #0a0a0b; }
+  .box.below span { top: auto; bottom: -24px; border-radius: 0 4px 4px 4px; }
+  .box.side span { left: auto; right: calc(100% + 4px); top: 0; border-radius: 4px; }
+  .g { border-color: #34c77b; } .g span { background: #34c77b; }
+  .a { border-color: #f5a524; } .a span { background: #f5a524; }
+  .r { border-color: #ff3b30; } .r span { background: #ff3b30; color: #fff; }
+  .live { position: absolute; right: 12px; top: 12px; }
+  .tl { border: 1px solid var(--line2); border-radius: 10px; padding: 12px 14px; background: #14151a; }
+  .tl h3 { margin: 0 0 10px; font: 600 13px 'SG'; display: flex; justify-content: space-between; }
+  .tl h3 span { font: 11px 'JB'; color: var(--dim); font-weight: 400; }
+  .row { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; margin: 5px 0; font: 11px 'JB'; color: var(--muted); }
+  .track { height: 10px; display: flex; border-radius: 3px; overflow: hidden; background: #202127; }
+  .track i { display: block; height: 100%; }
+  .right { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; background: #101116; }
+  .lbl { font: 500 10.5px 'JB'; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+  .prompt { border: 1px solid var(--line2); border-radius: 10px; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; background: #15161b; }
+  .resp { border: 1px solid rgba(255,59,48,.35); border-radius: 10px; padding: 12px 14px; font-size: 13.5px; line-height: 1.6; background: linear-gradient(180deg, rgba(255,59,48,.07), transparent); }
+  .resp .ts { font: 11px 'JB'; color: #ff7a70; }
+  .cursor { display: inline-block; width: 8px; height: 15px; background: var(--red); vertical-align: -2px; }
+  .st { display: flex; flex-direction: column; gap: 7px; }
+  .st div { display: flex; justify-content: space-between; align-items: center; padding: 8px 11px; border: 1px solid var(--line); border-radius: 8px; font-size: 13px; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: auto; }
+  .metrics div { border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; }
+  .metrics b { display: block; font: 700 17px 'SG'; } .metrics span { font: 10.5px 'JB'; color: var(--dim); }
+</style></head>
+<body>
+<div class="backdrop"></div>
+<div class="win">
+  <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url"><span class="lock">●</span> https://vision.plant-01.local/live</div><div style="width:60px"></div></div>
+  <div class="app">
+    <div class="main">
+      <section class="left">
+        <div class="bar">
+          <h2><img class="logo-mark" src="logo-mark.png" alt="">Line B · Camera 04</h2>
+          <div style="display:flex;gap:8px"><span class="badge grey">RTSP · 1080p</span><span class="badge green">● Processed on-site</span></div>
+        </div>
+        <div class="feed">
+          <img src="vision-feed.png" alt="">
+          <span class="badge red live">● LIVE</span>
+          <div class="box g side" style="left:44.6%;top:45%;width:4.4%;height:13%"><span>B3 · sewing</span></div>
+          <div class="box a" style="left:50.6%;top:40%;width:6.8%;height:10.5%"><span>B4 · unattended 03:12</span></div>
+          <div class="box r below" style="left:48.3%;top:50.8%;width:3%;height:6.6%"><span>queue · 6 bundles</span></div>
+          <div class="box a" style="left:70.6%;top:42%;width:6%;height:21.5%"><span>operator away from B5</span></div>
+          <div class="box g below" style="left:42.5%;top:63%;width:7.5%;height:19%"><span>C3 · sewing</span></div>
+        </div>
+        <div class="tl">
+          <h3>Shift timeline · Line B <span>06:00 to 10:42</span></h3>
+          <div class="row">B1<div class="track"><i style="width:92%;background:#34c77b"></i><i style="width:8%;background:#f5a524"></i></div></div>
+          <div class="row">B2<div class="track"><i style="width:40%;background:#34c77b"></i><i style="width:6%;background:#f5a524"></i><i style="width:54%;background:#34c77b"></i></div></div>
+          <div class="row">B3<div class="track"><i style="width:70%;background:#34c77b"></i><i style="width:12%;background:#f5a524"></i><i style="width:18%;background:#34c77b"></i></div></div>
+          <div class="row">B4<div class="track"><i style="width:55%;background:#34c77b"></i><i style="width:10%;background:#f5a524"></i><i style="width:20%;background:#34c77b"></i><i style="width:15%;background:#ff3b30"></i></div></div>
+          <div class="row">B5<div class="track"><i style="width:80%;background:#34c77b"></i><i style="width:20%;background:#f5a524"></i></div></div>
+        </div>
+      </section>
+      <aside class="right">
+        <div><div class="lbl">Prompt</div><div class="prompt">For each station on Line B, is the operator sewing, waiting for work or away? Report any queue of bundles between stations.</div></div>
+        <div><div class="lbl">Live response</div>
+          <div class="resp"><span class="ts">10:42:17</span><br>B1 to B3 sewing normally. <b>B4 unattended for 3 min 12 s.</b> Six bundles are queued in front of B4, so B3 output is backing up. The operator from B5 is walking toward the cart area.<span class="cursor"></span></div>
+        </div>
+        <div><div class="lbl">Station status</div>
+          <div class="st">
+            <div>B1 · Side seams <span class="badge green">sewing</span></div>
+            <div>B2 · Sleeve attach <span class="badge green">sewing</span></div>
+            <div>B3 · Collar <span class="badge green">sewing</span></div>
+            <div>B4 · Hemming <span class="badge amber">unattended</span></div>
+            <div>B5 · Label and trim <span class="badge amber">away</span></div>
+          </div>
+        </div>
+        <div class="metrics">
+          <div><b>0.9 s</b><span>per frame</span></div>
+          <div><b>41%</b><span>GPU load</span></div>
+          <div><b>0 KB</b><span>sent off-site</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</body></html>

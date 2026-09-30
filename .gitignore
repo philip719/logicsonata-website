@@ -8,3 +8,6 @@ tools/hero-video/node_modules/
 tools/hero-video/frames/
 tools/hero-video/frames-nl/
 tools/hero-video/out/
+tools/product-visuals/node_modules
+tools/product-visuals/out/
+tools/whitepapers/.cache/

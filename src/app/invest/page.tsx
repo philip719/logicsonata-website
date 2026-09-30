@@ -1,95 +1,218 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Icon } from '@/components/Icon';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
-import { PageHero, SectionHead } from '@/components/ui';
+import { LeadForm } from '@/components/LeadForm';
+import { Corners, PageHero, SectionHead } from '@/components/ui';
 import type { IconName } from '@/lib/site';
-import { SITE } from '@/lib/site';
+import { MARKETS, SITE } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Invest in Trusted Private AI Infrastructure',
+  title: 'Investor Relations',
   description:
-    'Logic Sonata is building a full private AI portfolio for Southeast Asian businesses. Strategic investors and partners can start a confidential conversation.',
+    'Investor relations at Logic Sonata: our investment thesis, business model and growth strategy for private AI in Southeast Asia, and how to contact our investor relations team.',
   alternates: { canonical: '/invest' },
   openGraph: { url: '/invest' },
 };
 
-const contactHref = `mailto:${SITE.emails.investors}?subject=${encodeURIComponent('Investor Introduction')}`;
-
-const DRIVERS = [
-  ['Data sovereignty', 'Businesses want the benefits of AI without sending data outside their control.'],
-  ['Security requirements', 'Regulated and security-conscious industries need controlled infrastructure by default.'],
-  ['Model flexibility', 'Buyers want to choose and change models, not commit to a single provider.'],
-  ['Governance and auditability', 'Boards and regulators increasingly expect a full audit trail on AI use.'],
-  ['Industry-specific deployment', 'Manufacturing, professional services and regional groups need AI shaped to their workflows.'],
-  ['Regional demand', 'Businesses across Southeast Asia are only beginning this shift.'],
+const SNAPSHOT: Array<{ label: string; value: string; icon: IconName }> = [
+  { label: 'Focus', value: 'Private AI for businesses', icon: 'shield' },
+  { label: 'Markets', value: MARKETS.map((m) => m.code).join(' · '), icon: 'globe' },
+  { label: 'Revenue model', value: 'Projects plus recurring managed services', icon: 'layers' },
+  { label: 'Route to market', value: 'Direct sales and a partner channel', icon: 'network' },
 ];
 
-const PORTFOLIO: Array<{ name: string; detail: string; icon: IconName }> = [
-  { name: 'Knowledge Assistant', detail: 'Secure internal question answering across company documents.', icon: 'book' },
-  { name: 'AI Agents', detail: 'Workflow automation inside the customer’s own environment.', icon: 'agent' },
-  { name: 'Code Assistant', detail: 'Repo-aware pair programming without exposing source code.', icon: 'code' },
-  { name: 'Vision AI', detail: 'Visual inspection and document processing for industry workflows.', icon: 'eye' },
-  { name: 'Translation and Voice', detail: 'Multilingual translation, transcription and internal voice assistants.', icon: 'translate' },
-  { name: 'AI Infrastructure', detail: 'Servers, GPU workstations, private cloud, access control and administration.', icon: 'chip' },
+const THESIS: Array<{ title: string; detail: string; icon: IconName }> = [
+  {
+    title: 'Data control is becoming non-negotiable',
+    detail:
+      'Businesses want the productivity of AI but cannot place confidential documents, source code and customer data into systems they do not control. Demand for private deployment is structural, not cyclical.',
+    icon: 'lock',
+  },
+  {
+    title: 'Private AI has become affordable',
+    detail:
+      'Compact AI workstations with up to 128 GB of unified memory now run capable open models on a desk. On-premise AI is within reach of mid-sized companies for the first time.',
+    icon: 'chip',
+  },
+  {
+    title: 'The mid-market needs a full-stack partner',
+    detail:
+      'Regional companies rarely have the in-house skills to select models, prepare data, secure access and drive adoption. One accountable partner for the whole stack is what they buy.',
+    icon: 'users',
+  },
+  {
+    title: 'Recurring revenue compounds',
+    detail:
+      'Every deployment moves into a managed support tier. Each additional product line deployed at an existing customer adds recurring value without new acquisition cost.',
+    icon: 'rocket',
+  },
+  {
+    title: 'Partners multiply reach',
+    detail:
+      'Resellers, system integrators and managed service providers extend our reach across five markets faster than a direct sales force alone.',
+    icon: 'network',
+  },
 ];
 
-const POSITION = [
-  'Private by design, not privacy added afterwards',
-  'Model independent: no lock-in to one AI provider',
-  'Deployment flexibility: on-premise, hosted or hybrid',
-  'Built to integrate with systems customers already run',
-  'Models, infrastructure, data and process in one solution',
-  'Governance and auditability built in from the start',
+const MARKET_DRIVERS = [
+  ['Data protection regulation', 'Personal data protection laws across Singapore, Malaysia, Thailand, Indonesia and Vietnam raise the cost of uncontrolled AI use.'],
+  ['Shadow AI inside companies', 'Staff already use public AI tools with company data, creating risk that boards now want addressed.'],
+  ['Model independence', 'Buyers want to choose and change models rather than commit to a single provider.'],
+  ['Manufacturing and supply-chain base', 'Southeast Asia’s manufacturing, apparel and supplier sectors hold sensitive buyer, costing and design data.'],
+  ['Governance expectations', 'Boards, auditors and customers increasingly expect a traceable record of how AI is used.'],
+  ['Early market', 'Most regional businesses are at the start of AI adoption, leaving room to establish a trusted brand.'],
+];
+
+const MODEL: Array<{ title: string; detail: string; icon: IconName }> = [
+  {
+    title: 'Land',
+    detail: 'Readiness assessments and pilots prove value on one use case and open the relationship.',
+    icon: 'flask',
+  },
+  {
+    title: 'Deploy',
+    detail: 'Implementation projects cover hardware, software, knowledge preparation, integration and training.',
+    icon: 'rocket',
+  },
+  {
+    title: 'Retain',
+    detail: 'Managed support tiers provide monitoring, model updates, governance reviews and ongoing improvement.',
+    icon: 'support',
+  },
+  {
+    title: 'Expand',
+    detail: 'Five product lines, from knowledge assistants to vision and agents, grow value within each customer.',
+    icon: 'layers',
+  },
+];
+
+const GROWTH = [
+  'Phased expansion across Singapore, Vietnam, Indonesia, Malaysia and Thailand',
+  'Building a partner channel of resellers, integrators and managed service providers',
+  'Industry packages for manufacturing, apparel, retail and supply chain',
+  'Appliance automation for faster, repeatable deployments',
+  'Strengthening managed services and governance tooling',
+  'Selective hiring of regional sales and pre-sales leaders',
+];
+
+const ADVANTAGES = [
+  'Private by design, with governance and audit built in from the start',
+  'Model- and hardware-independent: no lock-in for customers',
+  'A productised appliance with signed updates, backup and recovery',
+  'Full-stack delivery, from hardware to adoption training',
   'Regional presence and language capability',
-  'A partner network extending reach beyond direct sales',
+  'Partner programme extending reach beyond direct sales',
 ];
 
-const QUESTIONS = [
-  'Where is our data actually stored?',
-  'Which model is processing it?',
-  'Can we change that model later?',
-  'Who inside our company can access it?',
-  'Can it run entirely inside our own infrastructure?',
-  'How do we govern and audit its use?',
-];
-
-const FOCUS = [
-  'Expansion across Southeast Asia',
-  'Deepening the partner network',
-  'Broadening the product portfolio',
-  'Strengthening managed services',
-  'Industry-specific solution packages',
-  'Deployment automation and tooling',
-  'Governance and compliance frameworks',
+const FAQ = [
+  {
+    q: 'Is Logic Sonata raising capital?',
+    a: 'We are not running an open fundraising process. We speak selectively with investors and strategic partners who bring value beyond capital, such as regional market access, enterprise relationships or channel networks.',
+  },
+  {
+    q: 'Can I receive financial information or an investor briefing?',
+    a: 'Detailed materials are shared personally with qualified parties under a non-disclosure agreement. Use the enquiry form below and our team will be in touch.',
+  },
+  {
+    q: 'Do you publish financial results?',
+    a: 'Logic Sonata is a private company and does not publish financial statements or forward-looking financial information on this website.',
+  },
+  {
+    q: 'Who should I contact?',
+    a: `Write to ${SITE.emails.investors} or use the enquiry form. Customer and partnership questions are handled separately by our sales and partner teams.`,
+  },
 ];
 
 export default function InvestPage() {
   return (
     <>
-      <JsonLd data={breadcrumbs([{ name: 'Invest', path: '/invest' }])} />
+      <JsonLd data={breadcrumbs([{ name: 'Investor relations', path: '/invest' }])} />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+        }}
+      />
 
       <PageHero
-        eyebrow="Investors"
+        eyebrow="Investor relations"
         title={
           <>
-            Building the infrastructure for <span className="accent">trusted AI.</span>
+            Building Southeast Asia’s trusted <span className="accent">private AI company.</span>
           </>
         }
-        lead="AI is becoming part of every business function. Yet many companies still cannot use it, not because the technology is not ready, but because they cannot put confidential data into systems they do not control. Logic Sonata exists to close that gap."
-      />
+        lead="Information for prospective investors, strategic partners and analysts about Logic Sonata’s strategy, business model and growth plans, and how to reach our investor relations team."
+      >
+        <div className="btn-row">
+          <a href="#enquiry" className="btn btn-primary btn-lg">
+            Contact investor relations
+            <Icon name="arrow" size={18} />
+          </a>
+          <a href="#thesis" className="btn btn-ghost btn-lg">
+            Our investment thesis
+          </a>
+        </div>
+      </PageHero>
+
+      <section className="section">
+        <div className="container">
+          <SectionHead index="01" eyebrow="At a glance" title="Logic Sonata in brief." />
+          <div className="cards cards-4">
+            {SNAPSHOT.map((s) => (
+              <article key={s.label} className="card" data-reveal>
+                <span className="card-icon">
+                  <Icon name={s.icon} />
+                </span>
+                <span className="mono card-code">{s.label.toUpperCase()}</span>
+                <h3 className="h3">{s.value}</h3>
+              </article>
+            ))}
+          </div>
+          <p className="lead" style={{ marginTop: 32 }} data-reveal>
+            Logic Sonata designs, deploys and manages private AI for businesses that cannot send confidential data to
+            public AI services. Each solution combines hardware, software, company knowledge, access controls,
+            implementation, training and ongoing support. See our{' '}
+            <Link href="/solutions" className="email-link">
+              product portfolio
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      <section className="section section-alt" id="thesis">
+        <div className="container">
+          <SectionHead index="02" eyebrow="Investment thesis" title="Why private AI, why Southeast Asia, why now." />
+          <div className="cards cards-3">
+            {THESIS.map((t, i) => (
+              <article key={t.title} className="card" data-reveal>
+                <Corners />
+                <span className="service-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="card-icon">
+                  <Icon name={t.icon} />
+                </span>
+                <h3 className="h3">{t.title}</h3>
+                <p>{t.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section">
         <div className="container">
           <SectionHead
-            index="01"
-            eyebrow="Why now"
-            title="Private AI is becoming part of the business stack."
-            lead="This is a structural shift, not a trend, and it favours companies built around control from day one."
+            index="03"
+            eyebrow="Market opportunity"
+            title="Structural forces behind demand."
+            lead="The shift to private AI is driven by regulation, risk and the economics of new hardware, across a region with a deep manufacturing and supplier base."
           />
           <div className="cards cards-3">
-            {DRIVERS.map(([name, detail]) => (
-              <article key={name} className="card" data-reveal>
-                <h3 className="h3">{name}</h3>
+            {MARKET_DRIVERS.map(([title, detail]) => (
+              <article key={title} className="card" data-reveal>
+                <h3 className="h4">{title}</h3>
                 <p>{detail}</p>
               </article>
             ))}
@@ -99,40 +222,44 @@ export default function InvestPage() {
 
       <section className="section section-alt">
         <div className="container">
-          <SectionHead index="02" eyebrow="What we are building" title="A full private AI portfolio, not a single product." />
-          <div className="cards cards-3">
-            {PORTFOLIO.map((p) => (
-              <article key={p.name} className="card" data-reveal>
-                <span className="card-icon">
-                  <Icon name={p.icon} />
-                </span>
-                <h3 className="h3">{p.name}</h3>
-                <p>{p.detail}</p>
-              </article>
+          <SectionHead
+            index="04"
+            eyebrow="Business model"
+            title="Land, deploy, retain, expand."
+            lead="Project revenue opens each relationship; recurring managed services and additional product lines build long-term value."
+          />
+          <ol className="steps steps-4" data-reveal>
+            {MODEL.map((m, i) => (
+              <li key={m.title}>
+                <span className="service-num">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{m.title}</h3>
+                <p>{m.detail}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
       <section className="section">
         <div className="container split">
           <div>
-            <SectionHead
-              index="03"
-              eyebrow="Market approach"
-              title="Priority sectors, then a partner-led path to scale."
-              lead="We focus on manufacturing, apparel and textiles, design, professional services, software teams and regional business groups: sectors where the cost of a data leak is high and the willingness to pay for control is real. Growth compounds through resellers, integrators and managed service providers."
-            />
-          </div>
-          <div data-reveal>
-            <h3 className="h4" style={{ marginBottom: 16 }}>
-              Competitive position
-            </h3>
-            <ul className="check-list">
-              {POSITION.map((p) => (
-                <li key={p}>
+            <SectionHead index="05" eyebrow="Growth strategy" title="Where we are focused next." />
+            <ul className="check-list" data-reveal>
+              {GROWTH.map((g) => (
+                <li key={g}>
                   <Icon name="check" size={16} />
-                  {p}
+                  {g}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <SectionHead index="06" eyebrow="Competitive position" title="What sets us apart." />
+            <ul className="check-list" data-reveal>
+              {ADVANTAGES.map((a) => (
+                <li key={a}>
+                  <Icon name="check" size={16} />
+                  {a}
                 </li>
               ))}
             </ul>
@@ -141,83 +268,41 @@ export default function InvestPage() {
       </section>
 
       <section className="section section-alt">
-        <div className="container">
-          <SectionHead
-            index="04"
-            eyebrow="Business model"
-            title="Project revenue funding a recurring services base."
-          />
-          <div className="cards cards-2">
-            <article className="card" data-reveal>
-              <h3 className="h3">Project revenue</h3>
-              <p>
-                Assessments, pilot implementations, data preparation, infrastructure setup and integration: the entry
-                point for every new customer relationship.
-              </p>
-            </article>
-            <article className="card" data-reveal>
-              <h3 className="h3">Recurring revenue</h3>
-              <p>
-                Managed support tiers, model updates, monitoring and governance reviews: the base that compounds as the
-                customer roster grows.
-              </p>
-            </article>
+        <div className="container faq-wrap">
+          <SectionHead index="07" eyebrow="Investor FAQ" title="Engaging with Logic Sonata." />
+          <div className="faq" data-reveal>
+            {FAQ.map((f, i) => (
+              <details key={f.q} open={i === 0}>
+                <summary>
+                  <h3>{f.q}</h3>
+                  <span className="faq-toggle" aria-hidden="true" />
+                </summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <SectionHead index="05" eyebrow="Why Logic Sonata" title="We answer the questions businesses are already asking." />
-          <ul className="q-list" data-reveal>
-            {QUESTIONS.map((q, i) => (
-              <li key={q}>
-                <span className="mono">{String(i + 1).padStart(2, '0')}</span>
-                {q}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section section-alt">
-        <div className="container split">
+      <section className="section" id="enquiry">
+        <div className="container contact-grid">
           <div>
             <SectionHead
-              index="06"
-              eyebrow="Strategic investment"
-              title="We are selective about who we bring in."
-              lead="Logic Sonata is not running an open fundraising process. From time to time we speak with a small number of patient, strategic partners whose value goes beyond capital: technology experience, regional market access, customer relationships, channel networks or a credible path to international expansion."
+              index="08"
+              eyebrow="Contact investor relations"
+              title="Start a confidential conversation."
+              lead="Tell us about your organisation and your interest in Logic Sonata. We reply personally to every enquiry and share detailed materials under a non-disclosure agreement."
             />
+            <p className="fine-print">
+              Investor relations:{' '}
+              <a className="email-link" href={`mailto:${SITE.emails.investors}`}>
+                {SITE.emails.investors}
+              </a>
+            </p>
           </div>
-          <div data-reveal>
-            <h3 className="h4" style={{ marginBottom: 16 }}>
-              Where we are focused next
-            </h3>
-            <ul className="pill-grid">
-              {FOCUS.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-band">
-        <div className="container cta-inner" data-reveal>
-          <p className="eyebrow">
-            <span className="eyebrow-dot" aria-hidden="true" />
-            Connect
-          </p>
-          <h2 className="h2 cta-title">Start a confidential conversation.</h2>
-          <p className="lead">
-            Write to us with a short introduction to your background and what you would bring to the table. We reply
-            personally to every message.
-          </p>
-          <div className="btn-row btn-row--center">
-            <a href={contactHref} className="btn btn-primary btn-lg">
-              Contact {SITE.emails.investors}
-            </a>
+          <div className="panel">
+            <Corners />
+            <LeadForm variant="investor" subject="Investor relations enquiry" />
           </div>
         </div>
       </section>

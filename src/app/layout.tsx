@@ -76,6 +76,7 @@ const organization = {
         'Enterprise AI adoption and training',
       ],
       contactPoint: [
+        { '@type': 'ContactPoint', contactType: 'sales', email: SITE.emails.sales, areaServed: MARKETS.map((m) => m.code) },
         { '@type': 'ContactPoint', contactType: 'partnerships', email: SITE.emails.partners },
         { '@type': 'ContactPoint', contactType: 'investor relations', email: SITE.emails.investors },
       ],

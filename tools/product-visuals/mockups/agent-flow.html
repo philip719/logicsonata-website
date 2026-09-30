@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Governed agent loop</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .title { position: absolute; left: 70px; top: 44px; font: 700 28px 'SG'; }
+  .title span { color: var(--red); }
+  .sub { position: absolute; left: 70px; top: 88px; font-size: 15px; color: var(--muted); }
+  svg { position: absolute; inset: 0; }
+  .label { font-family: 'SG'; font-weight: 600; font-size: 19px; fill: #f2f1ee; }
+  .small { font-family: 'Inter'; font-size: 13px; fill: #a7a6a1; }
+  .num { font-family: 'JB'; font-size: 12px; fill: #ff3b30; }
+  .core { font-family: 'SG'; font-weight: 700; font-size: 24px; fill: #f2f1ee; }
+  .corek { font-family: 'JB'; font-size: 12px; fill: #ff3b30; letter-spacing: 2px; }
+  .side { position: absolute; right: 70px; top: 190px; width: 330px; display: flex; flex-direction: column; gap: 12px; }
+  .side div { border: 1px solid var(--line2); border-radius: 12px; padding: 14px 16px; background: #14151a; font-size: 14px; color: var(--muted); }
+  .side b { display: block; color: var(--text); font: 600 15px 'SG'; margin-bottom: 3px; }
+</style></head>
+<body>
+<div class="backdrop"></div>
+<div class="title">The governed agent loop: <span>bounded, approved, recorded.</span></div>
+<div class="sub">Hermes Agent or OpenClaw, running inside a Logic Sonata governed runtime.</div>
+<svg viewBox="0 0 1600 1000">
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff3b30"/></marker>
+    <radialGradient id="cg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff3b30" stop-opacity=".22"/><stop offset="1" stop-color="#ff3b30" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g transform="translate(560 560)">
+    <circle r="330" fill="url(#cg)"/>
+    <circle r="250" fill="none" stroke="#ff3b30" stroke-opacity=".6" stroke-width="2" stroke-dasharray="8 8"/>
+    <circle r="130" fill="#14151a" stroke="rgba(255,255,255,.16)"/>
+    <text class="corek" text-anchor="middle" y="-28">GOVERNED RUNTIME</text>
+    <text class="core" text-anchor="middle" y="6">Private model</text>
+    <text class="small" text-anchor="middle" y="32">Sandbox · allow-lists · vault</text>
+    <text class="small" text-anchor="middle" y="52">Full audit trail</text>
+  </g>
+  <g id="nodes"></g>
+</svg>
+<div class="side">
+  <div><b>Private models only</b>Agents never call public AI services.</div>
+  <div><b>Least-privilege tools</b>Each task gets only the files, systems and network access it needs.</div>
+  <div><b>Humans approve what matters</b>External and irreversible actions wait for sign-off.</div>
+  <div><b>Everything recorded</b>Plans, tool calls, approvals and results are auditable.</div>
+</div>
+<script>
+  const stages = [
+    ['Trigger', 'Chat, schedule or event'],
+    ['Plan', 'Steps drafted on-premise'],
+    ['Act in sandbox', 'Allow-listed tools'],
+    ['Approval', 'Human sign-off'],
+    ['Deliver', 'Result to the right place'],
+    ['Learn', 'New skill and memory'],
+  ];
+  const g = document.getElementById('nodes');
+  const cx = 560, cy = 560, R = 250;
+  let html = '';
+  stages.forEach(([t, d], i) => {
+    const a = -Math.PI / 2 + (i / stages.length) * Math.PI * 2;
+    const x = cx + Math.cos(a) * R, y = cy + Math.sin(a) * R;
+    const a2 = a + (Math.PI * 2) / stages.length;
+    const mid = a + Math.PI / stages.length;
+    const ax = cx + Math.cos(a + 0.4) * R, ay = cy + Math.sin(a + 0.4) * R;
+    const bx = cx + Math.cos(a2 - 0.4) * R, by = cy + Math.sin(a2 - 0.4) * R;
+    html += `<path d="M${ax} ${ay} A ${R} ${R} 0 0 1 ${bx} ${by}" fill="none" stroke="#ff3b30" stroke-width="3" marker-end="url(#ar)"/>`;
+    const lx = cx + Math.cos(a) * (R + 0), ly = cy + Math.sin(a) * (R + 0);
+    html += `<g transform="translate(${lx} ${ly})"><rect x="-105" y="-40" width="210" height="80" rx="14" fill="#14151a" stroke="${i === 3 ? '#f5a524' : 'rgba(255,255,255,.18)'}" stroke-width="${i === 3 ? 2 : 1}"/>
+      <text class="num" x="-88" y="-14">${String(i + 1).padStart(2, '0')}</text>
+      <text class="label" x="-88" y="10">${t}</text><text class="small" x="-88" y="29">${d}</text></g>`;
+  });
+  g.innerHTML = html;
+</script>
+</body></html>

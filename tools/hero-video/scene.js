@@ -57,18 +57,26 @@ function canvasTex(size, draw, srgb = true, repeat = [1, 1]) {
   return t;
 }
 
+// Slotted grille with a diagonal break that echoes the angled cut in the LS mark.
+const SLASH_X = 700; // canvas x of the diagonal at mid-height
+const SLASH_SLOPE = Math.tan(Math.PI / 6); // 60 degrees from horizontal
 function meshDraw(ctx, w, h, bump) {
-  ctx.fillStyle = bump ? '#ffffff' : '#2c2f36';
+  ctx.fillStyle = bump ? '#ffffff' : '#1f2227';
   ctx.fillRect(0, 0, w, h);
-  const pitch = 22;
-  for (let row = 0, y = pitch / 2; y < h; row++, y += pitch * 0.866) {
-    for (let x = (row % 2 ? pitch / 2 : 0) + pitch / 2; x < w; x += pitch) {
+  const slotH = 9, pitch = 21, slotW = 64, gap = 12;
+  for (let row = 0, y = 14; y < h - 10; row++, y += pitch) {
+    for (let x = 16 + (row % 2) * ((slotW + gap) / 2); x < w - 16; x += slotW + gap) {
+      const cx = SLASH_X + (h / 2 - (y + slotH / 2)) * SLASH_SLOPE;
+      const x2 = Math.min(x + slotW, w - 16);
+      if (x2 - x < 20 || (x2 > cx - 18 && x < cx + 18)) continue;
       if (!bump) {
-        ctx.fillStyle = 'rgba(210,214,222,0.18)';
-        ctx.beginPath(); ctx.arc(x - 1, y - 1, 7.4, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(200,205,214,0.16)';
+        ctx.fillRect(x, y - 1.2, x2 - x, 1.2);
       }
-      ctx.fillStyle = bump ? '#000000' : '#07080a';
-      ctx.beginPath(); ctx.arc(x, y, 6.6, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = bump ? '#000000' : '#050608';
+      ctx.beginPath();
+      ctx.roundRect(x, y, x2 - x, slotH, slotH / 2);
+      ctx.fill();
     }
   }
 }
@@ -131,9 +139,9 @@ const ssdLabel = canvasTex(256, (ctx, s) => {
 
 // ---------- materials ----------
 const M = {
-  shell: new THREE.MeshPhysicalMaterial({ color: '#8c929b', metalness: 1, roughness: 0.3, roughnessMap: brushed, clearcoat: 0.3, clearcoatRoughness: 0.35 }),
+  shell: new THREE.MeshPhysicalMaterial({ color: '#5f656e', metalness: 1, roughness: 0.32, roughnessMap: brushed, clearcoat: 0.4, clearcoatRoughness: 0.3 }),
   shellInner: new THREE.MeshStandardMaterial({ color: '#3a3d44', metalness: 1, roughness: 0.55 }),
-  mesh: new THREE.MeshStandardMaterial({ color: '#ffffff', map: meshMap, bumpMap: meshBump, bumpScale: 1.4, metalness: 0.75, roughness: 0.42 }),
+  mesh: new THREE.MeshStandardMaterial({ color: '#ffffff', map: meshMap, bumpMap: meshBump, bumpScale: 1.6, metalness: 0.8, roughness: 0.38 }),
   accent: new THREE.MeshStandardMaterial({ color: '#3a0906', emissive: '#ff3b30', emissiveIntensity: 2.4 }),
   fanBlade: new THREE.MeshStandardMaterial({ color: '#6b717b', metalness: 0.6, roughness: 0.35 }),
   fanHub: new THREE.MeshStandardMaterial({ color: '#2a2d33', metalness: 0.5, roughness: 0.4 }),
@@ -184,13 +192,14 @@ left.add(at(rbox(4, 42, 150, M.shell, 1.6), -73, 25, 0));
 const right = part('right', [72, 0, 0], 0.08);
 right.add(at(rbox(4, 42, 150, M.shell, 1.6), 73, 25, 0));
 
-// Front perforated panel with the brand accent light
+// Front slotted grille with the diagonal Logic Sonata accent light
 const front = part('front', [0, 0, 82], 0.03);
 front.add(at(rbox(142, 42, 4, M.mesh, 1.2), 0, 25, 73));
-front.add(at(box(118, 1.2, 0.8), 0, 7.2, 75.3));
-front.children[front.children.length - 1].material = M.accent;
+const slash = at(box(1.6, 44, 0.9, M.accent), (SLASH_X / 1024 - 0.5) * 142, 25, 75.3);
+slash.rotation.z = -Math.PI / 6;
+front.add(slash);
 
-// Rear panel: perforated, with the I/O cut-outs
+// Rear panel: slotted grille with the I/O cut-outs
 const rear = part('rear', [0, 0, -82], 0.03);
 rear.add(at(rbox(142, 42, 4, M.mesh, 1.2), 0, 25, -73));
 [[-52, 9, 7], [-38, 9, 7], [-24, 9, 7], [-6, 14, 11], [16, 16, 12], [38, 16, 12], [58, 12, 8]].forEach(([x, w, h]) => {
@@ -201,6 +210,31 @@ rear.add(at(rbox(142, 42, 4, M.mesh, 1.2), 0, 25, -73));
 const top = part('top', [0, 146, 0], 0);
 top.add(at(rbox(150, 4, 150, M.shell, 3), 0, 48, 0));
 top.add(at(box(140, 0.6, 140, M.shellInner), 0, 45.7, 0));
+
+// Etched LS mark on the top cover (loaded before the first frame).
+const logoReady = new Promise((resolve) => {
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement('canvas');
+    c.width = img.width; c.height = img.height;
+    const g = c.getContext('2d');
+    g.drawImage(img, 0, 0);
+    g.globalCompositeOperation = 'source-in';
+    g.fillStyle = '#ffffff';
+    g.fillRect(0, 0, c.width, c.height);
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const mark = new THREE.Mesh(
+      new THREE.PlaneGeometry(26, 26 * img.height / img.width),
+      new THREE.MeshStandardMaterial({ map: tex, transparent: true, color: '#c3c8d0', metalness: 0.9, roughness: 0.18 }),
+    );
+    mark.rotation.x = -Math.PI / 2;
+    mark.position.set(42, 50.05, 46);
+    top.add(mark);
+    resolve();
+  };
+  img.src = '/logo-mark.png';
+});
 
 // Mainboard with the AI superchip, memory, network controller and passives
 const board = part('board', [0, 8, 0], 0.18);
@@ -315,7 +349,7 @@ const LABELS = [
   { part: 'board', local: [35, 12.2, 24], side: 'right', title: 'Up to 128 GB memory', sub: 'Unified, for large models' },
   { part: 'ssd', local: [50, 12.8, 50], side: 'right', title: 'Local NVMe storage', sub: 'Your data stays on-site' },
   { part: 'board', local: [-42, 13.2, 46], side: 'left', title: 'High-speed networking', sub: 'Link units as you grow' },
-  { part: 'front', local: [-40, 12, 75], side: 'left', title: 'Perforated airflow panels', sub: 'Front and rear intake' },
+  { part: 'front', local: [-40, 12, 75], side: 'left', title: 'Slotted airflow grilles', sub: 'Front and rear intake' },
 ];
 const overlay = document.getElementById('overlay');
 const stage = document.getElementById('stage');
@@ -404,7 +438,7 @@ window.renderAt = (t) => {
   return true;
 };
 
-document.fonts.ready.then(() => {
+Promise.all([document.fonts.ready, logoReady]).then(() => {
   window.renderAt(Number(params.get('t') || 0));
   window.sceneReady = true;
 });

@@ -1,0 +1,82 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Agent</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .ch { width: 230px; flex: none; background: #0e0f14; border-right: 1px solid var(--line); padding: 16px 12px; font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+  .ch .ws { font: 600 15px 'SG'; color: var(--text); padding: 0 8px 14px; }
+  .ch .h { font: 500 10.5px 'JB'; letter-spacing: .1em; color: var(--dim); padding: 12px 8px 6px; }
+  .ch div.c { padding: 6px 10px; border-radius: 7px; }
+  .ch div.on { background: rgba(255,255,255,.07); color: var(--text); }
+  .conv { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .top { height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; border-bottom: 1px solid var(--line); font: 600 15px 'SG'; }
+  .msgs { flex: 1; padding: 18px 24px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
+  .m { display: flex; gap: 12px; }
+  .av { width: 36px; height: 36px; flex: none; border-radius: 9px; display: grid; place-items: center; font: 600 13px 'SG'; }
+  .m .who { font: 600 13.5px 'SG'; } .m .who span { font: 11px 'JB'; color: var(--dim); font-weight: 400; margin-left: 6px; }
+  .m .txt { font-size: 14px; line-height: 1.6; color: #e3e2de; margin-top: 3px; }
+  .steps { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; font: 12.5px 'JB'; color: var(--muted); }
+  .steps .ok { color: #5fdc9a; }
+  .tbl { margin-top: 10px; border: 1px solid var(--line2); border-radius: 10px; overflow: hidden; width: 560px; }
+  .tbl table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th { text-align: left; font: 500 10.5px 'JB'; color: var(--dim); background: #15161b; padding: 8px 12px; letter-spacing: .06em; }
+  .tbl td { padding: 8px 12px; border-top: 1px solid var(--line); }
+  .appr { margin-top: 12px; width: 560px; border: 1px solid rgba(245,165,36,.5); border-radius: 12px; padding: 14px 16px; background: linear-gradient(180deg, rgba(245,165,36,.09), transparent); }
+  .appr h4 { margin: 0 0 6px; font: 600 14.5px 'SG'; color: #f7bc55; }
+  .appr p { margin: 0; font-size: 13.5px; color: #e3e2de; }
+  .appr .btns { display: flex; gap: 8px; margin-top: 12px; }
+  .b { padding: 7px 14px; border-radius: 8px; font-size: 13px; border: 1px solid var(--line2); }
+  .b.p { background: var(--red); border-color: var(--red); color: #0a0a0b; font-weight: 600; }
+  .log { width: 330px; flex: none; background: #101116; border-left: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .log h3 { margin: 0 0 4px; font: 600 14px 'SG'; display: flex; justify-content: space-between; }
+  .log .e { border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px; font: 11.5px/1.55 'JB'; color: var(--muted); }
+  .log .e b { color: var(--text); font-weight: 500; }
+</style></head>
+<body>
+<div class="backdrop"></div>
+<div class="win">
+  <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url"><span class="lock">●</span> https://agents.company.local/ops</div><div style="width:60px"></div></div>
+  <div class="app">
+    <aside class="ch">
+      <div class="ws">Company workspace</div>
+      <div class="h">Channels</div>
+      <div class="c on"># operations</div><div class="c"># quality</div><div class="c"># purchasing</div><div class="c"># sales-rfq</div>
+      <div class="h">Agents</div>
+      <div class="c">◆ Ops agent</div><div class="c">◆ RFQ agent</div><div class="c">◆ Supplier agent</div>
+    </aside>
+    <section class="conv">
+      <div class="top"># operations <span class="badge green">● Agent runs on-premise</span></div>
+      <div class="msgs">
+        <div class="m"><div class="av" style="background:#2f4f7a">DL</div><div><div class="who">Dewi Lestari <span>07:32</span></div><div class="txt">@ops-agent prepare this morning's production summary from yesterday's export and send it to the plant manager.</div></div></div>
+        <div class="m"><div class="av" style="background:#17181e;border:1px solid var(--line2)"><img src="logo-mark.png" alt="" style="width:20px"></div><div>
+          <div class="who">Ops agent <span>07:33 · private model</span></div>
+          <div class="txt">Done. Here is the summary for 29 September.</div>
+          <div class="steps">
+            <div><span class="ok">✓</span> Read production_2026-09-29.csv (sandbox, read-only)</div>
+            <div><span class="ok">✓</span> Calculated output, efficiency and defect rate by line</div>
+            <div><span class="ok">✓</span> Compared with the 7-day average and flagged Line B</div>
+          </div>
+          <div class="tbl"><table>
+            <tr><th>LINE</th><th>OUTPUT</th><th>EFFICIENCY</th><th>DEFECTS</th><th>VS 7-DAY</th></tr>
+            <tr><td>Line A</td><td>1,240 pcs</td><td>91%</td><td>1.6%</td><td style="color:#5fdc9a">▲ 3%</td></tr>
+            <tr><td>Line B</td><td>980 pcs</td><td>78%</td><td>2.9%</td><td style="color:#ff7a70">▼ 11%</td></tr>
+            <tr><td>Line C</td><td>1,105 pcs</td><td>87%</td><td>1.9%</td><td style="color:var(--muted)">▬ 0%</td></tr>
+          </table></div>
+          <div class="appr">
+            <h4>Approval needed before sending</h4>
+            <p>Send email "Production summary, 29 Sep" to the plant manager, with the table above and a note on the Line B hemming bottleneck.</p>
+            <div class="btns"><span class="b p">Approve and send</span><span class="b">Edit draft</span><span class="b">Reject</span></div>
+          </div>
+        </div></div>
+      </div>
+    </section>
+    <aside class="log">
+      <h3>Agent activity <span class="badge grey">audit</span></h3>
+      <div class="e"><b>07:32:41</b> task received from #operations<br>skill: daily-production-summary</div>
+      <div class="e"><b>07:32:44</b> tool: files.read<br>scope: /exports/mes (read-only)</div>
+      <div class="e"><b>07:32:58</b> tool: sheets.analyse<br>sandbox · no network</div>
+      <div class="e"><b>07:33:10</b> draft: email.compose<br>recipient on allow-list</div>
+      <div class="e" style="border-color:rgba(245,165,36,.4)"><b>07:33:11</b> <span style="color:#f7bc55">paused · awaiting approval</span><br>policy: external-send-requires-approval</div>
+    </aside>
+  </div>
+</div>
+</body></html>

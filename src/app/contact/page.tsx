@@ -55,6 +55,11 @@ export default function ContactPage() {
               ))}
             </ol>
             <p className="fine-print">
+              Sales:{' '}
+              <a className="email-link" href={`mailto:${SITE.emails.sales}`}>
+                {SITE.emails.sales}
+              </a>
+              <br />
               Partnerships:{' '}
               <a className="email-link" href={`mailto:${SITE.emails.partners}`}>
                 {SITE.emails.partners}

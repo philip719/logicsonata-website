@@ -5,6 +5,7 @@ import { RegionMap } from '@/components/graphics/RegionMap';
 import { StackDiagram } from '@/components/graphics/StackDiagram';
 import { HeroVideo } from '@/components/HeroVideo';
 import { Icon } from '@/components/Icon';
+import { ProductCard } from '@/components/ProductCard';
 import { JsonLd } from '@/components/JsonLd';
 import { Corners, CtaBand, Eyebrow, SectionHead } from '@/components/ui';
 import { FAQ, HARDWARE_SPECS, INDUSTRIES, MARKETS, PROCESS, PRODUCTS, SITE, STACK } from '@/lib/site';
@@ -60,17 +61,7 @@ const serviceSchema = {
     name: 'Private AI products',
     itemListElement: PRODUCTS.map((p) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: p.name, description: p.summary, url: `${SITE.url}/solutions#${p.id}` },
-      ...(p.price.startsWith('From')
-        ? {
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'USD',
-              minPrice: Number(p.price.replace(/\D/g, '')) * 1000,
-              description: `${p.price} (setup)`,
-            },
-          }
-        : {}),
+      itemOffered: { '@type': 'Service', name: p.name, description: p.summary, url: `${SITE.url}/solutions/${p.id}` },
     })),
   },
 };
@@ -124,7 +115,6 @@ export default function Home() {
           </div>
           <div className="hero-visual">
             <div className="hero-visual-frame">
-              <span className="hero-visual-tag mono">FIG. 01 / PRIVATE AI APPLIANCE, EXPLODED</span>
               <HeroVideo />
             </div>
             <p className="hero-visual-caption mono">Illustrative render · internal layout simplified</p>
@@ -248,18 +238,7 @@ export default function Home() {
           </div>
           <div className="cards cards-3">
             {PRODUCTS.map((p) => (
-              <Link key={p.id} href={`/solutions#${p.id}`} className="card card-product" data-reveal>
-                <span className="card-icon">
-                  <Icon name={p.icon} />
-                </span>
-                <span className="mono card-code">{p.code}</span>
-                <h3 className="h3">{p.name}</h3>
-                <p>{p.summary}</p>
-                <span className="card-meta">
-                  {p.price}
-                  <Icon name="arrow" size={16} />
-                </span>
-              </Link>
+              <ProductCard key={p.id} product={p} />
             ))}
             <div className="card card-cta" data-reveal>
               <h3 className="h3">Not sure which one fits?</h3>
