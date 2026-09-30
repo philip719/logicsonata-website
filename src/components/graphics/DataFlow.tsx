@@ -1,3 +1,5 @@
+import type { CommonDict } from '@/i18n/locales/en/common';
+
 // Side-by-side comparison (stacked on phones): company data leaking to a
 // public model versus staying inside a private boundary.
 
@@ -10,14 +12,14 @@ function Doc({ x, y }: { x: number; y: number }) {
   );
 }
 
-export function DataFlow() {
+export function DataFlow({ t }: { t: CommonDict['graphics'] }) {
   return (
     <div className="flow">
       <figure className="flow-panel">
         <svg className="flow-svg" viewBox="0 0 300 220" role="img" aria-labelledby="flow-public">
-          <title id="flow-public">With public AI, company documents leave your network for unknown servers.</title>
+          <title id="flow-public">{t.publicTitle}</title>
           <rect x={2} y={30} width={150} height={170} className="flow-zone" />
-          <text x={14} y={52} className="flow-caption">Your company</text>
+          <text x={14} y={52} className="flow-caption">{t.yourCompany}</text>
           <Doc x={22} y={80} />
           <Doc x={62} y={100} />
           <Doc x={102} y={75} />
@@ -28,19 +30,19 @@ export function DataFlow() {
           <g transform="translate(232 36)">
             <path d="M8 52a16 16 0 0 1 0-32 20 20 0 0 1 38-6 16 16 0 0 1 4 38z" className="flow-cloud" />
           </g>
-          <text x={260} y={110} textAnchor="middle" className="flow-caption">Unknown</text>
-          <text x={260} y={124} textAnchor="middle" className="flow-caption">servers</text>
+          <text x={260} y={110} textAnchor="middle" className="flow-caption">{t.unknown}</text>
+          <text x={260} y={124} textAnchor="middle" className="flow-caption">{t.servers}</text>
         </svg>
         <figcaption>
-          <strong className="flow-heading flow-heading--bad">Public AI</strong>
-          Prompts, files and IP leave your control.
+          <strong className="flow-heading flow-heading--bad">{t.publicAi}</strong>
+          {t.publicCaption}
         </figcaption>
       </figure>
       <figure className="flow-panel">
         <svg className="flow-svg" viewBox="0 0 300 220" role="img" aria-labelledby="flow-private">
-          <title id="flow-private">With private AI, data and model stay inside your boundary.</title>
+          <title id="flow-private">{t.privateTitle}</title>
           <rect x={2} y={30} width={296} height={170} className="flow-zone flow-zone--secure" />
-          <text x={14} y={52} className="flow-caption">Your boundary</text>
+          <text x={14} y={52} className="flow-caption">{t.yourBoundary}</text>
           <Doc x={30} y={80} />
           <Doc x={70} y={104} />
           <Doc x={34} y={148} />
@@ -53,8 +55,8 @@ export function DataFlow() {
           <path d="M180 134 C 160 172, 110 176, 62 166" className="flow-loop flow-loop--late" />
         </svg>
         <figcaption>
-          <strong className="flow-heading flow-heading--good">Private AI</strong>
-          Data, model and audit trail stay inside.
+          <strong className="flow-heading flow-heading--good">{t.privateAi}</strong>
+          {t.privateCaption}
         </figcaption>
       </figure>
     </div>

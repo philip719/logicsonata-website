@@ -11,15 +11,36 @@ running JavaScript, and the site runs on standard Hostinger shared hosting with 
 
 | Path | What it holds |
 | --- | --- |
-| `src/lib/site.ts` | **Most content lives here**: products, prices, FAQ, markets, stack layers, industries, emails, form endpoint |
-| `src/app/*/page.tsx` | One file per page (home, solutions, services, about, partners, invest, careers, contact) |
+| `src/i18n/locales/en/` | **All English text**: one file per page plus `common.ts` (navigation, footer, forms), `data.ts` (FAQ, markets, stack, industries) and `products.ts` (the five products) |
+| `src/i18n/locales/<lang>/` | The same files translated: `zh` (Simplified Chinese), `id` (Bahasa Indonesia), `ms` (Bahasa Melayu), `th` (Thai), `vi` (Vietnamese) |
+| `src/i18n/config.ts` | Supported languages, URL rules and the language suggestion text |
+| `src/lib/site.ts` | Language-independent settings: emails, form endpoint, market codes, navigation |
+| `src/views/` | One component per page, shared by every language |
+| `src/app/(en)/` | English routes, served from the site root (`/about`) |
+| `src/app/[lang]/` | Translated routes (`/zh/about`, `/th/about` ...) |
 | `src/components/HeroVideo.tsx` | Homepage hero video (a vendor-neutral private AI appliance exploding into parts), with mobile cut and reduced-motion still |
 | `tools/hero-video/` | The 3D renderer that produces the hero video (see its README) |
+| `tools/whitepapers/` | Builds the five whitepaper PDFs from the English product data |
 | `src/components/graphics/` | Hand-built SVG illustrations (stack, deployment, data flow, map) |
-| `src/app/globals.css` | Design system: colours, type, layout, animation |
+| `src/app/globals.css` | Design system: colours, type, layout, animation, language-specific typography |
 | `public/.htaccess` | Hostinger rules: clean URLs, 301s from the old `.html` URLs, www redirect, caching, security headers |
-| `public/llms.txt` | Plain-text company summary for AI assistants |
+| `src/app/llms.txt/route.ts` | Generates `/llms.txt`, the plain-text company summary for AI assistants |
 | `scripts/extract-logo.py` | Regenerates the transparent logo and favicons from `brand/` |
+
+## Languages
+
+English lives at the root (`/solutions`); every other language has its own prefix (`/zh/solutions`). Each page
+lists its translations with `hreflang` tags and in the sitemap, so search engines show the right language.
+The header has a language menu, and first-time visitors whose browser uses another supported language see a
+small bar offering that version (the site never redirects automatically). Whitepaper PDFs are English only.
+
+To change text, edit the English file in `src/i18n/locales/en/` and the matching file in each language folder.
+TypeScript and the build refuse a translation whose structure no longer matches English. For a deeper check
+(markup, placeholders, dashes, untranslated leftovers) run:
+
+```bash
+node scripts/check-translations.mjs zh   # or id, ms, th, vi
+```
 
 ## Local development
 
@@ -51,6 +72,7 @@ npm run build    # writes the static site to ./out
 
 - hPanel > **Security > SSL**: make sure **Force HTTPS** is on (the `.htaccess` relies on it).
 - Check that `/about.html` redirects to `/about` and that `logicsonata.com` redirects to `www.logicsonata.com`.
+- Open `/zh`, `/id`, `/ms`, `/th` and `/vi` and switch languages from the header menu.
 - Submit `https://www.logicsonata.com/sitemap.xml` to **Google Search Console** and **Bing Webmaster Tools**
   (Bing's index also feeds ChatGPT search and Microsoft Copilot).
 - Test structured data with Google's Rich Results Test (FAQ, JobPosting, Organization, Breadcrumbs).
@@ -58,5 +80,6 @@ npm run build    # writes the static site to ./out
 
 ## Forms
 
-- **Consultation form** (`/contact`) posts to the existing Formspree endpoint set in `src/lib/site.ts`.
+- **Consultation form** (`/contact`) posts to the existing Formspree endpoint set in `src/lib/site.ts`. Every form also sends a `language`
+  field, and leads from translated pages carry the language code in the email subject (for example `[TH]`).
 - **Job applications** (`/careers`) use the existing embedded Google Form.

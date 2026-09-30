@@ -25,11 +25,11 @@ const LABEL_OFFSET: Record<string, [number, number, 'start' | 'end']> = {
   ID: [24, 0, 'start'],
 };
 
-export function RegionMap() {
+export function RegionMap({ names, title }: { names: Array<{ name: string; city: string }>; title: string }) {
   const pos = Object.fromEntries(MARKETS.map((m) => [m.code, project(m.lon, m.lat)]));
   return (
     <svg className="map-svg" viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="map-title">
-      <title id="map-title">Logic Sonata serves Singapore, Vietnam, Indonesia, Malaysia and Thailand</title>
+      <title id="map-title">{title}</title>
       <defs>
         <pattern id="ls-dots" width="14" height="14" patternUnits="userSpaceOnUse">
           <circle cx="7" cy="7" r="1" fill="rgba(242,241,238,0.12)" />
@@ -58,10 +58,10 @@ export function RegionMap() {
             <circle cx={x} cy={y} r={14} className="map-ring" style={{ ['--i' as string]: i }} />
             <circle cx={x} cy={y} r={5} className="map-node" />
             <text x={x + dx} y={y + dy} textAnchor={anchor} className="map-label">
-              {m.name}
+              {names[i].name}
             </text>
             <text x={x + dx} y={y + dy + 15} textAnchor={anchor} className="map-code">
-              {m.code} · {m.city.toUpperCase()}
+              {m.code} · {names[i].city.toUpperCase()}
             </text>
           </g>
         );

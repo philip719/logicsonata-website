@@ -1,7 +1,12 @@
 import Link from 'next/link';
+import { lp, type Locale } from '@/i18n/config';
+import { getDict } from '@/i18n/dictionaries';
 import { MARKETS, SITE } from '@/lib/site';
 
-export function Footer() {
+export function Footer({ lang }: { lang: Locale }) {
+  const { common, data } = getDict(lang);
+  const f = common.footer;
+  const L = (path: string) => lp(lang, path);
   return (
     <footer className="site-footer">
       <div className="container">
@@ -9,41 +14,38 @@ export function Footer() {
           <div className="footer-brand">
             <img src="/images/logo-horizontal.webp" alt="Logic Sonata" width={432} height={60} loading="lazy" />
             <p className="footer-tagline">{SITE.tagline}</p>
-            <p className="footer-blurb">
-              Secure private AI for Southeast Asian businesses. Hardware, software, knowledge, access control,
-              implementation, training and support from one accountable partner.
-            </p>
+            <p className="footer-blurb">{f.blurb}</p>
           </div>
           <div className="footer-cols">
             <div>
-              <h2 className="footer-h">Solutions</h2>
-              <Link href="/solutions">All products</Link>
-              <Link href="/solutions/knowledge-assistant">Knowledge Assistant</Link>
-              <Link href="/solutions/vision-intelligence">Vision Intelligence</Link>
-              <Link href="/solutions/coding-assistant">Coding Assistant</Link>
-              <Link href="/solutions/agent-platform">AI Agents</Link>
-              <Link href="/solutions/image-studio">Image Studio</Link>
-              <Link href="/solutions#hardware">AI hardware</Link>
-              <Link href="/services">Services</Link>
-              <Link href="/services#support">Support tiers</Link>
+              <h2 className="footer-h">{f.solutions}</h2>
+              <Link href={L('/solutions')}>{f.allProducts}</Link>
+              <Link href={L('/solutions/knowledge-assistant')}>{f.knowledgeAssistant}</Link>
+              <Link href={L('/solutions/vision-intelligence')}>{f.visionIntelligence}</Link>
+              <Link href={L('/solutions/coding-assistant')}>{f.codingAssistant}</Link>
+              <Link href={L('/solutions/agent-platform')}>{f.aiAgents}</Link>
+              <Link href={L('/solutions/image-studio')}>{f.imageStudio}</Link>
+              <Link href={L('/solutions#hardware')}>{f.aiHardware}</Link>
+              <Link href={L('/services')}>{f.services}</Link>
+              <Link href={L('/services#support')}>{f.supportTiers}</Link>
             </div>
             <div>
-              <h2 className="footer-h">Company</h2>
-              <Link href="/about">About us</Link>
-              <Link href="/partners">Partner with us</Link>
-              <Link href="/invest">Investors</Link>
-              <Link href="/careers">Careers</Link>
+              <h2 className="footer-h">{f.company}</h2>
+              <Link href={L('/about')}>{f.aboutUs}</Link>
+              <Link href={L('/partners')}>{f.partnerWithUs}</Link>
+              <Link href={L('/invest')}>{f.investors}</Link>
+              <Link href={L('/careers')}>{f.careers}</Link>
             </div>
             <div>
-              <h2 className="footer-h">Markets</h2>
-              {MARKETS.map((m) => (
-                <span key={m.code}>{m.name}</span>
+              <h2 className="footer-h">{f.markets}</h2>
+              {MARKETS.map((m, i) => (
+                <span key={m.code}>{data.markets[i].name}</span>
               ))}
             </div>
             <div>
-              <h2 className="footer-h">Get in touch</h2>
-              <Link href="/contact">Book a consultation</Link>
-              <Link href="/whitepapers">Whitepapers</Link>
+              <h2 className="footer-h">{f.getInTouch}</h2>
+              <Link href={L('/contact')}>{f.bookConsultation}</Link>
+              <Link href={L('/whitepapers')}>{f.whitepapers}</Link>
               <a href={`mailto:${SITE.emails.sales}`}>{SITE.emails.sales}</a>
               <a href={`mailto:${SITE.emails.partners}`}>{SITE.emails.partners}</a>
               <a href={`mailto:${SITE.emails.investors}`}>{SITE.emails.investors}</a>
@@ -51,7 +53,9 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Logic Sonata. Private AI, deployed responsibly.</span>
+          <span>
+            © {new Date().getFullYear()} {f.rights}
+          </span>
           <span className="mono">SG · VN · ID · MY · TH</span>
         </div>
       </div>

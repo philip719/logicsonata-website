@@ -1,4 +1,4 @@
-import { PRODUCTS } from './products';
+import { PRODUCT_IDS } from './products';
 
 type Route = { path: string; priority: number; changeFrequency: 'weekly' | 'monthly' | 'yearly' };
 
@@ -6,9 +6,9 @@ type Route = { path: string; priority: number; changeFrequency: 'weekly' | 'mont
 export const ROUTES: Route[] = [
   { path: '/', priority: 1.0, changeFrequency: 'monthly' },
   { path: '/solutions', priority: 0.9, changeFrequency: 'monthly' },
-  ...PRODUCTS.map((p) => ({ path: `/solutions/${p.id}`, priority: 0.9, changeFrequency: 'monthly' as const })),
+  ...PRODUCT_IDS.map((id) => ({ path: `/solutions/${id}`, priority: 0.9, changeFrequency: 'monthly' as const })),
   { path: '/whitepapers', priority: 0.7, changeFrequency: 'monthly' },
-  ...PRODUCTS.map((p) => ({ path: `/whitepapers/${p.id}`, priority: 0.6, changeFrequency: 'monthly' as const })),
+  ...PRODUCT_IDS.map((id) => ({ path: `/whitepapers/${id}`, priority: 0.6, changeFrequency: 'monthly' as const })),
   { path: '/services', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.9, changeFrequency: 'yearly' },
   { path: '/about', priority: 0.7, changeFrequency: 'yearly' },

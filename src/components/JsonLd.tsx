@@ -1,4 +1,6 @@
-import { SITE } from '@/lib/site';
+import type { Locale } from '@/i18n/config';
+import { getDict } from '@/i18n/dictionaries';
+import { absoluteUrl } from '@/i18n/seo';
 
 export function JsonLd({ data }: { data: object }) {
   return (
@@ -10,15 +12,16 @@ export function JsonLd({ data }: { data: object }) {
   );
 }
 
-export function breadcrumbs(items: Array<{ name: string; path: string }>) {
+export function breadcrumbs(lang: Locale, items: Array<{ name: string; path: string }>) {
+  const home = getDict(lang).common.breadcrumbHome;
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [{ name: 'Home', path: '/' }, ...items].map((item, i) => ({
+    itemListElement: [{ name: home, path: '/' }, ...items].map((item, i) => ({
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: `${SITE.url}${item.path === '/' ? '/' : item.path}`,
+      item: absoluteUrl(lang, item.path),
     })),
   };
 }

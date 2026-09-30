@@ -1,0 +1,117 @@
+import type { CareersDict } from '../en/careers';
+
+export const careers: CareersDict = {
+  meta: {
+    title: 'Kerjaya: Jawatan Jualan dan Pra-Jualan AI Peribadi',
+    description:
+      'Sertai Logic Sonata sebagai Pengurus Jualan atau Pra-Jualan di Vietnam atau Indonesia dan bantu syarikat menggunakan AI peribadi mengikut syarat sendiri.',
+  },
+  breadcrumb: 'Kerjaya',
+  hero: {
+    eyebrow: 'Kerjaya',
+    title: 'Bantu syarikat menerima pakai AI *mengikut syarat mereka sendiri.*',
+    lead: 'Kami sedang membuka pasaran Vietnam dan Indonesia serta mengambil dua Pengurus Jualan dan dua Pengurus Pra-Jualan untuk menerajui usaha ini.',
+    cta: 'Mohon sekarang',
+  },
+  roles: {
+    eyebrow: 'Jawatan kosong',
+    title: 'Empat jawatan. Dua pasaran.',
+    fullTime: 'SEPENUH MASA',
+    applyRole: 'Mohon jawatan ini',
+    own: 'Tanggungjawab anda',
+    have: 'Kelayakan yang diperlukan',
+    items: [
+      {
+        id: 'sales-vn',
+        countryCode: 'VN',
+        country: 'Vietnam',
+        title: 'Pengurus Jualan (Sales Manager), AI Peribadi',
+        location: 'Bandar Raya Ho Chi Minh atau Hanoi',
+        intro:
+          'Kami sedang membina perniagaan AI peribadi baharu di Vietnam dan mencari jurujual yang mahu mencipta pasaran, bukan mewarisinya: membuka pintu, membina hubungan dengan pihak eksekutif, memenangi projek perintis dan menjadikannya pelanggan jangka panjang.',
+        own: [
+          'Mencari prospek dan memeterai urus niaga dengan pelanggan enterprise di seluruh Vietnam',
+          'Mesyuarat penerokaan keperluan, POC, projek perintis dan rundingan',
+          'Perkongsian dengan penyepadu sistem, vendor perkakasan dan perunding',
+          'Disiplin saluran jualan (pipeline), ramalan jualan dan strategi akaun',
+        ],
+        have: [
+          'Lebih 5 tahun pengalaman dalam jualan teknologi B2B atau pembangunan perniagaan',
+          'Rekod prestasi memenangi pelanggan enterprise baharu',
+          'Fasih berbahasa Vietnam dan mahir berbahasa Inggeris secara profesional',
+          'Hubungan sedia ada dengan syarikat enterprise di Vietnam',
+        ],
+      },
+      {
+        id: 'presales-vn',
+        countryCode: 'VN',
+        country: 'Vietnam',
+        title: 'Pengurus Pra-Jualan (Pre-Sales Manager), AI Peribadi',
+        location: 'Bandar Raya Ho Chi Minh atau Hanoi',
+        intro:
+          'Pengurus Pra-Jualan yang kukuh dari segi teknikal dan berfikiran komersial, yang mengubah masalah pelanggan menjadi penyelesaian AI yang praktikal: mengetuai demonstrasi, mereka bentuk seni bina AI peribadi yang selamat dan menentukan skop projek perintis.',
+        own: [
+          'Penerokaan keperluan pelanggan dan reka bentuk penyelesaian teknikal',
+          'Demonstrasi, bengkel eksekutif dan pembentangan teknikal',
+          'Penentuan skop bukti konsep dan projek perintis bersama jurutera dan pasukan IT',
+          'Cadangan teknikal, rajah seni bina dan jawapan RFP',
+        ],
+        have: [
+          'Pengalaman dengan LLM, RAG, pangkalan data vektor atau ejen AI',
+          'Kebolehan menerangkan konsep AI yang kompleks dalam bahasa perniagaan yang mudah',
+          'Selesa membuat pembentangan kepada CIO, CTO dan Pengarah IT',
+          'Fasih berbahasa Vietnam dan mahir berbahasa Inggeris secara profesional',
+        ],
+      },
+      {
+        id: 'sales-id',
+        countryCode: 'ID',
+        country: 'Indonesia',
+        title: 'Pengurus Jualan (Sales Manager), AI Peribadi',
+        location: 'Jakarta',
+        intro:
+          'Jurujual teknologi yang bercita-cita tinggi dan mahu mencipta pasaran, bukan sekadar mengurus wilayah sedia ada: memperkenalkan AI yang ditempatkan secara peribadi kepada syarikat di Indonesia dan menukar projek perintis menjadi pelanggan jangka panjang.',
+        own: [
+          'Pembangunan pasaran Indonesia, daripada mencari prospek hingga memeterai kontrak',
+          'Hubungan dengan CEO, CIO, CTO dan Pengarah Operasi',
+          'Demonstrasi, bengkel, POC dan projek perintis berbayar',
+          'Perkongsian strategik dengan penyepadu sistem dan vendor perkakasan',
+        ],
+        have: [
+          'Rekod prestasi dalam jualan perisian enterprise, keselamatan siber, cloud atau AI',
+          'Pengalaman dalam sektor pembuatan, pakaian, peruncitan atau logistik merupakan kelebihan',
+          'Kemahiran mencari prospek, berunding dan memeterai urus niaga yang kukuh',
+          'Hubungan sedia ada dengan syarikat enterprise di Indonesia',
+        ],
+      },
+      {
+        id: 'presales-id',
+        countryCode: 'ID',
+        country: 'Indonesia',
+        title: 'Pengurus Pra-Jualan (Pre-Sales Manager), AI Peribadi',
+        location: 'Jakarta',
+        intro:
+          'Pengurus Pra-Jualan yang berwibawa dari segi teknikal dan berfikiran komersial, yang mengubah masalah pelanggan yang kompleks menjadi penyelesaian AI yang praktikal dan selamat, daripada reka bentuk seni bina hingga penyampaian projek perintis.',
+        own: [
+          'Peringkat teknikal dan reka bentuk penyelesaian dalam proses jualan di Indonesia',
+          'Mereka bentuk seni bina AI on-premise, cloud peribadi dan hibrid',
+          'Demo yang disesuaikan, bengkel eksekutif dan pembentangan teknikal',
+          'Jawapan RFP, soal selidik keselamatan dan usaha wajar (due diligence) teknikal',
+        ],
+        have: [
+          'Pengalaman dengan LLM, RAG, ejen AI atau carian enterprise',
+          'Yakin membuat pembentangan kepada CIO, CTO dan pemimpin transformasi digital',
+          'Kebolehan menterjemah keperluan perniagaan kepada reka bentuk penyelesaian teknikal',
+          'Fasih berbahasa Indonesia dan mahir berbahasa Inggeris secara profesional',
+        ],
+      },
+    ],
+  },
+  apply: {
+    eyebrow: 'Mohon sekarang',
+    title: 'Hantar CV anda.',
+    lead: 'Ceritakan sedikit tentang diri anda dan lampirkan CV anda. Kami menyemak setiap permohonan secara peribadi.',
+    frameTitle: 'Borang permohonan kerja Logic Sonata',
+    loading: 'Memuatkan borang permohonan…',
+  },
+};

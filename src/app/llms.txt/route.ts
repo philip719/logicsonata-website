@@ -1,4 +1,5 @@
-import { PRODUCTS } from '@/lib/products';
+import { LOCALE_META, PREFIXED_LOCALES } from '@/i18n/config';
+import { en } from '@/i18n/locales/en';
 import { ROUTES } from '@/lib/routes';
 import { SITE } from '@/lib/site';
 
@@ -85,7 +86,7 @@ solutions, with one partner accountable for the whole stack.
 
 function products() {
   const lines = ['## Products', '', 'Each product is available on-premise, hosted or hybrid.', ''];
-  for (const p of PRODUCTS) {
+  for (const p of en.products) {
     lines.push(`### ${p.name} (${p.code})`, '', p.tagline, '', p.summary, '');
     lines.push(`Built on: ${p.builtOn}`, '');
     lines.push('Use cases: ' + p.useCases.map((u) => u.title).join('; ') + '.', '');
@@ -97,6 +98,9 @@ function products() {
 function pages() {
   const lines = ['## Pages', ''];
   for (const r of ROUTES) lines.push(`- ${SITE.url}${r.path === '/' ? '/' : r.path}`);
+  lines.push('', '## Languages', '', 'English is served at the paths above. Every page is also available in:');
+  for (const l of PREFIXED_LOCALES) lines.push(`- ${LOCALE_META[l].name} (${LOCALE_META[l].hreflang}): ${SITE.url}/${l}`);
+  lines.push('', 'Whitepaper PDFs are written in English.');
   return lines.join('\n') + '\n\n';
 }
 

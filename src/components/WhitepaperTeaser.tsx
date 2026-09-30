@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { lp, type Locale } from '@/i18n/config';
+import { getDict } from '@/i18n/dictionaries';
 import type { Product } from '@/lib/products';
 import { Icon } from './Icon';
 import { Corners } from './ui';
@@ -6,17 +8,19 @@ import { Corners } from './ui';
 export const whitepaperCover = (p: Product) => `/images/whitepapers/${p.id}.webp`;
 
 /** Inline promotion for a product's gated whitepaper. */
-export function WhitepaperTeaser({ product: p }: { product: Product }) {
+export function WhitepaperTeaser({ product: p, lang }: { product: Product; lang: Locale }) {
+  const { common, whitepapers } = getDict(lang);
+  const href = lp(lang, `/whitepapers/${p.id}`);
   return (
     <div className="wp-teaser panel" data-reveal>
       <Corners />
-      <Link href={`/whitepapers/${p.id}`} className="wp-teaser-cover" tabIndex={-1} aria-hidden="true">
+      <Link href={href} className="wp-teaser-cover" tabIndex={-1} aria-hidden="true">
         <img src={whitepaperCover(p)} alt="" width={600} height={849} loading="lazy" />
       </Link>
       <div className="wp-teaser-body">
         <p className="eyebrow">
           <span className="eyebrow-dot" aria-hidden="true" />
-          Free whitepaper
+          {common.whitepaper.free}
         </p>
         <h2 className="h2">{p.whitepaper.title}</h2>
         <p className="lead">{p.whitepaper.subtitle}.</p>
@@ -28,10 +32,11 @@ export function WhitepaperTeaser({ product: p }: { product: Product }) {
             </li>
           ))}
         </ul>
+        {whitepapers.landing.language && <p className="fine-print">{whitepapers.landing.language}</p>}
         <div className="btn-row">
-          <Link href={`/whitepapers/${p.id}`} className="btn btn-primary btn-lg">
+          <Link href={href} className="btn btn-primary btn-lg">
             <Icon name="book" size={18} />
-            Download the whitepaper
+            {common.buttons.downloadTheWhitepaper}
           </Link>
         </div>
       </div>

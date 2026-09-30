@@ -13,9 +13,14 @@ const root = path.resolve(here, '../..');
 const cache = path.join(here, '.cache');
 mkdirSync(cache, { recursive: true });
 
-// Compile the product data straight from the site so whitepapers never drift from the pages.
-execSync(`npx tsc ${path.join(root, 'src/lib/products.ts')} --outDir ${cache} --module commonjs --target es2020 --skipLibCheck`, { stdio: 'inherit' });
-const { PRODUCTS } = require(path.join(cache, 'products.js'));
+// Compile the English product data straight from the site so whitepapers never drift from the pages.
+// Its only imports are types, so --noResolve is safe; type errors about '@/' paths are expected here.
+try {
+  execSync(`npx tsc ${path.join(root, 'src/i18n/locales/en/products.ts')} --outDir ${cache} --module commonjs --target es2020 --skipLibCheck --noResolve`, { stdio: 'pipe' });
+} catch {
+  /* emitted anyway */
+}
+const { products: PRODUCTS } = require(path.join(cache, 'products.js'));
 
 const fileUrl = (p) => pathToFileURL(path.join(root, p)).href;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

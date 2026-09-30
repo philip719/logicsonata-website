@@ -8,7 +8,8 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   // Inline the stylesheet into each page to remove a render-blocking request.
-  experimental: { inlineCss: true },
+  // globalNotFound: one 404 page for the English and translated root layouts.
+  experimental: { inlineCss: true, globalNotFound: true },
 };
 
 export default nextConfig;

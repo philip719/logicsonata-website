@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { lp, type Locale } from '@/i18n/config';
 import type { Product } from '@/lib/products';
 import { Icon } from './Icon';
 import { hasLead } from './LeadForm';
@@ -23,7 +24,9 @@ function recentlyDismissed() {
  * has read past the middle of the page, never for known leads, and stays away
  * for two weeks after being dismissed.
  */
-export function LeadNudge({ product }: { product: Product }) {
+type NudgeText = { free: string; label: string; dismiss: string; cta: string; note: string };
+
+export function LeadNudge({ product, lang, t }: { product: Product; lang: Locale; t: NudgeText }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -51,16 +54,17 @@ export function LeadNudge({ product }: { product: Product }) {
 
   if (!show) return null;
   return (
-    <aside className="lead-nudge" role="complementary" aria-label="Whitepaper offer">
-      <button type="button" className="lead-nudge-close" onClick={dismiss} aria-label="Dismiss">
+    <aside className="lead-nudge" role="complementary" aria-label={t.label}>
+      <button type="button" className="lead-nudge-close" onClick={dismiss} aria-label={t.dismiss}>
         ×
       </button>
-      <span className="mono lead-nudge-tag">Free whitepaper</span>
+      <span className="mono lead-nudge-tag">{t.free}</span>
       <strong>{product.whitepaper.title}</strong>
       <p>{product.whitepaper.subtitle}.</p>
-      <Link href={`/whitepapers/${product.id}`} className="btn btn-primary btn-sm" onClick={dismiss}>
+      {t.note && <p className="lead-nudge-note">{t.note}</p>}
+      <Link href={lp(lang, `/whitepapers/${product.id}`)} className="btn btn-primary btn-sm" onClick={dismiss}>
         <Icon name="book" size={15} />
-        Get the PDF
+        {t.cta}
       </Link>
     </aside>
   );

@@ -1,0 +1,118 @@
+export const careers = {
+  meta: {
+    title: 'Careers: Sales and Pre-Sales Roles in Private AI',
+    description:
+      'Join Logic Sonata as a Sales Manager or Pre-Sales Manager in Vietnam or Indonesia and help businesses adopt private AI on their own terms.',
+  },
+  breadcrumb: 'Careers',
+  hero: {
+    eyebrow: 'Careers',
+    title: 'Help businesses adopt AI *on their own terms.*',
+    lead: 'We are opening our Vietnam and Indonesia markets and hiring two Sales Managers and two Pre-Sales Managers to lead the charge.',
+    cta: 'Apply now',
+  },
+  roles: {
+    eyebrow: 'Open roles',
+    title: 'Four roles. Two markets.',
+    fullTime: 'FULL-TIME',
+    applyRole: 'Apply for this role',
+    own: 'You will own',
+    have: 'You should have',
+    // id and countryCode must stay the same in every language.
+    items: [
+      {
+        id: 'sales-vn',
+        countryCode: 'VN',
+        country: 'Vietnam',
+        title: 'Sales Manager, Private AI',
+        location: 'Ho Chi Minh City or Hanoi',
+        intro:
+          'We are building a new private AI business in Vietnam and want a salesperson who wants to create a market, not inherit one: opening doors, building executive relationships, winning pilots and turning them into long-term customers.',
+        own: [
+          'Prospecting and closing enterprise customers across Vietnam',
+          'Discovery meetings, POCs, pilot projects and negotiations',
+          'Partnerships with system integrators, hardware vendors and consultants',
+          'Pipeline discipline, forecasting and account strategy',
+        ],
+        have: [
+          '5+ years of B2B technology sales or business development',
+          'A track record of winning new enterprise customers',
+          'Fluent Vietnamese and strong professional English',
+          'Existing enterprise relationships in Vietnam',
+        ],
+      },
+      {
+        id: 'presales-vn',
+        countryCode: 'VN',
+        country: 'Vietnam',
+        title: 'Pre-Sales Manager, Private AI',
+        location: 'Ho Chi Minh City or Hanoi',
+        intro:
+          'A technically strong, commercially minded Pre-Sales Manager who turns customer problems into practical AI solutions: leading demonstrations, designing secure private AI architectures and scoping pilots.',
+        own: [
+          'Customer discovery and technical solution design',
+          'Demonstrations, executive workshops and technical presentations',
+          'Proof-of-concept and pilot scoping with engineers and IT teams',
+          'Technical proposals, architecture diagrams and RFP responses',
+        ],
+        have: [
+          'Experience with LLMs, RAG, vector databases or AI agents',
+          'Ability to explain complex AI concepts in plain business language',
+          'Comfort presenting to CIOs, CTOs and IT Directors',
+          'Fluent Vietnamese and strong professional English',
+        ],
+      },
+      {
+        id: 'sales-id',
+        countryCode: 'ID',
+        country: 'Indonesia',
+        title: 'Sales Manager, Private AI',
+        location: 'Jakarta',
+        intro:
+          'An ambitious technology salesperson who wants to create a market, not manage an existing territory: introducing Indonesian companies to privately deployed AI and converting pilots into long-term customers.',
+        own: [
+          'Development of the Indonesia market from prospecting to contract close',
+          'Relationships with CEOs, CIOs, CTOs and Operations Directors',
+          'Demonstrations, workshops, POCs and paid pilot projects',
+          'Strategic partnerships with system integrators and hardware vendors',
+        ],
+        have: [
+          'A track record in enterprise software, cybersecurity, cloud or AI sales',
+          'Experience in manufacturing, garment, retail or logistics is a plus',
+          'Strong prospecting, negotiation and closing skills',
+          'Existing enterprise relationships in Indonesia',
+        ],
+      },
+      {
+        id: 'presales-id',
+        countryCode: 'ID',
+        country: 'Indonesia',
+        title: 'Pre-Sales Manager, Private AI',
+        location: 'Jakarta',
+        intro:
+          'A technically credible, commercially minded Pre-Sales Manager who turns complex customer problems into practical, secure AI solutions, from architecture design to pilot delivery.',
+        own: [
+          'Technical and solution-design stages of the Indonesia sales process',
+          'Designing on-premise, private-cloud and hybrid AI architectures',
+          'Tailored demos, executive workshops and technical presentations',
+          'RFP responses, security questionnaires and technical due diligence',
+        ],
+        have: [
+          'Experience with LLMs, RAG, AI agents or enterprise search',
+          'Confidence presenting to CIOs, CTOs and digital transformation leaders',
+          'Ability to translate business needs into technical solution designs',
+          'Fluent Bahasa Indonesia and strong professional English',
+        ],
+      },
+    ],
+  },
+  apply: {
+    eyebrow: 'Apply now',
+    title: 'Submit your CV.',
+    lead: 'Tell us a little about yourself and attach your CV. We review every application personally.',
+    frameTitle: 'Logic Sonata job application form',
+    loading: 'Loading application form…',
+  },
+};
+
+export type CareersDict = typeof careers;

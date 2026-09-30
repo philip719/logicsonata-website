@@ -3,6 +3,53 @@
    Dark, technical, avant-garde. Brand red on near-black.
    ========================================================================== */
 
+/* Extra scripts, loaded only when a page contains those characters. Latin text
+   keeps the preloaded fonts from src/fonts; Chinese uses the system CJK fonts. */
+@font-face {
+  font-family: 'Inter VI';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-vietnamese-wght-normal.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+  font-family: 'Space Grotesk VI';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-vietnamese-wght-normal.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono VI';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-vietnamese-400-normal.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono VI';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-vietnamese-500-normal.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+@font-face {
+  font-family: 'Noto Sans Thai LS';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/noto-sans-thai-thai-wght-normal.woff2') format('woff2');
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+
 :root {
   --bg: #0b0c11;
   --bg-1: #111217;
@@ -17,9 +64,10 @@
   --red-2: #ff6a5f;
   --red-soft: rgba(255, 59, 48, 0.14);
 
-  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
-  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-cjk: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Noto Sans CJK SC', 'Source Han Sans SC';
+  --font-display: 'Space Grotesk VI', 'Noto Sans Thai LS', var(--font-space-grotesk), var(--font-cjk), system-ui, sans-serif;
+  --font-body: 'Inter VI', 'Noto Sans Thai LS', var(--font-inter), var(--font-cjk), system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono VI', 'Noto Sans Thai LS', var(--font-jetbrains-mono), var(--font-cjk), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --container: 1240px;
   --gutter: clamp(16px, 4vw, 40px);
@@ -2673,6 +2721,12 @@ a.card:hover {
   font-size: 13.5px;
 }
 
+.lead-nudge .lead-nudge-note {
+  margin-top: -6px;
+  font-size: 12px;
+  color: var(--dim);
+}
+
 .lead-nudge .btn {
   justify-self: start;
   margin-top: 4px;
@@ -2814,4 +2868,187 @@ a.card:hover {
 
 .wp-card-cover:hover img {
   transform: translateY(-6px);
+}
+
+/* ---------- Languages ---------- */
+
+.lang-switch {
+  position: relative;
+}
+
+.lang-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  background: none;
+  color: var(--muted);
+  font: 500 13px var(--font-body);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.lang-switch-btn:hover,
+.lang-switch-btn[aria-expanded='true'] {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 60;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s var(--ease), visibility 0.18s;
+}
+
+.lang-menu[data-open='true'] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.lang-menu a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.lang-menu a:hover {
+  background: var(--bg-3);
+  color: var(--text);
+}
+
+.lang-menu a[aria-current='true'] {
+  color: var(--text);
+}
+
+.lang-menu a svg {
+  color: var(--red);
+}
+
+@media (max-width: 960px) {
+  .lang-switch {
+    margin-left: auto;
+  }
+
+  .burger {
+    margin-left: 0;
+  }
+}
+
+.lang-suggest {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  z-index: 45;
+  background: rgba(22, 23, 29, 0.96);
+  border-bottom: 1px solid var(--line-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.lang-suggest-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+.lang-suggest-inner p {
+  margin-right: auto;
+  color: var(--text);
+}
+
+.lang-suggest-close {
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.lang-suggest-close:hover {
+  color: var(--text);
+}
+
+.notfound-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.notfound-langs a {
+  color: var(--muted);
+}
+
+.notfound-langs a:hover {
+  color: var(--text);
+}
+
+/* Thai and Chinese: no tracking, and taller lines for Thai tone marks. */
+html:lang(th) *,
+html:lang(zh-Hans) * {
+  letter-spacing: normal !important;
+}
+
+html:lang(th) body {
+  line-height: 1.75;
+}
+
+html:lang(th) :is(h1, h2, h3, h4, .h1, .h2, .h3, .h4, .statement) {
+  line-height: 1.4;
+}
+
+html:lang(zh-Hans) {
+  line-break: strict;
+}
+
+html:lang(zh-Hans) :is(h1, h2, h3, h4, .h1, .h2, .h3, .h4, .statement) {
+  line-height: 1.3;
+}
+
+/* Header labels never wrap; longer translations switch to the menu button a little earlier. */
+.nav-link,
+.header-cta,
+.lang-switch-btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .header-inner {
+    gap: 20px;
+  }
+
+  .nav {
+    gap: 16px;
+  }
 }

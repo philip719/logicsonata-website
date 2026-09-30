@@ -22,6 +22,10 @@ ErrorDocument 404 /404.html
   RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.html[\s?] [NC]
   RewriteRule ^ https://www.logicsonata.com/%1 [R=301,L]
 
+  # English lives at the root: /en and /en/about -> / and /about
+  RewriteRule ^en/?$ https://www.logicsonata.com/ [R=301,L]
+  RewriteRule ^en/(.+)$ https://www.logicsonata.com/$1 [R=301,L]
+
   # Strip trailing slashes from page URLs: /about/ -> /about
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.+)/$ https://www.logicsonata.com/$1 [R=301,L]

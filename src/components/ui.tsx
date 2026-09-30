@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { lp, type Locale } from '@/i18n/config';
+import { getDict } from '@/i18n/dictionaries';
 import { SITE } from '@/lib/site';
 import { Icon } from './Icon';
 
@@ -58,13 +60,8 @@ export function PageHero({
   );
 }
 
-export function CtaBand({
-  title = 'Find out where your AI risk is.',
-  lead = 'A 30-minute consultation costs you nothing. You leave with a clear view of your data exposure and a pilot that fits.',
-}: {
-  title?: string;
-  lead?: string;
-}) {
+export function CtaBand({ lang, title, lead }: { lang: Locale; title?: string; lead?: string }) {
+  const { common } = getDict(lang);
   return (
     <section className="cta-band" id="contact">
       <div className="container cta-inner" data-reveal>
@@ -73,12 +70,12 @@ export function CtaBand({
           <span />
           <span />
         </div>
-        <Eyebrow>Get started</Eyebrow>
-        <h2 className="h2 cta-title">{title}</h2>
-        <p className="lead">{lead}</p>
+        <Eyebrow>{common.ctaBand.eyebrow}</Eyebrow>
+        <h2 className="h2 cta-title">{title ?? common.ctaBand.title}</h2>
+        <p className="lead">{lead ?? common.ctaBand.lead}</p>
         <div className="btn-row btn-row--center">
-          <Link href={SITE.primaryCta.href} className="btn btn-primary btn-lg">
-            {SITE.primaryCta.label}
+          <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary btn-lg">
+            {common.cta.primary}
             <Icon name="arrow" size={18} />
           </Link>
         </div>

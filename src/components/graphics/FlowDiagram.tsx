@@ -2,11 +2,11 @@ import type { FlowStage } from '@/lib/products';
 import { Icon } from '../Icon';
 
 /** Architecture flow inside the customer boundary; horizontal on desktop, vertical on phones. */
-export function FlowDiagram({ stages, label }: { stages: FlowStage[]; label: string }) {
+export function FlowDiagram({ stages, label, inside, foot }: { stages: FlowStage[]; label: string; inside: string; foot: string }) {
   return (
     <figure className="flow-diagram" aria-label={label}>
       <div className="flow-boundary">
-        <span className="flow-boundary-tag mono">Inside your walls</span>
+        <span className="flow-boundary-tag mono">{inside}</span>
         <ol className="flow-stages">
           {stages.map((s, i) => (
             <li key={s.title} className="flow-stage" style={{ ['--i' as string]: i }}>
@@ -21,7 +21,7 @@ export function FlowDiagram({ stages, label }: { stages: FlowStage[]; label: str
         </ol>
       </div>
       <figcaption className="flow-foot mono">
-        <Icon name="lock" size={14} /> No prompts, files or results leave the appliance
+        <Icon name="lock" size={14} /> {foot}
       </figcaption>
     </figure>
   );

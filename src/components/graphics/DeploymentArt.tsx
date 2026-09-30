@@ -61,13 +61,7 @@ function Boundary({ iso, x, y, size }: { iso: Projector; x: number; y: number; s
   return <polygon points={pts([iso(x, y, 0), iso(x + size, y, 0), iso(x + size, y + size, 0), iso(x, y + size, 0)])} className="dep-boundary" />;
 }
 
-export function DeploymentArt({ variant }: { variant: Variant }) {
-  const labels: Record<Variant, string> = {
-    hosted: 'Hosted private AI running on dedicated servers in a managed private GPU cloud',
-    onprem: 'On-premise private AI running on hardware inside your own building',
-    hybrid: 'Hybrid private AI linking on-premise hardware with a hosted private cloud',
-  };
-
+export function DeploymentArt({ variant, labels }: { variant: Variant; labels: Record<Variant, string> }) {
   if (variant === 'hosted') {
     const iso = makeIso(140, 64, 0.85);
     return (

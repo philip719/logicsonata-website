@@ -3,9 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { lp, type Locale } from '@/i18n/config';
+import type { CommonDict } from '@/i18n/locales/en/common';
 import { NAV, SITE } from '@/lib/site';
+import { LangSwitcher } from './LangSwitcher';
 
-export function Header() {
+type HeaderText = { nav: CommonDict['nav']; cta: CommonDict['cta']; brandHome: string };
+
+export function Header({ lang, t }: { lang: Locale; t: HeaderText }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -17,30 +22,29 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link href="/" className="brand" aria-label="Logic Sonata home">
+        <Link href={lp(lang, '/')} className="brand" aria-label={t.brandHome}>
           <img src="/images/logo-horizontal.webp" alt="Logic Sonata" width={432} height={60} />
         </Link>
-        <nav className="nav" aria-label="Main">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="nav-link"
-              aria-current={pathname === item.href ? 'page' : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="nav" aria-label={t.nav.main}>
+          {NAV.map((item) => {
+            const href = lp(lang, item.href);
+            return (
+              <Link key={item.href} href={href} className="nav-link" aria-current={pathname === href ? 'page' : undefined}>
+                {t.nav[item.key]}
+              </Link>
+            );
+          })}
         </nav>
-        <Link href={SITE.primaryCta.href} className="btn btn-primary btn-sm header-cta">
-          Book a Consultation
+        <LangSwitcher lang={lang} label={t.nav.language} />
+        <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary btn-sm header-cta">
+          {t.cta.header}
         </Link>
         <button
           type="button"
           className="burger"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
           onClick={() => setOpen((v) => !v)}
         >
           <span />
@@ -48,18 +52,18 @@ export function Header() {
         </button>
       </div>
       <div id="mobile-menu" className="mobile-menu" data-open={open}>
-        <nav aria-label="Mobile">
-          <Link href="/" className="mobile-link">
-            Home
+        <nav aria-label={t.nav.mobile}>
+          <Link href={lp(lang, '/')} className="mobile-link">
+            {t.nav.home}
           </Link>
           {NAV.map((item, i) => (
-            <Link key={item.href} href={item.href} className="mobile-link">
+            <Link key={item.href} href={lp(lang, item.href)} className="mobile-link">
               <span className="mono">{String(i + 1).padStart(2, '0')}</span>
-              {item.label}
+              {t.nav[item.key]}
             </Link>
           ))}
-          <Link href={SITE.primaryCta.href} className="btn btn-primary">
-            {SITE.primaryCta.label}
+          <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary">
+            {t.cta.primary}
           </Link>
         </nav>
       </div>
