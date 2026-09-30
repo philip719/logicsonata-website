@@ -1,0 +1,56 @@
+# Logic Sonata: Hostinger (LiteSpeed/Apache) configuration for the static Next.js export.
+
+Options -MultiViews -Indexes
+DirectoryIndex index.html
+# Next.js writes folders (about/) next to pages (about.html); never append a slash to them.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Canonical host is www. HTTPS itself is enforced by Hostinger (hPanel > SSL > Force HTTPS),
+  # because the CDN terminates TLS and an origin-side HTTPS check could loop.
+  RewriteCond %{HTTP_HOST} ^logicsonata\.com$ [NC]
+  RewriteRule ^ https://www.logicsonata.com%{REQUEST_URI} [R=301,L]
+
+  # Old URLs: /index.html -> /  and  /about.html -> /about (keeps existing links and rankings).
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^ https://www.logicsonata.com/ [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.html[\s?] [NC]
+  RewriteRule ^ https://www.logicsonata.com/%1 [R=301,L]
+
+  # Strip trailing slashes from page URLs: /about/ -> /about
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.+)/$ https://www.logicsonata.com/$1 [R=301,L]
+
+  # Serve clean URLs from the exported .html files: /about -> about.html
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([^.]+)$ /$1.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # Fingerprinted build assets never change: cache for a year.
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpg|jpeg|webp|avif|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  # Pages always revalidate so updates appear immediately.
+  <FilesMatch "\.(html|txt|xml)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType text/plain .txt
+  AddType application/manifest+json .webmanifest
+</IfModule>

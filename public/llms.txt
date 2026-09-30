@@ -1,0 +1,88 @@
+# Logic Sonata
+
+> Logic Sonata delivers secure private AI solutions for businesses in Singapore, Vietnam, Indonesia,
+> Malaysia and Thailand. Each solution combines hardware, software, company knowledge, access controls,
+> implementation, training and ongoing support. Solutions run on-premise on customer hardware, hosted on
+> managed private GPU cloud, or in a hybrid configuration, so confidential documents, buyer data, costing
+> files, contracts and source code never reach a public AI model.
+
+Tagline: Intelligence. Harmony. Impact.
+Website: https://www.logicsonata.com
+Primary call to action: Book a Private AI Consultation at https://www.logicsonata.com/contact
+
+## What a Logic Sonata solution includes
+
+1. Hardware: compact AI supercomputers (such as NVIDIA DGX Spark), multi-GPU servers or managed private GPU cloud.
+2. Software and models: open, model-independent AI software with no lock-in to one provider.
+3. Company knowledge: documents, SOPs and data prepared as a clean, permissioned knowledge base.
+4. Access controls: role-based permissions, single sign-on and a full audit trail.
+5. Implementation: architecture, integration with existing systems and a pilot that proves value first.
+6. Training: role-based workshops for managers, HR, sales, operations and finance.
+7. Ongoing support: monitoring, model updates, knowledge refreshes and quarterly business reviews.
+
+## Products
+
+Each product is available on-premise, hosted or hybrid.
+
+- Private Knowledge Assistant (PAI-KB): question answering across HR, SOP, compliance and finance documents. From US$5k setup.
+- Enterprise Knowledge Assistant (PAI-KB-ENT): department workspaces, role-based access and an admin dashboard. From US$15k setup.
+- Private Coding Assistant (PAI-CODE): repo-aware AI pair programming with IDE and Git integration. From US$10k setup.
+- Private AI Agent Platform (PAI-AGENT): agents that draft reports and summarise documents, with human approval on every action. From US$15k setup.
+- Private Image Generation Studio (PAI-IMG): concept, marketing and packaging imagery in a private studio. Contact for pricing.
+- Extended capabilities: private translation, private vision AI and private voice AI.
+
+## On-premise hardware
+
+Smaller teams can start with a compact AI supercomputer such as NVIDIA DGX Spark: GB10 Grace Blackwell
+superchip, up to 1 petaFLOP of FP4 AI performance, 128 GB unified memory, models up to 200 billion
+parameters, up to 4 TB NVMe storage and ConnectX-7 networking in a 150 x 150 mm desktop unit.
+Larger rollouts use multi-GPU servers or a private cloud cluster.
+
+## Services
+
+1. AI Privacy and Readiness Assessment: risk mapping and a 30/60/90-day roadmap. The usual first engagement.
+2. Private AI Pilot Implementation: one working use case, proven before full rollout.
+3. Data Preparation and Knowledge Base: messy files turned into a clean, permissioned, tested knowledge base.
+4. AI Governance and Policy: usage policy, approved tools list and role-based access rules.
+5. AI Training and Adoption: role-based workshops.
+6. Managed Private AI Support: monitoring, model updates, knowledge base refreshes and quarterly reviews.
+
+## Managed support tiers (monthly, USD)
+
+- Basic: 10 to 30 users, $1k to 3k, next-business-day response.
+- Business: 30 to 150 users, $3k to 8k, same-business-day response.
+- Enterprise: 150+ users, $8k to 20k, 4 to 8 hour urgent response, dedicated support manager.
+- Premium: mission-critical, $20k+, dedicated technical lead, custom SLA, on-site option.
+
+## Customers
+
+Core customers: manufacturers, retailers, design companies, suppliers and regional business groups.
+Any company that wants to use AI while keeping its data private is a good fit.
+Markets: Singapore, Vietnam, Indonesia, Malaysia and Thailand.
+
+## Engagement process
+
+Assess, Pilot, Roll out, Manage.
+
+## Positioning
+
+Logic Sonata is not a reseller of public AI services. It combines AI models, secure infrastructure,
+company data, software integration and business-process understanding into complete private AI
+solutions, with one partner accountable for the whole stack.
+
+## Pages
+
+- https://www.logicsonata.com/ : overview, the private AI stack, deployment models, products, industries, markets, FAQ.
+- https://www.logicsonata.com/solutions : products in detail, on-premise hardware, deployment models.
+- https://www.logicsonata.com/services : services, managed support tiers and process.
+- https://www.logicsonata.com/about : purpose, principles and who we serve.
+- https://www.logicsonata.com/partners : partner programme for resellers, integrators and MSPs.
+- https://www.logicsonata.com/invest : market thesis and strategic investment.
+- https://www.logicsonata.com/careers : open sales and pre-sales roles in Vietnam and Indonesia.
+- https://www.logicsonata.com/contact : book a private AI consultation.
+
+## Contact
+
+Consultations: https://www.logicsonata.com/contact
+Partner enquiries: partner@logicsonata.com
+Investor enquiries: investment@logicsonata.com
