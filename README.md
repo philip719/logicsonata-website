@@ -28,6 +28,8 @@ running JavaScript, and the site runs on standard Hostinger shared hosting with 
 | `scripts/extract-logo.py` | Regenerates the transparent logo and favicons from `brand/` |
 | `brand/kit/` | Generator for the full brand kit: vector logos, stationery, Office templates, social images (see its README) |
 | `public/brand/` | Hosted brand files, such as the email signature logo |
+| `public/api/` | PHP for Hostinger: `apply.php` (job applications) and `chat.php` (the chat assistant) |
+| `deploy/chat-config.example.php` | Template for the chat assistant's private settings file (API key, inbox, limits) |
 
 ## Languages
 
@@ -92,3 +94,27 @@ npm run build    # writes the static site to ./out
   on the server. The mailbox `careers@logicsonata.com` must exist in Hostinger Email, because it is also the
   sender address (this keeps the messages out of spam). To change the inbox, edit `TO_ADDRESS` and
   `FROM_ADDRESS` at the top of `apply.php`.
+
+## Chat assistant
+
+An AI assistant answers visitors in all six languages, qualifies them (company, industry, country, use case,
+products, size, timeline, role, decision authority, privacy and security needs) and invites good prospects to
+book a free demo. Demo requests are emailed to `sales@logicsonata.com` with a lead grade (hot, warm or cold),
+the qualification, an AI summary and the full conversation.
+
+- **Widget:** `src/components/ChatLauncher.tsx` (the button, loaded on every page) and `ChatPanel.tsx` (the
+  conversation, downloaded only when a visitor opens it). Interface text is in the `chat` section of each
+  `common.ts` dictionary.
+- **Server:** `public/api/chat.php` calls the AI model, enforces limits (per visitor and per day) and sends the
+  demo email. The assistant's instructions (goals, qualifying questions, tone, when to offer the demo) are the
+  `INSTRUCTIONS` text at the top of that file.
+- **Knowledge:** `src/app/api/chat-knowledge.txt/route.ts` builds the assistant's reference text from the
+  English site content at every build, so it never drifts from the website. `.htaccess` blocks it from the web.
+- **Settings and key:** copy `deploy/chat-config.example.php` to `chat-config.php`, add the API key and upload it
+  to a `private` folder beside `public_html` on Hostinger. The key is never stored in this repository. Until a
+  valid key is installed the chat button simply does not appear.
+- **Privacy:** conversations are not stored on the website server. Visitor messages are processed by the AI
+  provider to generate replies; the only record kept is the email sent when a visitor submits the demo form
+  with consent.
+- **Own appliance:** set `provider` to `openai` and `api_url` to any OpenAI-compatible server (for example a
+  Logic Sonata appliance running vLLM or Ollama) to run the assistant on private infrastructure.

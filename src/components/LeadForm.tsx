@@ -3,33 +3,17 @@
 import { useEffect, useState } from 'react';
 import type { Locale } from '@/i18n/config';
 import type { CommonDict } from '@/i18n/locales/en/common';
+import { hasLead, rememberLead } from '@/lib/lead';
 import { MARKET_NAMES_EN, SITE } from '@/lib/site';
 import { Icon } from './Icon';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 type Variant = 'whitepaper' | 'investor';
 
-// Visitors who have already shared their details are never asked twice.
-const LEAD_KEY = 'ls_lead_v1';
-
 // Submitted values stay in English so every lead reads the same in the inbox.
 const INVESTOR_TYPES_EN = ['Venture capital', 'Corporate or strategic', 'Family office', 'Angel investor', 'Other'];
 
-export function hasLead(): boolean {
-  try {
-    return window.localStorage.getItem(LEAD_KEY) !== null;
-  } catch {
-    return false;
-  }
-}
-
-function rememberLead(email: string) {
-  try {
-    window.localStorage.setItem(LEAD_KEY, JSON.stringify({ email, at: Date.now() }));
-  } catch {
-    /* storage unavailable: the visitor simply sees the form again next time */
-  }
-}
+export { hasLead };
 
 function startDownload(url: string) {
   const a = document.createElement('a');

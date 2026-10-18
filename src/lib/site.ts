@@ -6,6 +6,8 @@ export const SITE = {
   formEndpoint: 'https://formspree.io/f/mlgqveyn',
   // Job applications post here; the PHP script on Hostinger emails them to emails.careers.
   careersEndpoint: '/api/apply.php',
+  // The website chat assistant (PHP on Hostinger); it emails demo requests to emails.sales.
+  chatEndpoint: '/api/chat.php',
   emails: {
     sales: 'sales@logicsonata.com',
     partners: 'partner@logicsonata.com',
@@ -67,4 +69,7 @@ export type IconName =
   | 'wave'
   | 'translate'
   | 'check'
-  | 'arrow';
+  | 'arrow'
+  | 'chat'
+  | 'send'
+  | 'refresh';

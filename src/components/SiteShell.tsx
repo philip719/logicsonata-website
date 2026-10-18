@@ -5,6 +5,7 @@ import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, languageAlternates } from '@/i18n/seo';
 import { inter, jetbrainsMono, spaceGrotesk } from '@/lib/fonts';
 import { MARKET_NAMES_EN, MARKETS, SITE } from '@/lib/site';
+import { ChatLauncher } from './ChatLauncher';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { JsonLd } from './JsonLd';
@@ -104,6 +105,7 @@ export function SiteShell({ lang, children }: { lang: Locale; children: React.Re
         <Footer lang={lang} />
         <Reveal />
         <LangSuggest lang={lang} />
+        <ChatLauncher lang={lang} t={common.chat} />
       </body>
     </html>
   );

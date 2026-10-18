@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { lp, type Locale } from '@/i18n/config';
 import type { Product } from '@/lib/products';
 import { Icon } from './Icon';
-import { hasLead } from './LeadForm';
+import { hasLead } from '@/lib/lead';
 
 const DISMISS_KEY = 'ls_nudge_dismissed_at';
 const QUIET_DAYS = 14;
