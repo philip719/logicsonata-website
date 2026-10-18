@@ -3637,3 +3637,56 @@ html:lang(zh-Hans) :is(h1, h2, h3, h4, .h1, .h2, .h3, .h4, .statement) {
     display: none !important;
   }
 }
+
+/* Chat: the form that starts a conversation, and the demo confirmation */
+
+.chat-form-lead {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.chat-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.chat-form .field select {
+  padding: 10px 34px 10px 12px;
+  background-position: right 12px center;
+  font-size: 14.5px;
+}
+
+.chat-start {
+  justify-self: start;
+}
+
+.chat-confirm {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-2);
+  background: var(--bg);
+  font-size: 13.5px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.chat-confirm strong {
+  color: var(--text);
+  font-size: 14.5px;
+}
+
+.chat-edit {
+  margin-top: 6px;
+  padding: 0;
+  font-size: 12.5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 380px) {
+  .chat-form-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -39,7 +39,7 @@ function teaserRecentlyShown() {
  * The chat button. It appears only once the server confirms the assistant is
  * configured, so the site works unchanged before the AI key is installed.
  */
-export function ChatLauncher({ lang, t }: { lang: Locale; t: CommonDict['chat'] }) {
+export function ChatLauncher({ lang, t, countries }: { lang: Locale; t: CommonDict['chat']; countries: string[] }) {
   const pathname = usePathname() || '/';
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false);
@@ -134,7 +134,7 @@ export function ChatLauncher({ lang, t }: { lang: Locale; t: CommonDict['chat'] 
       )}
       {mounted && (
         <Suspense fallback={null}>
-          <ChatPanel lang={lang} t={t} open={open} onClose={closeChat} />
+          <ChatPanel lang={lang} t={t} countries={countries} open={open} onClose={closeChat} />
         </Suspense>
       )}
     </>

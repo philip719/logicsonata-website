@@ -18,7 +18,7 @@ return [
     // claude-sonnet-5-5 gives the best answers; claude-haiku-5-5 is faster and costs less.
     'model' => 'claude-sonnet-5-5',
 
-    // Where demo requests are emailed, and the sender address (must be a real Hostinger mailbox).
+    // Where demo requests and chat summaries are emailed, and the sender address (must be a real Hostinger mailbox).
     'sales_to' => 'sales@logicsonata.com',
     'mail_from' => 'sales@logicsonata.com',
 

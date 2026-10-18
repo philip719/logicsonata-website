@@ -105,7 +105,7 @@ export function SiteShell({ lang, children }: { lang: Locale; children: React.Re
         <Footer lang={lang} />
         <Reveal />
         <LangSuggest lang={lang} />
-        <ChatLauncher lang={lang} t={common.chat} />
+        <ChatLauncher lang={lang} t={common.chat} countries={getDict(lang).data.markets.map((m) => m.name)} />
       </body>
     </html>
   );

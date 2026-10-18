@@ -97,16 +97,24 @@ npm run build    # writes the static site to ./out
 
 ## Chat assistant
 
-An AI assistant answers visitors in all six languages, qualifies them (company, industry, country, use case,
-products, size, timeline, role, decision authority, privacy and security needs) and invites good prospects to
-book a free demo. Demo requests are emailed to `sales@logicsonata.com` with a lead grade (hot, warm or cold),
-the qualification, an AI summary and the full conversation.
+An AI assistant answers visitors in all six languages, qualifies them and invites good prospects to book a
+free demo. Every conversation starts with a short form: name and email are required; company, job role, phone
+and country are optional; consent is required. The assistant is given the name, company, role and country
+(never the email or phone) so it can tailor answers without asking again.
+
+Sales (`sales@logicsonata.com`) receives two kinds of email:
+
+- **Demo request**, sent the moment a visitor confirms the one-click demo offer (with an optional preferred
+  time): contact details, lead grade (hot, warm or cold), qualification, AI summary and the conversation.
+- **Website chat**, sent when the visitor closes the chat, switches away or leaves the site: the same layout,
+  graded and summarised by AI at that point. If the visitor comes back and continues, an update with the full
+  conversation follows under the same subject, so mail apps group it. Nothing is sent when there is nothing new.
 
 - **Widget:** `src/components/ChatLauncher.tsx` (the button, loaded on every page) and `ChatPanel.tsx` (the
   conversation, downloaded only when a visitor opens it). Interface text is in the `chat` section of each
   `common.ts` dictionary.
 - **Server:** `public/api/chat.php` calls the AI model, enforces limits (per visitor and per day) and sends the
-  demo email. The assistant's instructions (goals, qualifying questions, tone, when to offer the demo) are the
+  sales emails. The assistant's instructions (goals, qualifying questions, tone, when to offer the demo) are the
   `INSTRUCTIONS` text at the top of that file.
 - **Knowledge:** `src/app/api/chat-knowledge.txt/route.ts` builds the assistant's reference text from the
   English site content at every build, so it never drifts from the website. `.htaccess` blocks it from the web.
@@ -114,7 +122,8 @@ the qualification, an AI summary and the full conversation.
   to a `private` folder beside `public_html` on Hostinger. The key is never stored in this repository. Until a
   valid key is installed the chat button simply does not appear.
 - **Privacy:** conversations are not stored on the website server. Visitor messages are processed by the AI
-  provider to generate replies; the only record kept is the email sent when a visitor submits the demo form
-  with consent.
+  provider to generate replies and summaries; the only record kept is the email to sales, sent with the consent
+  given in the form. Contact details are remembered in the visitor's own browser so returning visitors only
+  need to confirm them.
 - **Own appliance:** set `provider` to `openai` and `api_url` to any OpenAI-compatible server (for example a
   Logic Sonata appliance running vLLM or Ollama) to run the assistant on private infrastructure.
