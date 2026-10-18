@@ -3638,27 +3638,13 @@ html:lang(zh-Hans) :is(h1, h2, h3, h4, .h1, .h2, .h3, .h4, .statement) {
   }
 }
 
-/* Chat: the form that starts a conversation, and the demo confirmation */
+/* Chat: getting-to-know-you notes and the demo confirmation */
 
-.chat-form-lead {
-  color: var(--text);
-  font-size: 14px;
-}
-
-.chat-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.chat-form .field select {
-  padding: 10px 34px 10px 12px;
-  background-position: right 12px center;
-  font-size: 14.5px;
-}
-
-.chat-start {
-  justify-self: start;
+.chat-msg .chat-msg-note {
+  margin-top: 6px;
+  color: var(--dim);
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 .chat-confirm {
@@ -3685,8 +3671,3 @@ html:lang(zh-Hans) :is(h1, h2, h3, h4, .h1, .h2, .h3, .h4, .statement) {
   text-underline-offset: 3px;
 }
 
-@media (max-width: 380px) {
-  .chat-form-row {
-    grid-template-columns: 1fr;
-  }
-}

@@ -98,9 +98,20 @@ npm run build    # writes the static site to ./out
 ## Chat assistant
 
 An AI assistant answers visitors in all six languages, qualifies them and invites good prospects to book a
-free demo. Every conversation starts with a short form: name and email are required; company, job role, phone
-and country are optional; consent is required. The assistant is given the name, company, role and country
-(never the email or phone) so it can tailor answers without asking again.
+free demo. Before the conversation opens, the assistant asks a few quick questions in the chat itself, one at a
+time: name and email (required), then company and country (each with a Skip button; country also as tap buttons).
+Every answer is checked as it comes in (`src/lib/contactChecks.ts`, repeated on the server):
+
+- **Name:** must contain letters and no email address, web address or digits. A greeting ("hi") is met with the
+  question again; a question typed instead of a name is remembered and answered once the details are in.
+- **Email:** must be in the form name@domain.com. Common typos are caught with a suggestion ("Did you mean
+  jane@gmail.com?", "acme.con" becomes "acme.com"), and the server confirms the domain can receive email
+  (MX or address record). If the server's DNS is down, addresses are accepted rather than visitors blocked.
+- **Contact number:** offered only when booking the demo; optional, 7 to 15 digits, country code allowed.
+
+A one-line notice under the email question explains how the email is used; sharing it is the visitor's consent.
+Returning visitors see "Welcome back" with their saved details and continue with one tap. The assistant is given
+the name, company and country (never the email or phone) and learns the job role during the conversation.
 
 Sales (`sales@logicsonata.com`) receives two kinds of email:
 
@@ -123,7 +134,7 @@ Sales (`sales@logicsonata.com`) receives two kinds of email:
   valid key is installed the chat button simply does not appear.
 - **Privacy:** conversations are not stored on the website server. Visitor messages are processed by the AI
   provider to generate replies and summaries; the only record kept is the email to sales, sent with the consent
-  given in the form. Contact details are remembered in the visitor's own browser so returning visitors only
-  need to confirm them.
+  given at the start of the chat. Contact details are remembered in the visitor's own browser so returning
+  visitors only need to confirm them.
 - **Own appliance:** set `provider` to `openai` and `api_url` to any OpenAI-compatible server (for example a
   Logic Sonata appliance running vLLM or Ollama) to run the assistant on private infrastructure.

@@ -5,17 +5,36 @@ import { usePathname } from 'next/navigation';
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import type { Locale } from '@/i18n/config';
 import type { CommonDict } from '@/i18n/locales/en/common';
+import { normaliseEmail, readName, suggestEmail, validEmail, validPhone } from '@/lib/contactChecks';
 import { rememberLead } from '@/lib/lead';
 import { MARKET_NAMES_EN, SITE } from '@/lib/site';
 import { Icon } from './Icon';
 import { fmt, Rich } from './Rich';
 
-type Msg = { role: 'user' | 'assistant'; content: string; local?: boolean };
+// local: shown in the chat but never sent to the AI (the getting-to-know-you questions, notices).
+// hidden: sent to the AI but not shown again (a question asked before the details, already on screen).
+type Msg = {
+  role: 'user' | 'assistant';
+  content: string;
+  local?: boolean;
+  hidden?: boolean;
+  rich?: boolean;
+  note?: string;
+  error?: boolean;
+  edit?: boolean;
+};
 type Qualification = Record<string, unknown>;
 type Contact = { name: string; email: string; company: string; role: string; phone: string; country: string };
+// The questions asked before the conversation opens, one at a time.
+type Step = 'welcomeBack' | 'name' | 'email' | 'confirmEmail' | 'company' | 'country' | 'done';
 type Saved = {
   id: string;
-  contact: Contact | null;
+  step: Step;
+  name: string;
+  suggestion: string; // corrected email offered for a likely typo
+  typed: string; // the email as typed, if the visitor keeps it
+  pendingQuestion: string; // a question asked before the details, answered once they are in
+  contact: Contact | null; // set once a valid email is confirmed
   messages: Msg[];
   qualification: Qualification | null;
   form: 'open' | 'sent' | null;
@@ -25,26 +44,38 @@ type Saved = {
 };
 
 // The conversation survives page changes within the visit, and is gone when the tab closes.
-const STATE_KEY = 'ls_chat_v2';
+const STATE_KEY = 'ls_chat_v3';
 // Contact details are remembered on this device so returning visitors only need to confirm them.
 const CONTACT_KEY = 'ls_chat_contact';
 const MAX_INPUT = 1500;
 // Requests sent while the page closes must stay small (browsers cap them at 64 KB).
 const LEAVE_BUDGET = 15000;
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const FIELDS = ['name', 'email', 'company', 'role', 'phone', 'country'] as const;
 
 const newId = () => Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, '0')).join('');
-const fresh = (): Saved => ({ id: newId(), contact: null, messages: [], qualification: null, form: null, demo: false, reported: -1, part: 0 });
+const blank = (): Saved => ({
+  id: newId(),
+  step: 'name',
+  name: '',
+  suggestion: '',
+  typed: '',
+  pendingQuestion: '',
+  contact: null,
+  messages: [],
+  qualification: null,
+  form: null,
+  demo: false,
+  reported: -1,
+  part: 0,
+});
 
-function load(): Saved {
+function load(): Saved | null {
   try {
     const saved = JSON.parse(window.sessionStorage.getItem(STATE_KEY) || 'null');
-    if (saved && Array.isArray(saved.messages)) return { ...fresh(), ...saved };
+    if (saved && Array.isArray(saved.messages)) return { ...blank(), ...saved };
   } catch {
     /* start fresh */
   }
-  return fresh();
+  return null;
 }
 
 function persist(state: Saved) {
@@ -55,11 +86,23 @@ function persist(state: Saved) {
   }
 }
 
-function savedContact(): Partial<Contact> {
+function savedContact(): Contact | null {
   try {
-    return JSON.parse(window.localStorage.getItem(CONTACT_KEY) || '{}');
+    const c = JSON.parse(window.localStorage.getItem(CONTACT_KEY) || 'null');
+    if (c && typeof c.name === 'string' && validEmail(String(c.email))) {
+      return { name: c.name, email: c.email, company: c.company || '', role: c.role || '', phone: c.phone || '', country: c.country || '' };
+    }
   } catch {
-    return {};
+    /* ignore */
+  }
+  return null;
+}
+
+function keepContact(contact: Contact) {
+  try {
+    window.localStorage.setItem(CONTACT_KEY, JSON.stringify(contact));
+  } catch {
+    /* ignore */
   }
 }
 
@@ -164,54 +207,24 @@ export default function ChatPanel({
   onClose: () => void;
 }) {
   const pathname = usePathname() || '/';
-  const [state, setState] = useState<Saved>(fresh);
+  const [state, setState] = useState<Saved>(blank);
   const [input, setInput] = useState('');
   const [pending, setPending] = useState(false);
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState('');
-  const [prefill, setPrefill] = useState<Partial<Contact>>({});
   const [ready, setReady] = useState(false);
   const logRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
   const stateRef = useRef(state);
   const pageRef = useRef(pathname);
-  const loaded = useRef(false);
   const wasOpen = useRef(open);
 
   const mail = `[${SITE.emails.sales}](mailto:${SITE.emails.sales})`;
-  const { contact, messages, qualification, form } = state;
+  const { step, contact, messages, form } = state;
+  const conversation = talk(messages).length;
+  const lastEdit = messages.map((m) => Boolean(m.edit)).lastIndexOf(true);
   stateRef.current = state;
   pageRef.current = pathname;
-
-  useEffect(() => {
-    const saved = load();
-    stateRef.current = saved;
-    setState(saved);
-    setPrefill(savedContact());
-    setReady(true);
-    loaded.current = true;
-  }, []);
-
-  useEffect(() => {
-    if (loaded.current) persist(state);
-  }, [state]);
-
-  useEffect(() => {
-    const log = logRef.current;
-    // A new visitor starts at the top (welcome and form); a conversation follows its latest message.
-    if (log) log.scrollTop = contact || messages.length ? log.scrollHeight : 0;
-  }, [messages, pending, form, open, contact, ready]);
-
-  useEffect(() => {
-    if (!open) return;
-    (stateRef.current.contact ? inputRef.current : nameRef.current)?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [open, onClose, ready]);
 
   /** Updates state and saves it at once, so nothing is lost if the page closes straight after. */
   const commit = useCallback((next: Saved) => {
@@ -220,7 +233,40 @@ export default function ChatPanel({
     setState(next);
   }, []);
 
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    let start = load();
+    if (!start) {
+      start = blank();
+      const known = savedContact();
+      start.step = known ? 'welcomeBack' : 'name';
+      start.messages = [{ role: 'assistant', content: known ? fmt(t.welcomeBack, { name: known.name, email: known.email }) : t.askName, local: true }];
+    }
+    commit(start);
+    setReady(true);
+  }, [commit, t]);
+
+  useEffect(() => {
+    const log = logRef.current;
+    if (log) log.scrollTop = log.scrollHeight;
+  }, [messages, pending, form, open]);
+
+  useEffect(() => {
+    if (!open) return;
+    inputRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose, ready]);
+
   const update = (patch: Partial<Saved>) => commit({ ...stateRef.current, ...patch });
+  const heard = (content: string) => update({ messages: [...stateRef.current.messages, { role: 'user', content, local: true }] });
+  const say = (content: string, patch: Partial<Saved> = {}, extra: Partial<Msg> = {}) =>
+    update({ ...patch, messages: [...stateRef.current.messages, { role: 'assistant', content, local: true, ...extra }] });
 
   /** Emails the conversation to sales when there is something new since the last email. */
   const report = useCallback(
@@ -272,34 +318,89 @@ export default function ChatPanel({
       body: JSON.stringify({ lang, page: pathname, id: stateRef.current.id, visitor: stateRef.current.contact, consent: 'yes', ...body }),
     });
 
-  function start(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    if (data.get('_gotcha')) return;
-    const details = Object.fromEntries(FIELDS.map((f) => [f, String(data.get(f) || '').trim()])) as Contact;
-    if (!EMAIL.test(details.email)) {
-      setFormError(t.errorEmail);
-      return;
-    }
-    setFormError('');
+  // ---- Getting to know the visitor ----
+
+  /** Name and email are in: the visitor can now be followed up, so remember them and ask the optional questions. */
+  async function confirmEmail(email: string) {
+    setPending(true);
+    let verdict: { valid?: boolean; deliverable?: boolean } = { valid: true, deliverable: true };
     try {
-      window.localStorage.setItem(CONTACT_KEY, JSON.stringify(details));
+      const res = await post({ action: 'check_email', email });
+      if (res.ok) verdict = await res.json();
     } catch {
-      /* ignore */
+      /* the check is a courtesy: if it cannot run, the address is accepted */
     }
-    rememberLead(details.email);
-    setPrefill(details);
-    update({ contact: details });
-    window.setTimeout(() => inputRef.current?.focus(), 0);
+    setPending(false);
+    if (!verdict.valid) return say(t.errorEmail, { step: 'email' }, { error: true });
+    if (!verdict.deliverable) return say(fmt(t.errorDomain, { domain: email.slice(email.lastIndexOf('@') + 1) }), { step: 'email' }, { error: true });
+    const s = stateRef.current;
+    const details: Contact = { name: s.name, email, company: '', role: '', phone: '', country: '' };
+    rememberLead(email);
+    keepContact(details);
+    say(t.askCompany, { step: 'company', contact: details, suggestion: '', typed: '' });
   }
 
-  async function send(text: string) {
+  function finish(details: Contact) {
+    keepContact(details);
+    rememberLead(details.email);
+    say(fmt(t.greeting, { name: details.name }), { step: 'done', contact: details }, { edit: true });
+    const question = stateRef.current.pendingQuestion;
+    if (question) {
+      update({ pendingQuestion: '' });
+      void send(question, true);
+    }
+  }
+
+  async function answer(text: string) {
+    const s = stateRef.current;
+    heard(text);
+    switch (s.step) {
+      case 'welcomeBack': {
+        // Typing instead of tapping: carry on with the saved details and treat the text as the first question.
+        const known = savedContact();
+        if (known) {
+          update({ pendingQuestion: text });
+          return finish(known);
+        }
+        return say(t.askName, { step: 'name' });
+      }
+      case 'name': {
+        const kind = readName(text);
+        if (kind === 'question') return say(t.askNameFirst, { pendingQuestion: text });
+        if (kind === 'greeting') return say(t.askName);
+        if (kind === 'invalid') return say(t.errorName, {}, { error: true });
+        const name = text.trim().slice(0, 120);
+        return say(fmt(t.askEmail, { name }), { step: 'email', name }, { note: t.emailNotice });
+      }
+      case 'email':
+      case 'confirmEmail': {
+        const email = normaliseEmail(text);
+        if (!validEmail(email)) return say(t.errorEmail, { step: 'email' }, { error: true });
+        const suggestion = suggestEmail(email);
+        if (suggestion) return say(fmt(t.didYouMean, { email: suggestion }), { step: 'confirmEmail', suggestion, typed: email });
+        return confirmEmail(email);
+      }
+      case 'company':
+        return say(t.askCountry, { step: 'country', contact: { ...(s.contact as Contact), company: text.trim().slice(0, 160) } });
+      case 'country':
+        return finish({ ...(s.contact as Contact), country: text.trim().slice(0, 80) });
+    }
+  }
+
+  /** A tapped reply: shown in the conversation like a typed one. */
+  function choose(label: string, then: () => void) {
+    heard(label);
+    then();
+  }
+
+  // ---- The conversation ----
+
+  /** Asks the AI. `alreadyShown` is for a question the visitor typed before giving their details. */
+  async function send(text: string, alreadyShown = false) {
     const question = text.trim().slice(0, MAX_INPUT);
-    if (!question || pending || !stateRef.current.contact) return;
-    const next: Msg[] = [...stateRef.current.messages, { role: 'user', content: question }];
+    if (!question || stateRef.current.step !== 'done' || !stateRef.current.contact) return;
+    const next: Msg[] = [...stateRef.current.messages, { role: 'user', content: question, hidden: alreadyShown }];
     update({ messages: next });
-    setInput('');
-    if (inputRef.current) inputRef.current.style.height = '';
     setPending(true);
     let reply: Msg;
     let found: Qualification | null = null;
@@ -310,10 +411,10 @@ export default function ChatPanel({
         reply = { role: 'assistant', content: data.reply || t.formIntro };
         found = data.form ?? null;
       } else {
-        reply = { role: 'assistant', content: res.status === 429 ? fmt(t.errorRate, { email: mail }) : t.errorBusy, local: true };
+        reply = { role: 'assistant', content: res.status === 429 ? fmt(t.errorRate, { email: mail }) : t.errorBusy, local: true, rich: true, error: true };
       }
     } catch {
-      reply = { role: 'assistant', content: t.errorBusy, local: true };
+      reply = { role: 'assistant', content: t.errorBusy, local: true, rich: true, error: true };
     }
     const s = stateRef.current;
     commit({
@@ -324,12 +425,29 @@ export default function ChatPanel({
     setPending(false);
   }
 
+  function submit() {
+    const text = input.trim();
+    if (!text || pending) return;
+    setInput('');
+    if (inputRef.current) inputRef.current.style.height = '';
+    if (stateRef.current.step === 'done') void send(text);
+    else void answer(text.slice(0, 200));
+  }
+
   async function requestDemo(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const phone = String(data.get('phone') || '').trim();
+    if (phone && !validPhone(phone)) {
+      setFormError(t.errorPhone);
+      return;
+    }
     setFormError('');
     setBusy(true);
     try {
+      const withPhone = { ...(stateRef.current.contact as Contact), phone };
+      update({ contact: withPhone });
+      keepContact(withPhone);
       const s = stateRef.current;
       const res = await post({
         action: 'lead',
@@ -352,14 +470,16 @@ export default function ChatPanel({
 
   function restart() {
     report(false);
-    commit({ ...fresh(), contact: stateRef.current.contact, reported: 0 });
+    const s = stateRef.current;
+    const greeting: Msg = { role: 'assistant', content: fmt(t.greeting, { name: s.name || s.contact?.name || '' }), local: true, edit: true };
+    commit({ ...blank(), step: s.step, name: s.name, contact: s.contact, messages: s.step === 'done' ? [greeting] : s.messages, reported: 0 });
     setFormError('');
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
-      void send(input);
+      submit();
     }
   }
 
@@ -368,7 +488,41 @@ export default function ChatPanel({
     el.style.height = `${Math.min(el.scrollHeight, 132)}px`;
   }
 
-  const p = { ...prefill, ...(contact ?? {}) };
+  // What the input box expects at each step.
+  const field: Record<Step, { placeholder: string; inputMode?: 'email' | 'text'; autoComplete: string }> = {
+    welcomeBack: { placeholder: t.placeholder, autoComplete: 'off' },
+    name: { placeholder: t.phName, autoComplete: 'name' },
+    email: { placeholder: t.phEmail, inputMode: 'email', autoComplete: 'email' },
+    confirmEmail: { placeholder: t.phEmail, inputMode: 'email', autoComplete: 'email' },
+    company: { placeholder: t.phCompany, autoComplete: 'organization' },
+    country: { placeholder: t.phCountry, autoComplete: 'country-name' },
+    done: { placeholder: t.placeholder, autoComplete: 'off' },
+  };
+
+  let chips: Array<{ label: string; onClick: () => void }> = [];
+  if (!pending) {
+    if (step === 'welcomeBack') {
+      chips = [
+        { label: t.continueAs, onClick: () => choose(t.continueAs, () => { const known = savedContact(); if (known) finish(known); else say(t.askName, { step: 'name' }); }) },
+        { label: t.useOther, onClick: () => choose(t.useOther, () => say(t.askName, { step: 'name' })) },
+      ];
+    } else if (step === 'confirmEmail') {
+      chips = [
+        { label: t.fixYes, onClick: () => choose(t.fixYes, () => void confirmEmail(stateRef.current.suggestion)) },
+        { label: t.fixNo, onClick: () => choose(t.fixNo, () => void confirmEmail(stateRef.current.typed)) },
+      ];
+    } else if (step === 'company') {
+      chips = [{ label: t.skip, onClick: () => choose(t.skip, () => say(t.askCountry, { step: 'country' })) }];
+    } else if (step === 'country') {
+      chips = [
+        ...MARKET_NAMES_EN.map((value, i) => ({ label: countries[i], onClick: () => choose(countries[i], () => finish({ ...(stateRef.current.contact as Contact), country: value })) })),
+        { label: t.other, onClick: () => choose(t.other, () => finish({ ...(stateRef.current.contact as Contact), country: 'Other' })) },
+        { label: t.skip, onClick: () => choose(t.skip, () => finish(stateRef.current.contact as Contact)) },
+      ];
+    } else if (step === 'done' && conversation === 0) {
+      chips = t.starters.map((s) => ({ label: s, onClick: () => void send(s) }));
+    }
+  }
 
   return (
     <div className="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden={!open}>
@@ -380,7 +534,7 @@ export default function ChatPanel({
           <strong id="chat-title">{t.title}</strong>
           <span className="chat-status">{t.status}</span>
         </div>
-        {messages.length > 0 && (
+        {conversation > 0 && (
           <button type="button" className="chat-icon-btn" onClick={restart} aria-label={t.restart} title={t.restart}>
             <Icon name="refresh" size={17} />
           </button>
@@ -389,7 +543,7 @@ export default function ChatPanel({
           ×
         </button>
       </header>
-      {contact && form === null && (
+      {step === 'done' && form === null && (
         <button type="button" className="chat-demo-bar" onClick={() => update({ form: 'open' })}>
           <span>{t.formTitle}</span>
           <Icon name="arrow" size={16} />
@@ -400,48 +554,32 @@ export default function ChatPanel({
         <div className="chat-msg chat-msg--bot">
           <p>{t.welcome}</p>
         </div>
-
-        {contact && (
-          <div className="chat-msg chat-msg--bot">
-            <p>{fmt(t.greeting, { name: contact.name })}</p>
-            <button
-              type="button"
-              className="chat-link-btn chat-edit"
-              onClick={() => {
-                setPrefill(contact);
-                update({ contact: null });
-              }}
-            >
-              {t.editDetails}
-            </button>
-          </div>
-        )}
-        {contact && messages.length === 0 && (
-          <div className="chat-starters">
-            {t.starters.map((s) => (
-              <button key={s} type="button" onClick={() => void send(s)}>
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
-        {messages.map((m, i) =>
-          m.role === 'user' ? (
-            <div key={i} className="chat-msg chat-msg--user">
-              {m.content}
-            </div>
-          ) : (
-            <div key={i} className={`chat-msg chat-msg--bot${m.local ? ' chat-msg--note' : ''}`}>
-              {m.local ? (
-                <p>
-                  <Rich text={m.content} lang={lang} />
-                </p>
-              ) : (
-                <Reply text={m.content} />
-              )}
-            </div>
-          ),
-        )}
+        {ready &&
+          messages.map((m, i) => {
+            if (m.hidden) return null;
+            if (m.role === 'user') {
+              return (
+                <div key={i} className="chat-msg chat-msg--user">
+                  {m.content}
+                </div>
+              );
+            }
+            return (
+              <div key={i} className={`chat-msg chat-msg--bot${m.error ? ' chat-msg--note' : ''}`}>
+                {!m.local ? (
+                  <Reply text={m.content} />
+                ) : (
+                  <p>{m.rich ? <Rich text={m.content} lang={lang} /> : m.content}</p>
+                )}
+                {m.note && <p className="chat-msg-note">{m.note}</p>}
+                {m.edit && step === 'done' && i === lastEdit && (
+                  <button type="button" className="chat-link-btn chat-edit" onClick={() => say(t.askName, { step: 'name' })}>
+                    {t.editDetails}
+                  </button>
+                )}
+              </div>
+            );
+          })}
         {pending && (
           <div className="chat-msg chat-msg--bot chat-typing" role="status" aria-label={t.typing}>
             <i />
@@ -449,65 +587,17 @@ export default function ChatPanel({
             <i />
           </div>
         )}
-
-        {/* Rendered once saved details are loaded, so every field, the country included, starts filled in. */}
-        {ready && !contact && (
-          <form className="chat-form" onSubmit={start}>
-            <p className="chat-form-lead">{t.startLead}</p>
-            <label className="field">
-              <span>{t.name}</span>
-              <input ref={nameRef} name="name" required maxLength={120} autoComplete="name" defaultValue={p.name} />
-            </label>
-            <label className="field">
-              <span>{t.email}</span>
-              <input name="email" type="email" required maxLength={200} autoComplete="email" defaultValue={p.email} />
-            </label>
-            <div className="chat-form-row">
-              <label className="field">
-                <span>{t.company}</span>
-                <input name="company" maxLength={160} autoComplete="organization" defaultValue={p.company} />
-              </label>
-              <label className="field">
-                <span>{t.role}</span>
-                <input name="role" maxLength={120} autoComplete="organization-title" defaultValue={p.role} />
-              </label>
-            </div>
-            <div className="chat-form-row">
-              <label className="field">
-                <span>{t.phone}</span>
-                <input name="phone" type="tel" maxLength={60} autoComplete="tel" defaultValue={p.phone} />
-              </label>
-              <label className="field">
-                <span>{t.country}</span>
-                <select name="country" defaultValue={p.country ?? ''}>
-                  <option value="">{t.selectCountry}</option>
-                  {MARKET_NAMES_EN.map((value, i) => (
-                    <option key={value} value={value}>
-                      {countries[i]}
-                    </option>
-                  ))}
-                  <option value="Other">{t.other}</option>
-                </select>
-              </label>
-            </div>
-            <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
-            <label className="check-field">
-              <input type="checkbox" name="consent" value="yes" required />
-              <span>{t.consent}</span>
-            </label>
-            {formError && (
-              <p className="form-error" role="alert">
-                {formError}
-              </p>
-            )}
-            <button type="submit" className="btn btn-primary btn-sm chat-start">
-              {t.start}
-              <Icon name="arrow" size={15} />
-            </button>
-          </form>
+        {chips.length > 0 && (
+          <div className="chat-starters">
+            {chips.map((c) => (
+              <button key={c.label} type="button" onClick={c.onClick}>
+                {c.label}
+              </button>
+            ))}
+          </div>
         )}
 
-        {contact && form === 'open' && (
+        {contact && step === 'done' && form === 'open' && (
           <form className="chat-form" onSubmit={requestDemo}>
             <div className="chat-form-head">
               <strong>{t.formTitle}</strong>
@@ -515,9 +605,13 @@ export default function ChatPanel({
             </div>
             <div className="chat-confirm">
               <strong>{contact.name}</strong>
-              {(contact.company || contact.role) && <span>{[contact.role, contact.company].filter(Boolean).join(', ')}</span>}
+              {contact.company && <span>{contact.company}</span>}
               <span>{fmt(t.confirmFor, { email: contact.email })}</span>
             </div>
+            <label className="field">
+              <span>{t.phone}</span>
+              <input name="phone" type="tel" inputMode="tel" maxLength={30} autoComplete="tel" defaultValue={contact.phone} />
+            </label>
             <label className="field">
               <span>{t.preferredTime}</span>
               <input name="preferred_time" maxLength={200} />
@@ -551,32 +645,34 @@ export default function ChatPanel({
         )}
       </div>
 
-      {contact && (
-        <form
-          className="chat-input"
-          onSubmit={(e) => {
-            e.preventDefault();
-            void send(input);
+      <form
+        className="chat-input"
+        onSubmit={(e) => {
+          e.preventDefault();
+          submit();
+        }}
+      >
+        <textarea
+          ref={inputRef}
+          value={input}
+          rows={1}
+          maxLength={step === 'done' ? MAX_INPUT : 200}
+          placeholder={field[step].placeholder}
+          aria-label={field[step].placeholder}
+          inputMode={field[step].inputMode}
+          autoComplete={field[step].autoComplete}
+          autoCapitalize={step === 'email' || step === 'confirmEmail' ? 'off' : undefined}
+          spellCheck={step === 'done'}
+          onChange={(e) => {
+            setInput(e.target.value);
+            grow(e.target);
           }}
-        >
-          <textarea
-            ref={inputRef}
-            value={input}
-            rows={1}
-            maxLength={MAX_INPUT}
-            placeholder={t.placeholder}
-            aria-label={t.placeholder}
-            onChange={(e) => {
-              setInput(e.target.value);
-              grow(e.target);
-            }}
-            onKeyDown={onKeyDown}
-          />
-          <button type="submit" className="chat-send" disabled={pending || !input.trim()} aria-label={t.send} title={t.send}>
-            <Icon name="send" size={18} />
-          </button>
-        </form>
-      )}
+          onKeyDown={onKeyDown}
+        />
+        <button type="submit" className="chat-send" disabled={pending || !input.trim()} aria-label={t.send} title={t.send}>
+          <Icon name="send" size={18} />
+        </button>
+      </form>
       <p className="chat-note">{t.disclaimer}</p>
     </div>
   );
