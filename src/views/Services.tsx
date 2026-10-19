@@ -32,7 +32,7 @@ export function ServicesView({ lang }: { lang: Locale }) {
         }}
       />
 
-      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead}>
+      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} photo="services-install">
         <div className="btn-row">
           <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary btn-lg">
             {t.hero.cta}

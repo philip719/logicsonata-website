@@ -1066,6 +1066,16 @@ html:not(.js) .statement .w.hl,
   display: none;
 }
 
+.page-hero--dim {
+  isolation: isolate;
+  background: none;
+}
+
+.page-hero--dim .backdrop {
+  z-index: -1;
+  --shade: linear-gradient(90deg, rgba(5, 9, 11, 0.94) 35%, rgba(5, 9, 11, 0.7)), linear-gradient(180deg, transparent 50%, var(--bg));
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

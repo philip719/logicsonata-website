@@ -64,7 +64,7 @@ export function CareersView({ lang }: { lang: Locale }) {
       <JsonLd data={breadcrumbs(lang, [{ name: t.breadcrumb, path: '/careers' }])} />
       {lang === 'en' && en.careers.roles.items.map((r) => <JsonLd key={r.id} data={jobPosting(r)} />)}
 
-      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead}>
+      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} photo="careers-team">
         <div className="btn-row">
           <a href="#apply" className="btn btn-primary btn-lg">
             {t.hero.cta}

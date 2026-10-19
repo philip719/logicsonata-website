@@ -1,5 +1,6 @@
 import { ConsultationForm } from '@/components/ConsultationForm';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
+import { Photo } from '@/components/Photo';
 import { Rich } from '@/components/Rich';
 import { Corners, Eyebrow } from '@/components/ui';
 import type { Locale } from '@/i18n/config';
@@ -29,8 +30,10 @@ export function ContactView({ lang }: { lang: Locale }) {
           about: { '@id': `${SITE.url}/#org` },
         }}
       />
-      <section className="page-hero">
-        <div className="hero-grid-bg" aria-hidden="true" />
+      <section className="page-hero page-hero--dim">
+        <div className="backdrop" aria-hidden="true">
+          <Photo name="contact-reception" priority />
+        </div>
         <div className="container page-hero-inner contact-grid">
           <div>
             <Eyebrow>{t.eyebrow}</Eyebrow>

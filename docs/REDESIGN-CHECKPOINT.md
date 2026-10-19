@@ -104,6 +104,9 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
    first reading looked like $0.22). Balance after all imagery: $25.35 of $35.08. Story: 136 frames, 2.52 MB desktop,
    1.08 MB phone. Loops in `public/video` (0.2 MB each). VID-07 (hero motion) and VID-08 (markets flyover) are not
    used. Mockups sent to the owner: `docs/mockups/` (2026-10-19). Owner approved the mockups (2026-10-19) and supplied the CITY-SG photo. Next: rollout (step 4).
+   Rollout progress: homepage text translated (all 5 locales pass check-translations); photo heroes on About,
+   Services, Partners, Investors, Careers, Solutions, Whitepapers, product pages; Contact uses a dimmed backdrop.
+   Pending: owner's Ho Chi Minh City photo (file did not reach the session), full QA, zip.
 3. Build the new design system + homepage; screenshot desktop and phone mockups plus one inner page (Solutions or a
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,

@@ -3,6 +3,7 @@ import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { SITE } from '@/lib/site';
 import { Icon } from './Icon';
+import { Photo } from './Photo';
 
 export function Eyebrow({ children, index }: { children: React.ReactNode; index?: string }) {
   return (
@@ -40,19 +41,30 @@ export function PageHero({
   eyebrow,
   title,
   lead,
+  photo,
   children,
 }: {
   eyebrow: string;
   title: React.ReactNode;
   lead: React.ReactNode;
+  /** A graded photo from public/images/photos, shown full-bleed behind the hero. */
+  photo?: string;
   children?: React.ReactNode;
 }) {
   return (
-    <section className="page-hero">
-      <div className="hero-grid-bg" aria-hidden="true" />
+    <section className={photo ? 'page-hero page-hero--photo' : 'page-hero'}>
+      {photo ? (
+        <div className="backdrop" aria-hidden="true">
+          <Photo name={photo} priority />
+        </div>
+      ) : (
+        <div className="hero-grid-bg" aria-hidden="true" />
+      )}
       <div className="container page-hero-inner">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 className="h1 page-h1">{title}</h1>
+        <h1 className="h1 page-h1" data-decode>
+          {title}
+        </h1>
         <p className="lead lead-lg">{lead}</p>
         {children}
       </div>
