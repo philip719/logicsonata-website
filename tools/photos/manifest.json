@@ -89,24 +89,24 @@
   },
   "CITY-BKK": {
     "slug": "city-bangkok",
-    "source": "CITY-BKK_s3001",
-    "prompt": "Bangkok at night, an elevated skytrain track curving overhead above a wide avenue, a lit train passing above, the avenue below lined with tall trees and dark glass office towers, no shops, no signs, no billboards, wet road with taxis and a tuk-tuk. Low angle from street level looking up, 35mm lens at f/2, the track and train in focus. Street lights and traffic glow in acid cyan and signal red, reflecting on the wet road and the underside of the track, light rain visible against the lights. Cinematic night street photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, gentle halation, photorealistic, no readable text or logos.",
-    "seed": 3001,
-    "model": "flux1-krea-dev_fp8_scaled",
-    "steps": 28,
-    "guidance": 4.5,
+    "source": "owner-supplied photograph (Wat Arun across the Chao Phraya at night), resized to 1536x864; graded at 0.6 so the gilded temple keeps its colour",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
     "sampler": "euler/simple",
     "denoise": 1.0,
     "init_image": null,
     "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
     "grade": {
-      "strength": 1.0,
+      "strength": 0.6,
       "grain": 0.006
     },
     "webp_bytes": {
-      "3072": 193608,
-      "1536": 72564,
-      "768": 24848
+      "3072": 284658,
+      "1536": 97644,
+      "768": 28260
     }
   },
   "CITY-HCMC": {
