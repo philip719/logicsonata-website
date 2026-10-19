@@ -1,4 +1,4 @@
-# Redesign checkpoint (2026-10-19, updated same day: Comfy Cloud imagery)
+# Redesign checkpoint (2026-10-19: redesign LIVE)
 
 Read this first when continuing the Logic Sonata website redesign in a new session.
 
@@ -111,7 +111,9 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
    360 px on 60 page/language combinations, 0 JS errors, reduced motion verified (no frame/video downloads),
    Lighthouse home: CLS 0, best practices/SEO 100, accessibility 96 (pre-existing lang-switch label). Decode effect
    moved to an overlay layer (was causing CLS 0.56). Zip `logicsonata-site-redesign.zip` (34.5 MB) handed to owner.
-   After upload: merge `redesign/cyber` into `main`.
+   LIVE 2026-10-19 (owner uploaded). Production Lighthouse (mobile): home perf 79, product page 81; accessibility,
+   best practices, SEO 100; CLS 0. Merged `redesign/cyber` into `main`. Pending for the next upload: mp4 added to the
+   30-day cache rule in `public/.htaccess`.
 3. Build the new design system + homepage; screenshot desktop and phone mockups plus one inner page (Solutions or a
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,
