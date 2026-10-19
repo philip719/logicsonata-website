@@ -18,45 +18,43 @@ export const home: HomeDict = {
     ],
     caption: '示意渲染图 · 内部结构已简化',
     specsLabel: '硬件亮点',
-    // TODO(redesign): translate the keys below (English placeholders for the mockup phase).
-    scroll: 'Scroll to discover',
-    partsLabel: 'Inside the appliance',
-    parts: ['Aluminium chassis', 'Fan and vapor chamber', 'AI superchip', 'Slotted airflow grilles', 'Local NVMe storage'],
+    scroll: '向下滚动探索',
+    partsLabel: '设备内部',
+    parts: ['铝合金机身', '风扇与均热板', 'AI 超级芯片', '开槽散热格栅', '本地 NVMe 存储'],
   },
-  // TODO(redesign): translate.
   intro: {
-    eyebrow: 'Introduction',
+    eyebrow: '简介',
     statement:
-      'Your teams already use AI every day. Logic Sonata brings it *inside your walls*: the hardware, the models, your company knowledge and the controls, running where your data already lives.',
+      '您的团队每天都在使用 AI。Logic Sonata 把它带进*您的围墙之内*：硬件、模型、企业知识和管控措施，全部运行在您的数据所在之处。',
   },
   story: {
-    counter: 'Chapter',
+    counter: '章节',
     chapters: [
       {
-        label: 'Silicon',
-        title: 'Datacentre-class AI on one superchip.',
-        text: 'CPU, GPU and AI engines share up to 128 GB of unified memory, so large language models run locally at full speed.',
+        label: '芯片',
+        title: '一颗超级芯片，数据中心级 AI。',
+        text: 'CPU、GPU 和 AI 引擎共享最高 128 GB 统一内存，大语言模型可在本地全速运行。',
       },
       {
-        label: 'Appliance',
-        title: 'Engineered as one quiet unit.',
-        text: 'Fan and vapor-chamber cooling, local NVMe storage and high-speed networking in a compact aluminium chassis that fits any office.',
+        label: '设备',
+        title: '一台安静的一体化设备。',
+        text: '风扇与均热板散热、本地 NVMe 存储和高速网络，集成在紧凑的铝合金机身中，适合任何办公室。',
       },
       {
-        label: 'Deployment',
-        title: 'Racked in your server room.',
-        text: 'Install it on-premise, run it hosted on private GPU capacity, or combine both. Start with one unit and scale to a cluster.',
+        label: '部署',
+        title: '部署在您的机房里。',
+        text: '可本地部署，可在私有 GPU 算力上托管运行，也可两者结合。从一台起步，按需扩展为集群。',
       },
     ],
   },
   readout: {
-    eyebrow: 'Readout',
-    title: 'Private AI that answers to you.',
+    eyebrow: '数据一览',
+    title: '听命于您的私有 AI。',
     items: [
-      { value: '100*%*', label: 'Of prompts, files and answers stay under your control' },
-      { value: '128 *GB*', label: 'Unified memory per appliance for large models' },
-      { value: '3', label: 'Deployment models: on-premise, hosted and hybrid' },
-      { value: '5', label: 'Southeast Asian markets with local delivery and support' },
+      { value: '100*%*', label: '提示词、文件和回答始终由您掌控' },
+      { value: '128 *GB*', label: '每台设备的统一内存，可运行大模型' },
+      { value: '3', label: '种部署模式：本地部署、托管和混合部署' },
+      { value: '5', label: '个东南亚市场，提供本地交付与支持' },
     ],
   },
   marqueeLabel: '我们服务的行业',
@@ -107,7 +105,7 @@ export const home: HomeDict = {
     aside: '每套系统均可本地部署、托管或混合部署，并按您的知识和访问规则完成全面配置。',
     ctaTitle: '不确定哪套适合？',
     ctaText: '大多数客户从就绪度评估开始。我们梳理您的数据，并推荐合适的系统。',
-    view: 'View', // TODO(redesign): translate
+    view: '查看',
   },
   industries: {
     eyebrow: '服务对象',
@@ -122,7 +120,7 @@ export const home: HomeDict = {
     eyebrow: '市场',
     title: '服务东南亚五大市场。',
     lead: '我们服务新加坡、越南、印尼、马来西亚和泰国的企业，交付、培训和托管支持覆盖整个区域。',
-    swipe: 'Drag or scroll', // TODO(redesign): translate
+    swipe: '拖动或滚动',
   },
   faq: {
     eyebrow: '常见问题',

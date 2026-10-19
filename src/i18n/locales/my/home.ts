@@ -18,45 +18,43 @@ export const home: HomeDict = {
     ],
     caption: 'Imej ilustrasi · susun atur dalaman dipermudahkan',
     specsLabel: 'Sorotan perkakasan',
-    // TODO(redesign): translate the keys below (English placeholders for the mockup phase).
-    scroll: 'Scroll to discover',
-    partsLabel: 'Inside the appliance',
-    parts: ['Aluminium chassis', 'Fan and vapor chamber', 'AI superchip', 'Slotted airflow grilles', 'Local NVMe storage'],
+    scroll: 'Tatal untuk meneroka',
+    partsLabel: 'Di dalam peranti',
+    parts: ['Casis aluminium', 'Kipas dan ruang wap', 'Supercip AI', 'Gril aliran udara berlubang', 'Storan NVMe tempatan'],
   },
-  // TODO(redesign): translate.
   intro: {
-    eyebrow: 'Introduction',
+    eyebrow: 'Pengenalan',
     statement:
-      'Your teams already use AI every day. Logic Sonata brings it *inside your walls*: the hardware, the models, your company knowledge and the controls, running where your data already lives.',
+      'Pasukan anda sudah menggunakan AI setiap hari. Logic Sonata membawanya *ke dalam premis anda*: perkakasan, model, pengetahuan syarikat dan kawalannya, berjalan di tempat data anda berada.',
   },
   story: {
-    counter: 'Chapter',
+    counter: 'Bab',
     chapters: [
       {
-        label: 'Silicon',
-        title: 'Datacentre-class AI on one superchip.',
-        text: 'CPU, GPU and AI engines share up to 128 GB of unified memory, so large language models run locally at full speed.',
+        label: 'Silikon',
+        title: 'AI kelas pusat data pada satu supercip.',
+        text: 'CPU, GPU dan enjin AI berkongsi sehingga 128 GB memori bersepadu, jadi model bahasa besar berjalan secara tempatan pada kelajuan penuh.',
       },
       {
-        label: 'Appliance',
-        title: 'Engineered as one quiet unit.',
-        text: 'Fan and vapor-chamber cooling, local NVMe storage and high-speed networking in a compact aluminium chassis that fits any office.',
+        label: 'Peranti',
+        title: 'Direka sebagai satu unit yang senyap.',
+        text: 'Penyejukan kipas dan ruang wap, storan NVMe tempatan dan rangkaian berkelajuan tinggi dalam casis aluminium padat yang sesuai untuk mana-mana pejabat.',
       },
       {
-        label: 'Deployment',
-        title: 'Racked in your server room.',
-        text: 'Install it on-premise, run it hosted on private GPU capacity, or combine both. Start with one unit and scale to a cluster.',
+        label: 'Penempatan',
+        title: 'Dipasang di bilik pelayan anda.',
+        text: 'Pasang di premis anda, jalankan secara dihoskan pada kapasiti GPU peribadi, atau gabungkan kedua-duanya. Mulakan dengan satu unit dan kembangkan kepada kluster.',
       },
     ],
   },
   readout: {
-    eyebrow: 'Readout',
-    title: 'Private AI that answers to you.',
+    eyebrow: 'Ringkasan',
+    title: 'AI peribadi yang patuh kepada anda.',
     items: [
-      { value: '100*%*', label: 'Of prompts, files and answers stay under your control' },
-      { value: '128 *GB*', label: 'Unified memory per appliance for large models' },
-      { value: '3', label: 'Deployment models: on-premise, hosted and hybrid' },
-      { value: '5', label: 'Southeast Asian markets with local delivery and support' },
+      { value: '100*%*', label: 'Gesaan, fail dan jawapan kekal di bawah kawalan anda' },
+      { value: '128 *GB*', label: 'Memori bersepadu bagi setiap peranti untuk model besar' },
+      { value: '3', label: 'Model penempatan: di premis, dihoskan dan hibrid' },
+      { value: '5', label: 'Pasaran Asia Tenggara dengan penghantaran dan sokongan tempatan' },
     ],
   },
   marqueeLabel: 'Industri yang kami layani',
@@ -107,7 +105,7 @@ export const home: HomeDict = {
     aside: 'Setiap sistem dihantar secara on-premise, dihoskan atau hibrid, dikonfigurasi sepenuhnya dengan pengetahuan dan peraturan akses anda.',
     ctaTitle: 'Tidak pasti yang mana sesuai?',
     ctaText: 'Kebanyakan pelanggan bermula dengan Penilaian Kesediaan. Kami memetakan data anda dan mengesyorkan sistem yang tepat.',
-    view: 'View', // TODO(redesign): translate
+    view: 'Lihat',
   },
   industries: {
     eyebrow: 'Siapa yang kami layani',
@@ -122,7 +120,7 @@ export const home: HomeDict = {
     eyebrow: 'Pasaran',
     title: 'Berkhidmat di lima pasaran di seluruh Asia Tenggara.',
     lead: 'Kami bekerjasama dengan syarikat di Singapura, Vietnam, Indonesia, Malaysia dan Thailand, dengan penghantaran, latihan dan sokongan terurus di seluruh rantau ini.',
-    swipe: 'Drag or scroll', // TODO(redesign): translate
+    swipe: 'Seret atau tatal',
   },
   faq: {
     eyebrow: 'Soalan Lazim',

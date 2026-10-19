@@ -18,45 +18,43 @@ export const home: HomeDict = {
     ],
     caption: 'ภาพจำลองเพื่อประกอบ · โครงสร้างภายในแสดงแบบย่อ',
     specsLabel: 'จุดเด่นของฮาร์ดแวร์',
-    // TODO(redesign): translate the keys below (English placeholders for the mockup phase).
-    scroll: 'Scroll to discover',
-    partsLabel: 'Inside the appliance',
-    parts: ['Aluminium chassis', 'Fan and vapor chamber', 'AI superchip', 'Slotted airflow grilles', 'Local NVMe storage'],
+    scroll: 'เลื่อนเพื่อสำรวจ',
+    partsLabel: 'ภายในเครื่อง',
+    parts: ['ตัวเครื่องอะลูมิเนียม', 'พัดลมและ Vapor Chamber', 'AI Superchip', 'ช่องระบายอากาศ', 'พื้นที่จัดเก็บ NVMe ภายในเครื่อง'],
   },
-  // TODO(redesign): translate.
   intro: {
-    eyebrow: 'Introduction',
+    eyebrow: 'บทนำ',
     statement:
-      'Your teams already use AI every day. Logic Sonata brings it *inside your walls*: the hardware, the models, your company knowledge and the controls, running where your data already lives.',
+      'ทีมของคุณใช้ AI อยู่ทุกวันแล้ว Logic Sonata นำ AI มาไว้ *ภายในองค์กรของคุณ* ทั้งฮาร์ดแวร์ โมเดล คลังความรู้องค์กร และการควบคุม ทำงานอยู่ในที่เดียวกับข้อมูลของคุณ',
   },
   story: {
-    counter: 'Chapter',
+    counter: 'บทที่',
     chapters: [
       {
-        label: 'Silicon',
-        title: 'Datacentre-class AI on one superchip.',
-        text: 'CPU, GPU and AI engines share up to 128 GB of unified memory, so large language models run locally at full speed.',
+        label: 'ซิลิคอน',
+        title: 'AI ระดับดาต้าเซ็นเตอร์บนชิปเดียว',
+        text: 'CPU, GPU และ AI Engine ใช้หน่วยความจำรวมสูงสุด 128 GB ร่วมกัน โมเดลภาษาขนาดใหญ่จึงทำงานในเครื่องได้เต็มประสิทธิภาพ',
       },
       {
-        label: 'Appliance',
-        title: 'Engineered as one quiet unit.',
-        text: 'Fan and vapor-chamber cooling, local NVMe storage and high-speed networking in a compact aluminium chassis that fits any office.',
+        label: 'ตัวเครื่อง',
+        title: 'ออกแบบเป็นเครื่องเดียวที่เงียบ',
+        text: 'ระบายความร้อนด้วยพัดลมและ Vapor Chamber มีพื้นที่จัดเก็บ NVMe และเครือข่ายความเร็วสูง ในตัวเครื่องอะลูมิเนียมขนาดกะทัดรัดที่เหมาะกับทุกสำนักงาน',
       },
       {
-        label: 'Deployment',
-        title: 'Racked in your server room.',
-        text: 'Install it on-premise, run it hosted on private GPU capacity, or combine both. Start with one unit and scale to a cluster.',
+        label: 'การติดตั้ง',
+        title: 'ติดตั้งในห้องเซิร์ฟเวอร์ของคุณ',
+        text: 'ติดตั้งแบบ On-premise ใช้งานแบบ Hosted บน GPU ส่วนตัว หรือผสานทั้งสองแบบ เริ่มจากเครื่องเดียวแล้วขยายเป็นคลัสเตอร์',
       },
     ],
   },
   readout: {
-    eyebrow: 'Readout',
-    title: 'Private AI that answers to you.',
+    eyebrow: 'ภาพรวม',
+    title: 'Private AI ที่อยู่ภายใต้การควบคุมของคุณ',
     items: [
-      { value: '100*%*', label: 'Of prompts, files and answers stay under your control' },
-      { value: '128 *GB*', label: 'Unified memory per appliance for large models' },
-      { value: '3', label: 'Deployment models: on-premise, hosted and hybrid' },
-      { value: '5', label: 'Southeast Asian markets with local delivery and support' },
+      { value: '100*%*', label: 'พรอมต์ ไฟล์ และคำตอบอยู่ภายใต้การควบคุมของคุณ' },
+      { value: '128 *GB*', label: 'หน่วยความจำรวมต่อเครื่องสำหรับโมเดลขนาดใหญ่' },
+      { value: '3', label: 'รูปแบบการติดตั้ง: On-premise, Hosted และ Hybrid' },
+      { value: '5', label: 'ตลาดในเอเชียตะวันออกเฉียงใต้ พร้อมทีมส่งมอบและดูแลในพื้นที่' },
     ],
   },
   marqueeLabel: 'อุตสาหกรรมที่เราให้บริการ',
@@ -107,7 +105,7 @@ export const home: HomeDict = {
     aside: 'ทุกระบบติดตั้งได้แบบ On-premise, Hosted หรือ Hybrid พร้อมตั้งค่าคลังความรู้และกฎการเข้าถึงขององค์กรคุณไว้ครบถ้วน',
     ctaTitle: 'ยังไม่แน่ใจว่าระบบใดเหมาะกับคุณ',
     ctaText: 'ลูกค้าส่วนใหญ่เริ่มจากการประเมินความพร้อมด้าน AI เราจะสำรวจข้อมูลของคุณและแนะนำระบบที่เหมาะสม',
-    view: 'View', // TODO(redesign): translate
+    view: 'ดู',
   },
   industries: {
     eyebrow: 'ลูกค้าของเรา',
@@ -122,7 +120,7 @@ export const home: HomeDict = {
     eyebrow: 'ตลาด',
     title: 'ให้บริการ 5 ตลาดทั่วเอเชียตะวันออกเฉียงใต้',
     lead: 'เราทำงานกับธุรกิจในสิงคโปร์ เวียดนาม อินโดนีเซีย มาเลเซีย และไทย พร้อมบริการติดตั้ง ฝึกอบรม และดูแลระบบทั่วภูมิภาค',
-    swipe: 'Drag or scroll', // TODO(redesign): translate
+    swipe: 'ลากหรือเลื่อน',
   },
   faq: {
     eyebrow: 'คำถามที่พบบ่อย',
