@@ -16,3 +16,9 @@ tools/whitepapers/.cache/
 brand/kit/out/
 brand/kit/build/
 __pycache__/
+
+# Hero render intermediates
+tools/hero-render/tex/
+tools/hero-render/.venv/
+tools/hero-render/*.png
+tools/hero-render/labels.json

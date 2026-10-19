@@ -151,8 +151,8 @@ export const common: CommonDict = {
     deployHosted: 'AI riêng tư trên đám mây riêng, chạy trên máy chủ chuyên dụng trong đám mây GPU riêng được quản lý',
     deployOnprem: 'AI riêng tư on-premise, chạy trên phần cứng đặt ngay trong tòa nhà của bạn',
     deployHybrid: 'AI riêng tư kết hợp, liên kết phần cứng on-premise với đám mây riêng được quản lý',
-    heroVideo:
-      'Hoạt ảnh một thiết bị AI riêng tư tách rời thành các linh kiện: vỏ nhôm, tấm thông gió đục lỗ, quạt và buồng hơi tản nhiệt, siêu chip AI, bộ nhớ hợp nhất lên đến 128 GB, ổ lưu trữ NVMe cục bộ và kết nối mạng tốc độ cao, rồi lắp ráp trở lại.',
+    heroRender:
+      'Ảnh kết xuất chân thực một thiết bị AI riêng tư được tách rời các linh kiện: vỏ nhôm, tấm thông gió có khe, quạt và buồng hơi tản nhiệt, siêu chip AI, bộ nhớ hợp nhất lên đến 128 GB, ổ lưu trữ NVMe cục bộ và kết nối mạng tốc độ cao.',
   },
   chat: {
     launcher: 'Hỏi AI của chúng tôi',

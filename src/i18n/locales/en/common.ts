@@ -150,8 +150,8 @@ export const common = {
     deployHosted: 'Hosted private AI running on dedicated servers in a managed private GPU cloud',
     deployOnprem: 'On-premise private AI running on hardware inside your own building',
     deployHybrid: 'Hybrid private AI linking on-premise hardware with a hosted private cloud',
-    heroVideo:
-      'Animation of a private AI appliance exploding into its components: aluminium chassis, perforated airflow panels, fan and vapor-chamber cooling, AI superchip, up to 128 GB of unified memory, local NVMe storage and high-speed networking, then reassembling.',
+    heroRender:
+      'Photorealistic render of a private AI appliance with its parts separated: aluminium chassis, slotted airflow panels, fan and vapor-chamber cooling, AI superchip, up to 128 GB of unified memory, local NVMe storage and high-speed networking.',
   },
   chat: {
     launcher: 'Ask our AI',

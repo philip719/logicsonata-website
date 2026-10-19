@@ -3,7 +3,7 @@ import { DataFlow } from '@/components/graphics/DataFlow';
 import { DeploymentArt } from '@/components/graphics/DeploymentArt';
 import { RegionMap } from '@/components/graphics/RegionMap';
 import { StackDiagram } from '@/components/graphics/StackDiagram';
-import { HeroVideo } from '@/components/HeroVideo';
+import { HeroRender } from '@/components/HeroRender';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { ProductCard } from '@/components/ProductCard';
@@ -85,7 +85,7 @@ export function HomeView({ lang }: { lang: Locale }) {
           </div>
           <div className="hero-visual">
             <div className="hero-visual-frame">
-              <HeroVideo label={common.graphics.heroVideo} />
+              <HeroRender alt={common.graphics.heroRender} />
             </div>
             <p className="hero-visual-caption mono">{t.hero.caption}</p>
             <ul className="spec-chips" aria-label={t.hero.specsLabel}>

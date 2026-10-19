@@ -152,8 +152,8 @@ export const common: CommonDict = {
     deployHosted: '托管私有 AI：运行于托管式私有 GPU 云中的专用服务器',
     deployOnprem: '本地部署私有 AI：运行于您自有楼宇内的硬件',
     deployHybrid: '混合部署私有 AI：连接本地硬件与托管私有云',
-    heroVideo:
-      '私有 AI 设备的拆解动画：铝制机身、多孔散热面板、风扇与均热板散热、AI 超级芯片、最高 128 GB 统一内存、本地 NVMe 存储和高速网络，随后重新组装。',
+    heroRender:
+      '私有 AI 设备的拆解渲染图：铝制机身、开槽散热面板、风扇与均热板散热、AI 超级芯片、最高 128 GB 统一内存、本地 NVMe 存储和高速网络。',
   },
   chat: {
     launcher: '咨询 AI 助手',

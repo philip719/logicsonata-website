@@ -18,8 +18,9 @@ running JavaScript, and the site runs on standard Hostinger shared hosting with 
 | `src/views/` | One component per page, shared by every language |
 | `src/app/(en)/` | English routes, served from the site root (`/about`) |
 | `src/app/[lang]/` | Translated routes (`/cn/about`, `/th/about` ...) |
-| `src/components/HeroVideo.tsx` | Homepage hero video (a vendor-neutral private AI appliance exploding into parts), with mobile cut and reduced-motion still |
-| `tools/hero-video/` | The 3D renderer that produces the hero video (see its README) |
+| `src/components/HeroRender.tsx` | Homepage hero: photoreal render of a vendor-neutral private AI appliance with its parts separated, labelled on desktop, square crop on phones |
+| `tools/hero-render/` | Blender (Cycles) scene, textures and label overlay that produce the hero render (see its README) |
+| `tools/hero-video/` | Earlier three.js hero animation, kept for reference |
 | `tools/whitepapers/` | Builds the five whitepaper PDFs from the English product data |
 | `src/components/graphics/` | Hand-built SVG illustrations (stack, deployment, data flow, map) |
 | `src/app/globals.css` | Design system: colours, type, layout, animation, language-specific typography |
