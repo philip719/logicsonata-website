@@ -138,6 +138,58 @@ How to use this: when a visitor is interested, describe what they would see, rel
 and documents (the demo can be tailored to their use case), and invite them to book. Do not answer questions
 about Apex's documents yourself; offer to show them in the live demo instead.`;
 
+// Capabilities that go beyond a standard RAG chatbot. Written from the LSAI lab stack (port 12002)
+// install guide; describe what they do, not which open-source components provide them.
+const BEYOND_RAG = `# Beyond standard RAG (included in the Private Knowledge Assistant today)
+
+Most document chatbots only search plain text and answer from whatever they find. Logic Sonata's knowledge
+assistant adds the following, all available now on the appliance.
+
+Reads the documents companies really have:
+- PDFs including their figures, charts, tables and diagrams drawn with lines and boxes, not just the text.
+- Older and less common formats such as DOC, XLS, PPT, RTF, OpenDocument (ODT, ODS, ODP), EPUB and HTML,
+  including the pictures embedded inside them.
+- Emails (EML and MSG) and their attachments, read exactly like uploaded files.
+- Scanned pages and photos through text recognition (OCR) that keeps exact characters, so part numbers,
+  codes and Thai or Chinese text stay correct.
+
+Finds the right passage:
+- Hybrid search: exact-word search (part numbers, error codes, names, Thai and Chinese text) combined with
+  meaning search, so it finds both "what the user meant" and "the exact code they typed".
+- A re-ranking step on the GPU picks the best passages before the answer is written; if it is busy,
+  answers still arrive.
+- Documents are split along their headings, so tables and step-by-step procedures stay whole.
+
+Shows its evidence:
+- Answers can show the pictures they used (diagrams, charts, scanned pages), up to three by default. Every
+  view re-checks the user's folder access and is recorded in the audit log.
+
+Honest answers (designed to prevent made-up answers):
+- If the approved documents do not contain the answer, it says "This is not in the approved documents
+  available to you." instead of guessing. It gives exactly the same reply for folders the user is not
+  allowed to see, so it never reveals that restricted documents exist.
+- Every sentence in an answer must match the document it comes from.
+- When documents disagree, it shows them side by side with their sources rather than picking one silently.
+- Superseded editions are not used; answers follow the current version.
+- For questions that need a second document, it runs one extra targeted search.
+
+Governance and operations:
+- Request Access: users can ask for access to a folder through an approval step; access can be
+  time-limited and is revoked automatically when it expires, or manually at any time.
+- An extra sign-in step (multi-factor authentication) for sensitive actions.
+- A full audit timeline of who asked what, what was answered, refused or viewed.
+- Automatic encrypted backups (nightly full, hourly for documents and chats) to the customer's own network
+  storage, checked every week by reading a copy back, and restorable onto another machine.
+- Encryption of stored data, and health monitoring of the appliance (services, disk, backups) in the
+  Security Center.
+
+How to use this: describe these as capabilities in plain business terms and relate them to the visitor's
+documents (for example scanned forms, old Excel files, email archives, technical drawings, Thai or Chinese
+documents). Do not name the underlying open-source components unless a technical visitor asks directly;
+if they do, you may say it is built on proven open-source document, search and policy components, and that
+a specialist can walk through the exact architecture in the consultation. Offer to show these in the live
+demo.`;
+
 function faq() {
   return ['# General FAQ', en.data.faq.map((f) => `Q: ${f.q}\nA: ${f.a}`).join('\n\n')].join('\n\n');
 }
@@ -182,6 +234,6 @@ const PRECISE_FACTS = `# Precise facts (state these exactly)
   produces a sizing and a recommended pilot.`;
 
 export function GET() {
-  const body = [company(), deployment(), products(), services(), consultation(), LIVE_DEMO, faq(), otherAudiences(), pages(), PRECISE_FACTS].join('\n\n') + '\n';
+  const body = [company(), deployment(), products(), services(), consultation(), LIVE_DEMO, BEYOND_RAG, faq(), otherAudiences(), pages(), PRECISE_FACTS].join('\n\n') + '\n';
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }
