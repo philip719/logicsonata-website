@@ -41,7 +41,7 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 # Chat assistant: its reference text and an optional config file are read by PHP only, never served.
-<FilesMatch "^(chat-knowledge\.txt|chat-config\.php)$">
+<FilesMatch "^(chat-knowledge\.txt|chat-config\.php|mail-config\.php|mailer\.php)$">
   Require all denied
 </FilesMatch>
 

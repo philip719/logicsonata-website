@@ -94,6 +94,11 @@ npm run build    # writes the static site to ./out
   on the server. The mailbox `careers@logicsonata.com` must exist in Hostinger Email, because it is also the
   sender address (this keeps the messages out of spam). To change the inbox, edit `TO_ADDRESS` and
   `FROM_ADDRESS` at the top of `apply.php`.
+- **Email delivery** (job applications and chat emails): `public/api/mailer.php` signs in to the sender's
+  mailbox on `smtp.hostinger.com` (port 465), so messages carry the domain's DKIM signature and pass SPF and
+  DMARC instead of landing in spam. The mailbox passwords go in `mail-config.php` in the private folder beside
+  `public_html` (template: `deploy/mail-config.example.php`). Without a password, or if the SMTP login fails,
+  the scripts fall back to PHP `mail()`; the reason is written to the PHP error log, never the password.
 
 ## Chat assistant
 

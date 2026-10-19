@@ -16,6 +16,8 @@
 
 declare(strict_types=1);
 
+require __DIR__ . '/mailer.php';
+
 const ALLOWED_ORIGINS = ['https://www.logicsonata.com', 'https://logicsonata.com'];
 const LANGS = [
     'en' => 'English',
@@ -588,13 +590,7 @@ function send_sales_mail(array $cfg, string $subject, string $body, array $v, ar
         'Content-Transfer-Encoding: base64',
         'X-Mailer: LogicSonata-Chat',
     ], $extraHeaders);
-    return mail(
-        clean_line($cfg['sales_to'], 200),
-        '=?UTF-8?B?' . base64_encode($subject) . '?=',
-        chunk_split(base64_encode($body)),
-        implode("\r\n", $headers),
-        '-f' . $from
-    );
+    return ls_send_mail($from, clean_line($cfg['sales_to'], 200), '=?UTF-8?B?' . base64_encode($subject) . '?=', chunk_split(base64_encode($body)), $headers);
 }
 
 // ---------------------------------------------------------------------------

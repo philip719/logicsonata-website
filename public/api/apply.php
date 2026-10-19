@@ -7,10 +7,14 @@
  * only lives in PHP's temporary folder for the length of the request.
  *
  * Runs on Hostinger's standard PHP. The From address must be a real mailbox on
- * the logicsonata.com domain so the message passes SPF and lands in the inbox.
+ * the logicsonata.com domain; mailer.php sends through that mailbox's SMTP login
+ * (password in the private mail-config.php) so the message is DKIM-signed and
+ * lands in the inbox.
  */
 
 declare(strict_types=1);
+
+require __DIR__ . '/mailer.php';
 
 const TO_ADDRESS = 'careers@logicsonata.com';
 const FROM_ADDRESS = 'careers@logicsonata.com';
@@ -158,13 +162,13 @@ $subject = 'Job application: ' . $position . ' - ' . $name . $tag;
 $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 
 $boundary = 'ls-' . bin2hex(random_bytes(12));
-$headers = implode("\r\n", [
+$headers = [
     'From: Logic Sonata Careers <' . FROM_ADDRESS . '>',
     'Reply-To: ' . '=?UTF-8?B?' . base64_encode($name) . '?= <' . $email . '>',
     'MIME-Version: 1.0',
     'Content-Type: multipart/mixed; boundary="' . $boundary . '"',
     'X-Mailer: LogicSonata-Careers',
-]);
+];
 
 $mimeType = $ext === 'pdf' ? 'application/pdf' : ($ext === 'doc' ? 'application/msword' : ALLOWED['docx'][0]);
 $payload = implode("\r\n", [
@@ -183,7 +187,7 @@ $payload = implode("\r\n", [
     '',
 ]);
 
-$sent = mail(TO_ADDRESS, $encodedSubject, $payload, $headers, '-f' . FROM_ADDRESS);
+$sent = ls_send_mail(FROM_ADDRESS, TO_ADDRESS, $encodedSubject, $payload, $headers);
 if (!$sent) {
     finish(false, 'server', 500);
 }
