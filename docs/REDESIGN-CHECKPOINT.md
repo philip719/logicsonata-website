@@ -1,4 +1,4 @@
-# Redesign checkpoint (2026-10-19)
+# Redesign checkpoint (2026-10-19, updated same day: Comfy Cloud imagery)
 
 Read this first when continuing the Logic Sonata website redesign in a new session.
 
@@ -34,10 +34,10 @@ Read this first when continuing the Logic Sonata website redesign in a new sessi
 - Scope: whole site, all six languages. Homepage first as mockups for sign-off, then roll out.
 - Effects: bold but business-safe (big type, glitch/decode headlines, scanlines/grain, HUD frames and readouts, scroll
   reveals, marquees). Must respect `prefers-reduced-motion`, stay fast on phones. No custom cursor / heavy WebGL.
-- Imagery: "a lot of photos", real photographs (not illustrations). Source: Unsplash (free commercial licence, no
-  attribution required), downloaded and graded into one red/cyan cyberpunk look. Exclude Unsplash+ / premium photos.
-- Arago-style scroll story: YES, as a scroll-scrubbed pre-rendered frame sequence from Blender (chip close-up →
-  appliance assembling → inside a server rack). Hero itself stays a still image. Budget ~2-3 MB, lazy-loaded.
+- Imagery: "a lot of photos", photographic (not illustrations). Source changed to generated imagery on Comfy Cloud
+  (Flux.1 Krea dev stills, Wan 2.2 video), graded into one red/cyan look (section 6).
+- Arago-style scroll story: YES, as a scroll-scrubbed frame sequence from three Wan 2.2 clips (chip close-up →
+  appliance assembling → server rack drawer). Hero itself stays a still image. Budget ~2-3 MB, lazy-loaded.
 
 ## 4. What the references contribute
 
@@ -65,26 +65,42 @@ Read this first when continuing the Logic Sonata website redesign in a new sessi
 - Hero render: re-light `tools/hero-render/render.py` in cyberpunk style (teal + red neon rims, wet reflective floor,
   haze), keep labels.
 
-## 6. Photo plan (Unsplash)
+## 6. Imagery (Comfy Cloud, generated 2026-10-19)
 
-Queries: Bangkok / Singapore / Kuala Lumpur / Jakarta / Ho Chi Minh City at night (neon), Hong Kong neon street,
-neon rain street, server room, data center aisle, microchip / silicon wafer macro, circuit board macro, engineer in server
-room, person at screens in the dark, factory automation / robot arm, warehouse at night, CCTV camera at night, code on
-screen dark, office at night city view. ~25-35 final photos. Keep a manifest (id, photographer, URL) in
-`tools/photos/manifest.json`. Grade consistently (teal shadows, red/cyan highlights, grain), export WebP 1x/2x.
+Unsplash was dropped. All stills and videos are generated on Comfy Cloud (owner's Creator plan). The agent proxy adds
+the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the environment.
 
-## 7. Blocker and how to continue
+- Client and tools: `tools/photos/` (`comfy.py` API client, `flux.py` Flux Krea workflows and prompt-pack parser,
+  `wan.py` Wan 2.2 I2V/FLF workflows, `batch.py` 3-at-a-time runner, `sheet.py` contact sheets, `grade.py` brand
+  grade, `finish.py` upscale + grade + WebP export + manifest). Prompt pack and hero sources: monsters-rolodex branch
+  `claude/quirky-sagan-t2zhaz`, `deliverables/`.
+- Credits: balance read via `GET /api/billing/usage/timeseries` (`summary.balance.amount_cents`). Start $35.08.
+  One Flux still (28 steps, 1536x864) ~ $0.02; all stills incl. rerolls and upscales cost $1.54.
+- Output: `public/images/photos/<slug>-{768,1536,3072}.webp`, manifest `tools/photos/manifest.json` (35 shots).
+  Raw takes live only in the session (`/home/user/comfy/raw`), not in the repo.
+- Decisions: HOME-01 = img2img seed 102 denoise 0.40 (0.45 deforms screws/grilles). HW-05 = assembled source, seed
+  102, denoise 0.35, mangled lid logo retouched out (HOME-01 lid is blank too). CITY-SG: Flux always invents spires;
+  s2002 is the most generic, flagged to owner. CITY-BKK: reprompted without shops (sign gibberish). CITY-SZ: all
+  takes show wrong landmarks; parked (not in the five-market carousel). SERV-01, PART-01, CAR-02, PROD-CA-WIDE
+  re-prompted as Southeast Asian people. PROD-KA-CLOSE re-prompted for a text-free screen.
 
-The Claude cloud environment blocks unsplash.com, and the Spark has no GitHub credentials, so photos cannot reach the
-session. Owner action: add `unsplash.com` and `images.unsplash.com` under Allowed domains in this cloud environment's
-Network access settings (environment menu in the session title bar → Edit; keep "Allow package managers" ticked), then
-start a new session and say "continue the redesign from docs/REDESIGN-CHECKPOINT.md".
+## 6b. Code state (uncommitted until owner approval of mockups)
+
+- Tokens/fonts: `src/app/globals.css` :root retheme (teal-black, cyan accent), display font Archivo variable
+  (width axis, `src/fonts/archivo-latin-wdth-normal.woff2` + `public/fonts/archivo-vietnamese-wdth-normal.woff2`),
+  Space Grotesk removed.
+- `src/app/cyber.css`: HUD layer (scanlines/grain, bracket labels, pills, chamfer, homepage sections xh/intro/story/
+  xp/xd/xm/xs/xmq/xc, page-hero--photo, reduced motion).
+- New components: `Photo`, `Statement` (word fill), `Fx` (decode + fill), `ScrollStory` (canvas frame sequence,
+  expects `/images/story/{1280,720}/fNNN.webp` + `/images/story/poster.webp`, frame count in Home.tsx).
+- `src/views/Home.tsx` rebuilt. New EN keys in `home.ts`; other locales carry English placeholders marked
+  `TODO(redesign)` (translate at rollout).
+- Mockup capture: `/home/user/shots/sections.js` (Playwright, per-section, eager images).
 
 ## 8. Next steps (in order)
 
-1. Source photos from Unsplash directly in the session (search API `unsplash.com/napi/search/photos?query=...`, skip
-   `premium`/`plus`), build contact sheets, pick, grade, manifest.
-2. Re-light the hero render (cyberpunk), render the scroll-story frame sequence (~48-72 frames, CPU ~1-2 h).
+1. DONE: stills (section 6).
+2. Videos: 8 Wan 2.2 clips; VID-01..03 become the scroll-story frame sequence (~2-3 MB).
 3. Build the new design system + homepage; screenshot desktop and phone mockups plus one inner page (Solutions or a
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,

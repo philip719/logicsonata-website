@@ -1,19 +1,31 @@
 import Link from 'next/link';
+import { BgVideo } from '@/components/BgVideo';
 import { DataFlow } from '@/components/graphics/DataFlow';
-import { DeploymentArt } from '@/components/graphics/DeploymentArt';
-import { RegionMap } from '@/components/graphics/RegionMap';
 import { StackDiagram } from '@/components/graphics/StackDiagram';
-import { HeroRender } from '@/components/HeroRender';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
-import { ProductCard } from '@/components/ProductCard';
+import { Photo } from '@/components/Photo';
 import { Rich } from '@/components/Rich';
-import { Corners, CtaBand, Eyebrow, SectionHead } from '@/components/ui';
+import { ScrollStory } from '@/components/ScrollStory';
+import { Statement } from '@/components/Statement';
+import { Corners, SectionHead } from '@/components/ui';
 import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, pageMeta } from '@/i18n/seo';
+import { MARKET_PHOTOS, productPhoto } from '@/lib/photos';
 import { MARKET_NAMES_EN, MARKETS, SITE } from '@/lib/site';
-import { deployLabels } from './shared';
+
+// Part label anchors on the hero photo, as a share of its width and height (tools/photos/README.md).
+const HERO_PARTS: Array<{ side: 'left' | 'right'; style: React.CSSProperties }> = [
+  { side: 'right', style: { '--x': '61.2%', '--y': '19.7%', '--len': '9cqw' } as React.CSSProperties },
+  { side: 'right', style: { '--x': '58.3%', '--y': '37%', '--len': '12cqw' } as React.CSSProperties },
+  { side: 'right', style: { '--x': '50.1%', '--y': '53.5%', '--len': '20cqw' } as React.CSSProperties },
+  { side: 'right', style: { '--x': '65.1%', '--y': '44%', '--len': '5cqw' } as React.CSSProperties },
+  { side: 'right', style: { '--x': '57.3%', '--y': '59.6%', '--len': '13cqw' } as React.CSSProperties },
+]
+
+const STORY_FRAMES = 144;
+
 
 export function homeMeta(lang: Locale) {
   const { common } = getDict(lang);
@@ -53,18 +65,26 @@ export function HomeView({ lang }: { lang: Locale }) {
       <JsonLd data={serviceSchema} />
 
       {/* HERO */}
-      <section className="hero">
-        <div className="hero-grid-bg" aria-hidden="true" />
-        <div className="hero-glow" aria-hidden="true" />
-        <div className="container hero-inner">
-          <div className="hero-copy">
-            <Eyebrow>
+      <section className="xh">
+        <div className="xh-media">
+          <Photo name="home-hero" alt={common.graphics.heroRender} sizes="(max-width: 960px) 100vw, 82vw" priority />
+          <ul className="xh-labels" aria-label={t.hero.partsLabel}>
+            {t.hero.parts.map((part, i) => (
+              <li key={part} className="xh-label" data-side={HERO_PARTS[i].side} style={HERO_PARTS[i].style}>
+                <span>{part}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="container">
+          <div className="xh-copy">
+            <p className="eyebrow">
               {t.hero.eyebrow} · {MARKETS.map((m) => m.code).join(' · ')}
-            </Eyebrow>
-            <h1 className="h1 hero-h1">
+            </p>
+            <h1 className="h1" data-decode>
               <Rich text={t.hero.title} lang={lang} />
             </h1>
-            <p className="lead lead-lg hero-lead">{t.hero.lead}</p>
+            <p className="lead lead-lg">{t.hero.lead}</p>
             <div className="btn-row">
               <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary btn-lg">
                 {common.cta.primary}
@@ -74,7 +94,9 @@ export function HomeView({ lang }: { lang: Locale }) {
                 {t.hero.secondary}
               </Link>
             </div>
-            <dl className="hero-stats">
+          </div>
+          <div className="xh-foot">
+            <dl className="xh-readout">
               {t.hero.stats.map((s) => (
                 <div key={s.value}>
                   <dt>{s.value}</dt>
@@ -82,36 +104,31 @@ export function HomeView({ lang }: { lang: Locale }) {
                 </div>
               ))}
             </dl>
-          </div>
-          <div className="hero-visual">
-            <div className="hero-visual-frame">
-              <HeroRender alt={common.graphics.heroRender} />
-            </div>
-            <p className="hero-visual-caption mono">{t.hero.caption}</p>
-            <ul className="spec-chips" aria-label={t.hero.specsLabel}>
-              {data.hardwareSpecs.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
+            <a href="#intro" className="scroll-cue hud">
+              <i aria-hidden="true" />
+              {t.hero.scroll}
+            </a>
           </div>
         </div>
       </section>
 
-      {/* INDUSTRY MARQUEE */}
-      <div className="marquee" aria-label={t.marqueeLabel}>
-        <div className="marquee-track">
-          {[0, 1].map((dup) => (
-            <ul key={dup} aria-hidden={dup === 1}>
-              {t.marquee.map((m) => (
-                <li key={m}>
-                  <span className="marquee-dot" aria-hidden="true" />
-                  {m}
-                </li>
-              ))}
-            </ul>
-          ))}
+      {/* INTRODUCTION */}
+      <section className="intro" id="intro">
+        <div className="backdrop" aria-hidden="true">
+          <Photo name="home-intro" />
+          <BgVideo name="loop-city-rain" />
         </div>
-      </div>
+        <div className="container">
+          <p className="eyebrow">
+            <span className="eyebrow-index">01</span>
+            {t.intro.eyebrow}
+          </p>
+          <Statement text={t.intro.statement} lang={lang} />
+        </div>
+      </section>
+
+      {/* SCROLL STORY */}
+      <ScrollStory frames={STORY_FRAMES} poster="/images/story/poster.webp" chapters={t.story.chapters} counterLabel={t.story.counter} />
 
       {/* PROBLEM */}
       <section className="section">
@@ -161,16 +178,21 @@ export function HomeView({ lang }: { lang: Locale }) {
       </section>
 
       {/* DEPLOYMENT */}
-      <section className="section" id="deployment">
+      <section className="xd" id="deployment">
+        <div className="backdrop" aria-hidden="true">
+          <Photo name="home-datacentre-aisle" />
+          <BgVideo name="loop-datacentre" />
+        </div>
         <div className="container">
           <SectionHead index="03" eyebrow={t.deployment.eyebrow} title={t.deployment.title} lead={t.deployment.lead} />
-          <div className="cards cards-3">
-            {t.deployment.items.map((d) => (
-              <article key={d.variant} className="card card-art" data-reveal>
-                <Corners />
-                <DeploymentArt variant={d.variant} labels={deployLabels(common)} />
-                <h3 className="h3">{d.name}</h3>
-                <p className="card-strong">{d.line}</p>
+          <div className="xd-list">
+            {t.deployment.items.map((d, i) => (
+              <article key={d.variant} className="xd-item chamfer" data-reveal>
+                <p className="hud">
+                  <b>_{String(i + 1).padStart(3, '0')}</b> / _{String(t.deployment.items.length).padStart(3, '0')}
+                </p>
+                <h3>{d.name}</h3>
+                <p className="strong">{d.line}</p>
                 <p>{d.detail}</p>
               </article>
             ))}
@@ -179,7 +201,7 @@ export function HomeView({ lang }: { lang: Locale }) {
       </section>
 
       {/* PRODUCTS */}
-      <section className="section section-alt" id="products">
+      <section className="section" id="products">
         <div className="container">
           <div className="head-row">
             <SectionHead index="04" eyebrow={t.products.eyebrow} title={<Rich text={t.products.title} lang={lang} />} />
@@ -187,20 +209,50 @@ export function HomeView({ lang }: { lang: Locale }) {
               {t.products.aside}
             </p>
           </div>
-          <div className="cards cards-3">
+          <div className="xp-grid">
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} lang={lang} />
-            ))}
-            <div className="card card-cta" data-reveal>
-              <h3 className="h3">{t.products.ctaTitle}</h3>
-              <p>{t.products.ctaText}</p>
-              <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary">
-                {common.cta.consultation}
+              <Link key={p.id} href={lp(lang, `/solutions/${p.id}`)} className="xp-card chamfer" data-reveal>
+                <div className="photo" aria-hidden="true">
+                  <Photo name={productPhoto(p.id, 'close')} sizes="(max-width: 640px) 100vw, 50vw" />
+                </div>
+                <div className="xp-top hud">
+                  <b>{p.code}</b>
+                  <span>[_ {t.products.view} ]</span>
+                </div>
+                <span className="view-badge" aria-hidden="true">
+                  {t.products.view}
+                </span>
+                <div className="xp-body">
+                  <h3>{p.name}</h3>
+                  <p>{p.summary}</p>
+                </div>
               </Link>
+            ))}
+            <div className="xp-card xp-card--cta chamfer" data-reveal>
+              <div className="xp-body">
+                <h3>{t.products.ctaTitle}</h3>
+                <p>{t.products.ctaText}</p>
+                <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary">
+                  {common.cta.consultation}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* INDUSTRY MARQUEE */}
+      <div className="xmq" aria-label={t.marqueeLabel}>
+        <div className="xmq-track">
+          {[0, 1].map((dup) => (
+            <ul key={dup} aria-hidden={dup === 1}>
+              {t.marquee.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
 
       {/* INDUSTRIES */}
       <section className="section" id="industries">
@@ -238,21 +290,48 @@ export function HomeView({ lang }: { lang: Locale }) {
 
       {/* MARKETS */}
       <section className="section" id="markets">
-        <div className="container split">
-          <div>
-            <SectionHead index="07" eyebrow={t.markets.eyebrow} title={t.markets.title} lead={t.markets.lead} />
-            <ul className="market-list" data-reveal>
-              {MARKETS.map((m, i) => (
-                <li key={m.code}>
-                  <span className="mono">{m.code}</span>
-                  {data.markets[i].name}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="panel panel-graphic panel-map" data-reveal>
-            <Corners />
-            <RegionMap names={data.markets} title={common.graphics.mapTitle} />
+        <div className="container xm-head">
+          <SectionHead index="07" eyebrow={t.markets.eyebrow} title={t.markets.title} lead={t.markets.lead} />
+          <p className="hud head-aside">[_ {t.markets.swipe} → ]</p>
+        </div>
+        <ul className="xm-track" role="list">
+          {MARKETS.map((m, i) => (
+            <li key={m.code} className="xm-card chamfer">
+              <div className="photo" aria-hidden="true">
+                <Photo name={MARKET_PHOTOS[m.code]} sizes="(max-width: 640px) 80vw, 30vw" />
+              </div>
+              <p className="hud">
+                <b>{m.code}</b>
+                <span>
+                  _{String(i + 1).padStart(3, '0')} / _{String(MARKETS.length).padStart(3, '0')}
+                </span>
+              </p>
+              <h3>{data.markets[i].city}</h3>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* READOUT */}
+      <section className="xs">
+        <div className="backdrop" aria-hidden="true">
+          <Photo name="home-control-room" />
+          <BgVideo name="loop-control-room" />
+        </div>
+        <div className="container">
+          <SectionHead index="08" eyebrow={t.readout.eyebrow} title={t.readout.title} />
+          <div className="xs-grid">
+            {t.readout.items.map((r, i) => (
+              <div key={r.label} className="xs-cell chamfer" data-reveal>
+                <span className="hud">
+                  <b>_{String(i + 1).padStart(3, '0')}</b>
+                </span>
+                <span className="num">
+                  <Rich text={r.value} lang={lang} />
+                </span>
+                <p>{r.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -275,7 +354,25 @@ export function HomeView({ lang }: { lang: Locale }) {
         </div>
       </section>
 
-      <CtaBand lang={lang} />
+      {/* CTA */}
+      <section className="xc" id="contact">
+        <div className="backdrop" aria-hidden="true">
+          <Photo name="home-cta-boardroom" />
+        </div>
+        <div className="container" data-reveal>
+          <p className="eyebrow">{common.ctaBand.eyebrow}</p>
+          <h2 className="h2" data-decode>
+            {common.ctaBand.title}
+          </h2>
+          <p className="lead">{common.ctaBand.lead}</p>
+          <div className="btn-row btn-row--center">
+            <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary btn-lg">
+              {common.cta.primary}
+              <Icon name="arrow" size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

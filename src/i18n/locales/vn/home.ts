@@ -18,6 +18,46 @@ export const home: HomeDict = {
     ],
     caption: 'Hình minh họa · bố cục bên trong đã được đơn giản hóa',
     specsLabel: 'Điểm nổi bật về phần cứng',
+    // TODO(redesign): translate the keys below (English placeholders for the mockup phase).
+    scroll: 'Scroll to discover',
+    partsLabel: 'Inside the appliance',
+    parts: ['Aluminium chassis', 'Fan and vapor chamber', 'AI superchip', 'Slotted airflow grilles', 'Local NVMe storage'],
+  },
+  // TODO(redesign): translate.
+  intro: {
+    eyebrow: 'Introduction',
+    statement:
+      'Your teams already use AI every day. Logic Sonata brings it *inside your walls*: the hardware, the models, your company knowledge and the controls, running where your data already lives.',
+  },
+  story: {
+    counter: 'Chapter',
+    chapters: [
+      {
+        label: 'Silicon',
+        title: 'Datacentre-class AI on one superchip.',
+        text: 'CPU, GPU and AI engines share up to 128 GB of unified memory, so large language models run locally at full speed.',
+      },
+      {
+        label: 'Appliance',
+        title: 'Engineered as one quiet unit.',
+        text: 'Fan and vapor-chamber cooling, local NVMe storage and high-speed networking in a compact aluminium chassis that fits any office.',
+      },
+      {
+        label: 'Deployment',
+        title: 'Racked in your server room.',
+        text: 'Install it on-premise, run it hosted on private GPU capacity, or combine both. Start with one unit and scale to a cluster.',
+      },
+    ],
+  },
+  readout: {
+    eyebrow: 'Readout',
+    title: 'Private AI that answers to you.',
+    items: [
+      { value: '100*%*', label: 'Of prompts, files and answers stay under your control' },
+      { value: '128 *GB*', label: 'Unified memory per appliance for large models' },
+      { value: '3', label: 'Deployment models: on-premise, hosted and hybrid' },
+      { value: '5', label: 'Southeast Asian markets with local delivery and support' },
+    ],
   },
   marqueeLabel: 'Các ngành chúng tôi phục vụ',
   marquee: ['Sản xuất', 'Bán lẻ', 'Thiết kế', 'Nhà cung ứng', 'Tập đoàn khu vực', 'Dệt may và thời trang', 'Logistics', 'Kỹ thuật', 'Dịch vụ chuyên nghiệp', 'Đội ngũ phần mềm'],
@@ -67,6 +107,7 @@ export const home: HomeDict = {
     aside: 'Mỗi hệ thống đều có thể triển khai on-premise, trên đám mây riêng hoặc kết hợp, được cấu hình đầy đủ với tri thức và quy tắc truy cập của bạn.',
     ctaTitle: 'Chưa chắc hệ thống nào phù hợp?',
     ctaText: 'Phần lớn khách hàng bắt đầu với buổi Đánh giá Mức độ Sẵn sàng. Chúng tôi phân tích dữ liệu và đề xuất hệ thống phù hợp.',
+    view: 'View', // TODO(redesign): translate
   },
   industries: {
     eyebrow: 'Khách hàng của chúng tôi',
@@ -81,6 +122,7 @@ export const home: HomeDict = {
     eyebrow: 'Thị trường',
     title: 'Phục vụ năm thị trường trên khắp Đông Nam Á.',
     lead: 'Chúng tôi làm việc với doanh nghiệp tại Singapore, Việt Nam, Indonesia, Malaysia và Thái Lan, với năng lực triển khai, đào tạo và hỗ trợ vận hành trên toàn khu vực.',
+    swipe: 'Drag or scroll', // TODO(redesign): translate
   },
   faq: {
     eyebrow: 'Câu hỏi thường gặp',
