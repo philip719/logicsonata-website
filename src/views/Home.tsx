@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { BgVideo } from '@/components/BgVideo';
-import { DataFlow } from '@/components/graphics/DataFlow';
-import { StackDiagram } from '@/components/graphics/StackDiagram';
+import { FlowIllustration } from '@/components/graphics/FlowIllustration';
+import { StackIllustration } from '@/components/graphics/StackIllustration';
+import { HeroLoop } from '@/components/HeroLoop';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { Photo } from '@/components/Photo';
@@ -68,6 +69,7 @@ export function HomeView({ lang }: { lang: Locale }) {
       <section className="xh">
         <div className="xh-media">
           <Photo name="home-hero" alt={common.graphics.heroRender} sizes="(max-width: 960px) 100vw, 82vw" priority />
+          <HeroLoop />
           <ul className="xh-labels" aria-label={t.hero.partsLabel}>
             {t.hero.parts.map((part, i) => (
               <li key={part} className="xh-label" data-side={HERO_PARTS[i].side} style={HERO_PARTS[i].style}>
@@ -148,7 +150,7 @@ export function HomeView({ lang }: { lang: Locale }) {
           </div>
           <div className="panel panel-graphic" data-reveal>
             <Corners />
-            <DataFlow t={common.graphics} />
+            <FlowIllustration t={common.graphics} />
           </div>
         </div>
       </section>
@@ -158,7 +160,7 @@ export function HomeView({ lang }: { lang: Locale }) {
         <div className="container split split--reverse">
           <div className="panel panel-graphic" data-reveal>
             <Corners />
-            <StackDiagram layers={data.stack.map((l) => l.name)} title={common.graphics.stackTitle} />
+            <StackIllustration layers={data.stack.map((l) => l.name)} title={common.graphics.stackTitle} />
           </div>
           <div>
             <SectionHead index="02" eyebrow={t.stack.eyebrow} title={t.stack.title} lead={t.stack.lead} />
