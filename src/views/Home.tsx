@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BgVideo } from '@/components/BgVideo';
 import { DataFlow } from '@/components/graphics/DataFlow';
-import { StackDiagram } from '@/components/graphics/StackDiagram';
+import { StackIllustration } from '@/components/graphics/StackIllustration';
 import { HeroLoop } from '@/components/HeroLoop';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
@@ -160,7 +160,7 @@ export function HomeView({ lang }: { lang: Locale }) {
         <div className="container split split--reverse">
           <div className="panel panel-graphic" data-reveal>
             <Corners />
-            <StackDiagram layers={data.stack.map((l) => l.name)} title={common.graphics.stackTitle} />
+            <StackIllustration layers={data.stack.map((l) => l.name)} title={common.graphics.stackTitle} />
           </div>
           <div>
             <SectionHead index="02" eyebrow={t.stack.eyebrow} title={t.stack.title} lead={t.stack.lead} />

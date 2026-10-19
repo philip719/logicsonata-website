@@ -15,7 +15,8 @@ def run(j):
     if os.path.exists(dst): return name, 'exists'
     prompt = j.get('prompt') or P[j['shot']][1]
     wf = flux.still(prompt, j['seed'], image=j.get('image'), denoise=j.get('denoise', 1.0), prefix=j['shot'],
-                    steps=j.get('steps', 28), guidance=j.get('guidance', 4.5))
+                    steps=j.get('steps', 28), guidance=j.get('guidance', 4.5),
+                    width=j.get('width', 1536), height=j.get('height', 864))
     for attempt in range(3):
         try:
             jid = comfy.submit(wf)

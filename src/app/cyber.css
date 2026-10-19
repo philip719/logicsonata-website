@@ -1121,6 +1121,137 @@ html:not(.js) .statement .w.hl,
   --shade: linear-gradient(90deg, rgba(5, 9, 11, 0.94) 35%, rgba(5, 9, 11, 0.7)), linear-gradient(180deg, transparent 50%, var(--bg));
 }
 
+/* ---------- Illustrated stack ---------- */
+
+.stackx {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.stackx-beam {
+  stroke: var(--cyan);
+  stroke-width: 2;
+  opacity: 0.35;
+  filter: drop-shadow(0 0 6px var(--cyan));
+}
+
+.stackx-top {
+  fill: url(#sx-top);
+  opacity: 0.94;
+}
+
+.stackx-top-hot {
+  opacity: 0;
+}
+
+.stackx-edge {
+  fill: none;
+  stroke: rgba(62, 240, 224, 0.55);
+  stroke-width: 1.2;
+}
+
+.stackx-pad {
+  fill: rgba(62, 240, 224, 0.06);
+  stroke: rgba(62, 240, 224, 0.35);
+  stroke-width: 1.5;
+}
+
+.stackx-icon {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stackx-icon circle {
+  fill: var(--cyan);
+  stroke: none;
+}
+
+.stackx-icon-shadow {
+  stroke: rgba(0, 0, 0, 0.6);
+}
+
+.stackx-leader {
+  fill: none;
+  stroke: rgba(233, 241, 240, 0.25);
+}
+
+.stackx-dot {
+  fill: var(--cyan);
+}
+
+.stackx-num {
+  fill: var(--red);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.stackx-label {
+  fill: var(--text);
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: 17px;
+}
+
+.stackx-particle {
+  fill: var(--cyan);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* A highlight climbs the stack, one layer at a time (7 layers x 1.4 s). */
+  .stackx-top-hot {
+    animation: stackx-show 9.8s calc(var(--i) * 1.4s) infinite;
+  }
+
+  .stackx-edge {
+    animation: stackx-edge 9.8s calc(var(--i) * 1.4s) infinite;
+  }
+
+  .stackx-icon {
+    animation: stackx-icon 9.8s calc(var(--i) * 1.4s) infinite;
+  }
+
+  .stackx-particle {
+    animation: stackx-rise 4.2s calc(var(--k) * 0.7s) linear infinite;
+  }
+}
+
+@keyframes stackx-show {
+  0%, 16%, 100% { opacity: 0; }
+  4%, 11% { opacity: 1; }
+}
+
+@keyframes stackx-edge {
+  0%, 16%, 100% { stroke: rgba(62, 240, 224, 0.55); }
+  4%, 11% { stroke: #ff3b30; }
+}
+
+@keyframes stackx-icon {
+  0%, 16%, 100% { stroke: #3ef0e0; }
+  4%, 11% { stroke: #ff6a5f; }
+}
+
+@keyframes stackx-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-400px);
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
