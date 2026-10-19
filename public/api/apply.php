@@ -159,24 +159,23 @@ $body = implode("\r\n", $lines);
 
 $tag = ($language !== '' && strtolower($language) !== 'en') ? ' [' . strtoupper($language) . ']' : '';
 $subject = 'Job application: ' . $position . ' - ' . $name . $tag;
-$encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+$encodedSubject = mail_header_text($subject);
 
 $boundary = 'ls-' . bin2hex(random_bytes(12));
 $headers = [
     'From: Logic Sonata Careers <' . FROM_ADDRESS . '>',
-    'Reply-To: ' . '=?UTF-8?B?' . base64_encode($name) . '?= <' . $email . '>',
+    'Reply-To: ' . mail_header_text($name, true) . ' <' . $email . '>',
     'MIME-Version: 1.0',
     'Content-Type: multipart/mixed; boundary="' . $boundary . '"',
-    'X-Mailer: LogicSonata-Careers',
 ];
 
 $mimeType = $ext === 'pdf' ? 'application/pdf' : ($ext === 'doc' ? 'application/msword' : ALLOWED['docx'][0]);
 $payload = implode("\r\n", [
     '--' . $boundary,
     'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: base64',
+    'Content-Transfer-Encoding: quoted-printable',
     '',
-    chunk_split(base64_encode($body)),
+    quoted_printable_encode($body),
     '--' . $boundary,
     'Content-Type: ' . $mimeType . '; name="' . $attachmentName . '"',
     'Content-Transfer-Encoding: base64',

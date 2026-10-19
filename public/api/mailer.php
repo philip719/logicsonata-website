@@ -11,6 +11,19 @@
 
 declare(strict_types=1);
 
+/**
+ * Header text such as a subject or display name: plain when it is simple ASCII, otherwise UTF-8 encoded.
+ * Needless encoding of plain English is one of the signals spam filters score.
+ */
+function mail_header_text(string $text, bool $displayName = false): string
+{
+    $text = trim((string)preg_replace('/[\x00-\x1F\x7F]+/', ' ', $text)); // never a line break in a header
+    if (preg_match('/^[\x20-\x7E]*$/', $text) === 1) {
+        return $displayName ? '"' . str_replace(['\\', '"'], '', $text) . '"' : $text;
+    }
+    return '=?UTF-8?B?' . base64_encode($text) . '?=';
+}
+
 /** SMTP settings: defaults, overridden by the private mail-config.php. */
 function mail_settings(): array
 {

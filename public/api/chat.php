@@ -584,13 +584,12 @@ function send_sales_mail(array $cfg, string $subject, string $body, array $v, ar
     $from = clean_line($cfg['mail_from'], 200);
     $headers = array_merge([
         'From: Logic Sonata Website <' . $from . '>',
-        'Reply-To: =?UTF-8?B?' . base64_encode($v['name']) . '?= <' . $v['email'] . '>',
+        'Reply-To: ' . mail_header_text($v['name'], true) . ' <' . $v['email'] . '>',
         'MIME-Version: 1.0',
         'Content-Type: text/plain; charset=UTF-8',
-        'Content-Transfer-Encoding: base64',
-        'X-Mailer: LogicSonata-Chat',
+        'Content-Transfer-Encoding: quoted-printable',
     ], $extraHeaders);
-    return ls_send_mail($from, clean_line($cfg['sales_to'], 200), '=?UTF-8?B?' . base64_encode($subject) . '?=', chunk_split(base64_encode($body)), $headers);
+    return ls_send_mail($from, clean_line($cfg['sales_to'], 200), mail_header_text($subject), quoted_printable_encode($body), $headers);
 }
 
 // ---------------------------------------------------------------------------
