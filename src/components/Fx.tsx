@@ -5,35 +5,33 @@ import { useEffect } from 'react';
 
 const GLYPHS = '_/\\[]{}<>#%01ABCDEFGHJKLMNPRSTUVXYZ';
 
-/** Decodes the text of a [data-decode] element in from random glyphs, left to right. */
+/**
+ * Decodes a [data-decode] headline in from random glyphs, left to right. The scramble runs on an absolutely positioned
+ * overlay while the real text stays in place (transparent), so the animation never shifts the layout.
+ */
 function decode(el: HTMLElement) {
-  const nodes: Array<{ node: Text; text: string }> = [];
-  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const node = walker.currentNode as Text;
-    nodes.push({ node, text: node.data });
-  }
-  const total = nodes.reduce((n, x) => n + x.text.length, 0);
+  const text = el.innerText;
   // Only Latin-script headlines decode; other scripts would flash foreign glyphs.
-  if (!total || /[^\u0000-ɏḀ-ỿ\s]/.test(nodes.map((n) => n.text).join(''))) return;
-  el.style.minHeight = `${el.offsetHeight}px`;
+  if (!text.trim() || /[^\u0000-\u024f\u1e00-\u1eff\s]/.test(text)) return;
+  const layer = document.createElement('span');
+  layer.className = 'dc-layer';
+  layer.setAttribute('aria-hidden', 'true');
+  el.append(layer);
+  el.classList.add('decoding');
   const start = performance.now();
-  const dur = Math.min(1400, 400 + total * 18);
+  const dur = Math.min(1400, 400 + text.length * 18);
   const tick = (now: number) => {
     const p = Math.min(1, (now - start) / dur);
-    let i = 0;
-    for (const { node, text } of nodes) {
-      let out = '';
-      for (const ch of text) {
-        const at = i++ / total;
-        out += ch === ' ' || ch === '\n' || at < p - 0.12 ? ch : at < p ? GLYPHS[(Math.random() * GLYPHS.length) | 0] : ' ';
-      }
-      node.data = out;
-    }
+    let out = '';
+    [...text].forEach((ch, i) => {
+      const at = i / text.length;
+      out += /\s/.test(ch) || at < p - 0.12 ? ch : at < p ? GLYPHS[(Math.random() * GLYPHS.length) | 0] : '\u2007';
+    });
+    layer.textContent = out;
     if (p < 1) requestAnimationFrame(tick);
     else {
-      nodes.forEach(({ node, text }) => (node.data = text));
-      el.style.minHeight = '';
+      layer.remove();
+      el.classList.remove('decoding');
     }
   };
   requestAnimationFrame(tick);

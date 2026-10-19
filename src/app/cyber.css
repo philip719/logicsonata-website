@@ -58,6 +58,20 @@ h4 {
   font-size: clamp(26px, 3vw, 44px);
 }
 
+/* Small phones: long single words (Malay, Indonesian) must fit 320 to 400 px screens. */
+@media (max-width: 480px) {
+  h1,
+  h2 {
+    font-stretch: 108%;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .h2 {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+}
+
 /* Scripts without case or with tall marks keep a calmer setting. */
 :lang(zh) :is(h1, h2),
 :lang(th) :is(h1, h2) {
@@ -132,10 +146,6 @@ h4 {
 .btn-lg {
   padding: 17px 28px;
   font-size: 14px;
-}
-
-.btn-primary {
-  color: #fff;
 }
 
 .btn-primary:hover {
@@ -1039,10 +1049,23 @@ html:not(.js) .statement .w.hl,
   margin: 0 auto 32px;
 }
 
-/* ---------- Decode headline ---------- */
+/* ---------- Decode headline (overlay; the real text keeps its place) ---------- */
 
-.decode .dc {
-  color: var(--cyan);
+[data-decode].decoding {
+  position: relative;
+  color: transparent;
+}
+
+[data-decode].decoding .accent {
+  color: transparent;
+}
+
+.dc-layer {
+  position: absolute;
+  inset: 0;
+  color: var(--text);
+  white-space: pre-line;
+  pointer-events: none;
 }
 
 /* ---------- Inner page hero with photo ---------- */
@@ -1115,6 +1138,10 @@ html:not(.js) .statement .w.hl,
     position: relative;
     inset: auto;
     padding: 32px var(--gutter);
+  }
+
+  .story-top {
+    display: none;
   }
 
   .story-chapters {
