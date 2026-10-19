@@ -22,7 +22,7 @@ export function WhitepapersView({ lang }: { lang: Locale }) {
   return (
     <>
       <JsonLd data={breadcrumbs(lang, [{ name: t.breadcrumb, path: '/whitepapers' }])} />
-      <PageHero eyebrow={t.eyebrow} title={<Rich text={t.title} lang={lang} />} lead={t.lead} />
+      <PageHero eyebrow={t.eyebrow} title={<Rich text={t.title} lang={lang} />} lead={t.lead} photo="whitepapers-reading" />
       <section className="section">
         <div className="container">
           {whitepapers.landing.language && (

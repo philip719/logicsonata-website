@@ -8,11 +8,13 @@ export const inter = localFont({
   display: 'swap',
 });
 
-export const spaceGrotesk = localFont({
-  src: '../fonts/space-grotesk-latin-wght-normal.woff2',
-  weight: '300 700',
-  variable: '--font-space-grotesk',
+// Archivo variable with a width axis: headlines use the expanded cut (font-stretch 112-125%).
+export const archivo = localFont({
+  src: '../fonts/archivo-latin-wdth-normal.woff2',
+  weight: '100 900',
+  variable: '--font-archivo',
   display: 'swap',
+  declarations: [{ prop: 'font-stretch', value: '62% 125%' }],
 });
 
 export const jetbrainsMono = localFont({

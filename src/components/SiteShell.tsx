@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from 'next';
 import '@/app/globals.css';
+import '@/app/cyber.css';
 import { type Locale, LOCALE_META } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, languageAlternates } from '@/i18n/seo';
-import { inter, jetbrainsMono, spaceGrotesk } from '@/lib/fonts';
+import { inter, jetbrainsMono, archivo } from '@/lib/fonts';
 import { MARKET_NAMES_EN, MARKETS, SITE } from '@/lib/site';
 import { ChatLauncher } from './ChatLauncher';
 import { Footer } from './Footer';
+import { Fx } from './Fx';
 import { Header } from './Header';
 import { JsonLd } from './JsonLd';
 import { LangSuggest } from './LangSuggest';
@@ -41,7 +43,7 @@ export function siteMetadata(lang: Locale): Metadata {
 }
 
 export const siteViewport: Viewport = {
-  themeColor: '#0b0c11',
+  themeColor: '#05090b',
   colorScheme: 'dark',
 };
 
@@ -90,7 +92,7 @@ function organization(lang: Locale) {
 export function SiteShell({ lang, children }: { lang: Locale; children: React.ReactNode }) {
   const { common } = getDict(lang);
   return (
-    <html lang={LOCALE_META[lang].htmlLang} className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+    <html lang={LOCALE_META[lang].htmlLang} className={`${inter.variable} ${archivo.variable} ${jetbrainsMono.variable}`}>
       <head>
         {/* Enables reveal animations only when JavaScript runs; content is always visible without it. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
@@ -104,6 +106,7 @@ export function SiteShell({ lang, children }: { lang: Locale; children: React.Re
         <main id="main">{children}</main>
         <Footer lang={lang} />
         <Reveal />
+        <Fx />
         <LangSuggest lang={lang} />
         <ChatLauncher lang={lang} t={common.chat} countries={getDict(lang).data.markets.map((m) => m.name)} />
       </body>

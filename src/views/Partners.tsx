@@ -22,7 +22,7 @@ export function PartnersView({ lang }: { lang: Locale }) {
     <>
       <JsonLd data={breadcrumbs(lang, [{ name: t.breadcrumb, path: '/partners' }])} />
 
-      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead}>
+      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} photo="partners-handshake">
         <div className="btn-row">
           <a href={applyHref(lang)} className="btn btn-primary btn-lg">
             {t.apply}

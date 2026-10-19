@@ -18,6 +18,44 @@ export const home: HomeDict = {
     ],
     caption: 'Imej ilustrasi · susun atur dalaman dipermudahkan',
     specsLabel: 'Sorotan perkakasan',
+    scroll: 'Tatal untuk meneroka',
+    partsLabel: 'Di dalam peranti',
+    parts: ['Casis aluminium', 'Kipas dan ruang wap', 'Supercip AI', 'Gril aliran udara berlubang', 'Storan NVMe tempatan'],
+  },
+  intro: {
+    eyebrow: 'Pengenalan',
+    statement:
+      'Pasukan anda sudah menggunakan AI setiap hari. Logic Sonata membawanya *ke dalam premis anda*: perkakasan, model, pengetahuan syarikat dan kawalannya, berjalan di tempat data anda berada.',
+  },
+  story: {
+    counter: 'Bab',
+    chapters: [
+      {
+        label: 'Silikon',
+        title: 'AI kelas pusat data pada satu supercip.',
+        text: 'CPU, GPU dan enjin AI berkongsi sehingga 128 GB memori bersepadu, jadi model bahasa besar berjalan secara tempatan pada kelajuan penuh.',
+      },
+      {
+        label: 'Peranti',
+        title: 'Direka sebagai satu unit yang senyap.',
+        text: 'Penyejukan kipas dan ruang wap, storan NVMe tempatan dan rangkaian berkelajuan tinggi dalam casis aluminium padat yang sesuai untuk mana-mana pejabat.',
+      },
+      {
+        label: 'Penempatan',
+        title: 'Dipasang di bilik pelayan anda.',
+        text: 'Pasang di premis anda, jalankan secara dihoskan pada kapasiti GPU peribadi, atau gabungkan kedua-duanya. Mulakan dengan satu unit dan kembangkan kepada kluster.',
+      },
+    ],
+  },
+  readout: {
+    eyebrow: 'Ringkasan',
+    title: 'AI peribadi yang patuh kepada anda.',
+    items: [
+      { value: '100*%*', label: 'Gesaan, fail dan jawapan kekal di bawah kawalan anda' },
+      { value: '128 *GB*', label: 'Memori bersepadu bagi setiap peranti untuk model besar' },
+      { value: '3', label: 'Model penempatan: di premis, dihoskan dan hibrid' },
+      { value: '5', label: 'Pasaran Asia Tenggara dengan penghantaran dan sokongan tempatan' },
+    ],
   },
   marqueeLabel: 'Industri yang kami layani',
   marquee: ['Pembuatan', 'Peruncitan', 'Reka bentuk', 'Pembekal', 'Kumpulan serantau', 'Pakaian & tekstil', 'Logistik', 'Kejuruteraan', 'Perkhidmatan profesional', 'Pasukan perisian'],
@@ -67,6 +105,7 @@ export const home: HomeDict = {
     aside: 'Setiap sistem dihantar secara on-premise, dihoskan atau hibrid, dikonfigurasi sepenuhnya dengan pengetahuan dan peraturan akses anda.',
     ctaTitle: 'Tidak pasti yang mana sesuai?',
     ctaText: 'Kebanyakan pelanggan bermula dengan Penilaian Kesediaan. Kami memetakan data anda dan mengesyorkan sistem yang tepat.',
+    view: 'Lihat',
   },
   industries: {
     eyebrow: 'Siapa yang kami layani',
@@ -81,6 +120,7 @@ export const home: HomeDict = {
     eyebrow: 'Pasaran',
     title: 'Berkhidmat di lima pasaran di seluruh Asia Tenggara.',
     lead: 'Kami bekerjasama dengan syarikat di Singapura, Vietnam, Indonesia, Malaysia dan Thailand, dengan penghantaran, latihan dan sokongan terurus di seluruh rantau ini.',
+    swipe: 'Seret atau tatal',
   },
   faq: {
     eyebrow: 'Soalan Lazim',

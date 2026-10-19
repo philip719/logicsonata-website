@@ -18,6 +18,44 @@ export const home = {
     ],
     caption: 'Illustrative render · internal layout simplified',
     specsLabel: 'Hardware highlights',
+    scroll: 'Scroll to discover',
+    partsLabel: 'Inside the appliance',
+    parts: ['Aluminium chassis', 'Fan and vapor chamber', 'AI superchip', 'Slotted airflow grilles', 'Local NVMe storage'],
+  },
+  intro: {
+    eyebrow: 'Introduction',
+    statement:
+      'Your teams already use AI every day. Logic Sonata brings it *inside your walls*: the hardware, the models, your company knowledge and the controls, running where your data already lives.',
+  },
+  story: {
+    counter: 'Chapter',
+    chapters: [
+      {
+        label: 'Silicon',
+        title: 'Datacentre-class AI on one superchip.',
+        text: 'CPU, GPU and AI engines share up to 128 GB of unified memory, so large language models run locally at full speed.',
+      },
+      {
+        label: 'Appliance',
+        title: 'Engineered as one quiet unit.',
+        text: 'Fan and vapor-chamber cooling, local NVMe storage and high-speed networking in a compact aluminium chassis that fits any office.',
+      },
+      {
+        label: 'Deployment',
+        title: 'Racked in your server room.',
+        text: 'Install it on-premise, run it hosted on private GPU capacity, or combine both. Start with one unit and scale to a cluster.',
+      },
+    ],
+  },
+  readout: {
+    eyebrow: 'Readout',
+    title: 'Private AI that answers to you.',
+    items: [
+      { value: '100*%*', label: 'Of prompts, files and answers stay under your control' },
+      { value: '128 *GB*', label: 'Unified memory per appliance for large models' },
+      { value: '3', label: 'Deployment models: on-premise, hosted and hybrid' },
+      { value: '5', label: 'Southeast Asian markets with local delivery and support' },
+    ],
   },
   marqueeLabel: 'Industries we serve',
   marquee: ['Manufacturing', 'Retail', 'Design', 'Suppliers', 'Regional groups', 'Apparel & textile', 'Logistics', 'Engineering', 'Professional services', 'Software teams'],
@@ -67,6 +105,7 @@ export const home = {
     aside: 'Each system ships on-premise, hosted or hybrid, fully configured with your knowledge and access rules.',
     ctaTitle: 'Not sure which one fits?',
     ctaText: 'Most customers start with a Readiness Assessment. We map your data and recommend the right system.',
+    view: 'View',
   },
   industries: {
     eyebrow: 'Who we serve',
@@ -81,6 +120,7 @@ export const home = {
     eyebrow: 'Markets',
     title: 'Serving five markets across Southeast Asia.',
     lead: 'We work with businesses in Singapore, Vietnam, Indonesia, Malaysia and Thailand, with delivery, training and managed support across the region.',
+    swipe: 'Drag or scroll',
   },
   faq: {
     eyebrow: 'FAQ',

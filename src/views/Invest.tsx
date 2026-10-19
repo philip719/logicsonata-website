@@ -26,7 +26,7 @@ export function InvestView({ lang }: { lang: Locale }) {
         }}
       />
 
-      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead}>
+      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} photo="invest-boardroom">
         <div className="btn-row">
           <a href="#enquiry" className="btn btn-primary btn-lg">
             {t.hero.primary}

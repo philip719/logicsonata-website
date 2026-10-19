@@ -27,7 +27,7 @@ export function AboutView({ lang }: { lang: Locale }) {
         }}
       />
 
-      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} />
+      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} photo="about-team" />
 
       <section className="section">
         <div className="container split">

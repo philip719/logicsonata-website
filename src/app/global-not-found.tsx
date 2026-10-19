@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './cyber.css';
 import { Eyebrow } from '@/components/ui';
 import { LOCALE_META, LOCALES, lp } from '@/i18n/config';
-import { inter, jetbrainsMono, spaceGrotesk } from '@/lib/fonts';
+import { inter, jetbrainsMono, archivo } from '@/lib/fonts';
 
 // Served for any unknown URL (404.html). The site has one root layout per
 // language, so this page renders its own document and offers every language.
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${archivo.variable} ${jetbrainsMono.variable}`}>
       <body>
         <main id="main">
           <section className="page-hero">

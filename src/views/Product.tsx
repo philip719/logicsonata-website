@@ -3,6 +3,7 @@ import { FlowDiagram } from '@/components/graphics/FlowDiagram';
 import { Icon } from '@/components/Icon';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
 import { LeadNudge } from '@/components/LeadNudge';
+import { Photo } from '@/components/Photo';
 import { ProductCard } from '@/components/ProductCard';
 import { fmt } from '@/components/Rich';
 import { Corners, CtaBand, Eyebrow, SectionHead } from '@/components/ui';
@@ -11,6 +12,7 @@ import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, pageMeta } from '@/i18n/seo';
 import type { Product } from '@/lib/products';
+import { productPhoto } from '@/lib/photos';
 import { MARKET_NAMES_EN, SITE } from '@/lib/site';
 
 export function productMeta(lang: Locale, p: Product) {
@@ -55,15 +57,19 @@ export function ProductView({ lang, product: p }: { lang: Locale; product: Produ
       />
 
       {/* HERO */}
-      <section className="page-hero product-hero">
-        <div className="hero-grid-bg" aria-hidden="true" />
+      <section className="page-hero page-hero--photo product-hero">
+        <div className="backdrop" aria-hidden="true">
+          <Photo name={productPhoto(p.id, 'wide')} priority />
+        </div>
         <div className="container product-hero-inner">
           <div>
             <nav className="crumbs mono" aria-label="Breadcrumb">
               <Link href={lp(lang, '/solutions')}>{solutions.breadcrumb}</Link> / <span>{p.code}</span>
             </nav>
             <Eyebrow>{p.code}</Eyebrow>
-            <h1 className="h1 page-h1">{p.name}</h1>
+            <h1 className="h1 page-h1" data-decode>
+              {p.name}
+            </h1>
             <p className="product-hero-tagline">{p.tagline}</p>
             <p className="lead">{p.heroLead}</p>
             <div className="btn-row">
@@ -111,10 +117,7 @@ export function ProductView({ lang, product: p }: { lang: Locale; product: Produ
           </div>
           <figure className="product-photo panel panel-photo" data-reveal>
             <Corners />
-            <img src={p.visuals.photo.src} alt={p.visuals.photo.alt} width={p.visuals.photo.width} height={p.visuals.photo.height} loading="lazy" />
-            <figcaption className="mono">
-              {common.illustration} · {p.visuals.photo.caption}
-            </figcaption>
+            <Photo name={productPhoto(p.id, 'close')} sizes="(max-width: 960px) 100vw, 50vw" />
           </figure>
         </div>
       </section>

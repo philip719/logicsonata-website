@@ -40,7 +40,7 @@ export function SolutionsView({ lang }: { lang: Locale }) {
         }}
       />
 
-      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead}>
+      <PageHero eyebrow={t.hero.eyebrow} title={<Rich text={t.hero.title} lang={lang} />} lead={t.hero.lead} photo="hw-superchip">
         <div className="btn-row">
           <Link href={lp(lang, SITE.primaryCtaHref)} className="btn btn-primary btn-lg">
             {common.cta.primary}

@@ -18,6 +18,44 @@ export const home: HomeDict = {
     ],
     caption: 'Hình minh họa · bố cục bên trong đã được đơn giản hóa',
     specsLabel: 'Điểm nổi bật về phần cứng',
+    scroll: 'Cuộn để khám phá',
+    partsLabel: 'Bên trong thiết bị',
+    parts: ['Vỏ nhôm', 'Quạt và buồng hơi tản nhiệt', 'Siêu chip AI', 'Lưới tản nhiệt xẻ rãnh', 'Lưu trữ NVMe cục bộ'],
+  },
+  intro: {
+    eyebrow: 'Giới thiệu',
+    statement:
+      'Đội ngũ của bạn đã dùng AI mỗi ngày. Logic Sonata đưa AI vào *ngay trong doanh nghiệp bạn*: phần cứng, mô hình, tri thức doanh nghiệp và cơ chế kiểm soát, vận hành ngay nơi dữ liệu của bạn đang nằm.',
+  },
+  story: {
+    counter: 'Chương',
+    chapters: [
+      {
+        label: 'Silicon',
+        title: 'AI cấp trung tâm dữ liệu trên một siêu chip.',
+        text: 'CPU, GPU và các bộ xử lý AI dùng chung tới 128 GB bộ nhớ hợp nhất, nhờ đó mô hình ngôn ngữ lớn chạy cục bộ với tốc độ tối đa.',
+      },
+      {
+        label: 'Thiết bị',
+        title: 'Thiết kế thành một khối êm ái.',
+        text: 'Tản nhiệt bằng quạt và buồng hơi, lưu trữ NVMe cục bộ và mạng tốc độ cao trong vỏ nhôm nhỏ gọn, phù hợp với mọi văn phòng.',
+      },
+      {
+        label: 'Triển khai',
+        title: 'Đặt ngay trong phòng máy chủ của bạn.',
+        text: 'Lắp đặt tại chỗ, chạy dạng hosted trên hạ tầng GPU riêng, hoặc kết hợp cả hai. Bắt đầu với một thiết bị và mở rộng thành cụm.',
+      },
+    ],
+  },
+  readout: {
+    eyebrow: 'Tổng quan',
+    title: 'AI riêng tư, do bạn làm chủ.',
+    items: [
+      { value: '100*%*', label: 'Câu lệnh, tệp và câu trả lời luôn nằm trong tầm kiểm soát của bạn' },
+      { value: '128 *GB*', label: 'Bộ nhớ hợp nhất mỗi thiết bị cho các mô hình lớn' },
+      { value: '3', label: 'Mô hình triển khai: tại chỗ, hosted và kết hợp' },
+      { value: '5', label: 'Thị trường Đông Nam Á, có đội ngũ triển khai và hỗ trợ tại chỗ' },
+    ],
   },
   marqueeLabel: 'Các ngành chúng tôi phục vụ',
   marquee: ['Sản xuất', 'Bán lẻ', 'Thiết kế', 'Nhà cung ứng', 'Tập đoàn khu vực', 'Dệt may và thời trang', 'Logistics', 'Kỹ thuật', 'Dịch vụ chuyên nghiệp', 'Đội ngũ phần mềm'],
@@ -67,6 +105,7 @@ export const home: HomeDict = {
     aside: 'Mỗi hệ thống đều có thể triển khai on-premise, trên đám mây riêng hoặc kết hợp, được cấu hình đầy đủ với tri thức và quy tắc truy cập của bạn.',
     ctaTitle: 'Chưa chắc hệ thống nào phù hợp?',
     ctaText: 'Phần lớn khách hàng bắt đầu với buổi Đánh giá Mức độ Sẵn sàng. Chúng tôi phân tích dữ liệu và đề xuất hệ thống phù hợp.',
+    view: 'Xem',
   },
   industries: {
     eyebrow: 'Khách hàng của chúng tôi',
@@ -81,6 +120,7 @@ export const home: HomeDict = {
     eyebrow: 'Thị trường',
     title: 'Phục vụ năm thị trường trên khắp Đông Nam Á.',
     lead: 'Chúng tôi làm việc với doanh nghiệp tại Singapore, Việt Nam, Indonesia, Malaysia và Thái Lan, với năng lực triển khai, đào tạo và hỗ trợ vận hành trên toàn khu vực.',
+    swipe: 'Kéo hoặc cuộn',
   },
   faq: {
     eyebrow: 'Câu hỏi thường gặp',

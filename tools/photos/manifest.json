@@ -1,0 +1,892 @@
+{
+  "ABOUT-01": {
+    "slug": "about-team",
+    "source": "ABOUT-01_s1001",
+    "prompt": "A small AI engineering team of four Southeast Asian professionals collaborating at night around a glass whiteboard wall covered in sketched system diagrams drawn as abstract boxes and arrows, one person drawing while the others discuss. Eye level, three-quarter view of the group, 35mm lens at f/2, focus on the person drawing. Light from a cyan LED panel behind the glass wall lights the group, a signal-red glow from the city through the window rims their shoulders, the office behind them falls into shadow. Cinematic editorial photograph, energetic and focused, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1001,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 128998,
+      "1536": 56576,
+      "768": 22410
+    }
+  },
+  "ABOUT-02": {
+    "slug": "about-office",
+    "source": "ABOUT-02_s1002",
+    "prompt": "A modern minimalist technology office at night, empty, polished concrete floor, dark glass partitions, a small server room visible behind a glass wall at the far end glowing cyan from rows of server lights. Symmetrical one-point perspective at eye level, 20mm lens at f/5.6, deep focus. The server room is the main light source, its cyan glow reflects along the floor, a thin signal-red light strip runs along the ceiling edge, the rest of the office is dark. Cinematic architectural photograph, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 63490,
+      "1536": 24130,
+      "768": 8356
+    }
+  },
+  "CAR-01": {
+    "slug": "careers-team",
+    "source": "CAR-01_s1001",
+    "prompt": "A young, diverse Southeast Asian tech team of three at a standing desk late in the evening, laughing while reviewing something on a laptop, casual smart clothing. Eye level, slight three-quarter view, 50mm lens at f/1.8, focus on the person in the middle. A soft cyan overhead light and the laptop glow light their faces, a gentle fill keeps the skin natural, a signal-red neon accent on the wall behind them, the rest of the office dark. Cinematic editorial photograph, warm and energetic, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1001,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 89436,
+      "1536": 35472,
+      "768": 13788
+    }
+  },
+  "CAR-02": {
+    "slug": "careers-developer",
+    "source": "CAR-02_s2002",
+    "prompt": "A young Southeast Asian developer wearing headphones focused on a dual-monitor setup late at night, seen in side profile. Eye level, 50mm lens at f/1.4, sharp focus on the face and headphones, monitors and background in soft blur. The monitors cast cyan light across the face, the city at night glows signal red and teal through the window behind as soft bokeh. Cinematic editorial photograph, deep focus and calm, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic skin, no readable text or logos.",
+    "seed": 2002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 67370,
+      "1536": 27032,
+      "768": 11064
+    }
+  },
+  "CITY-BKK": {
+    "slug": "city-bangkok",
+    "source": "owner-supplied photograph (Wat Arun across the Chao Phraya at night), resized to 1536x864; graded at 0.6 so the gilded temple keeps its colour",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 284658,
+      "1536": 97644,
+      "768": 28260
+    }
+  },
+  "CITY-HCMC": {
+    "slug": "city-ho-chi-minh",
+    "source": "owner-supplied aerial photograph (Landmark 81 and the Saigon River), cropped to 16:9 and resized to 1536x864 before the pipeline",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 474364,
+      "1536": 176630,
+      "768": 54456
+    }
+  },
+  "CITY-JKT": {
+    "slug": "city-jakarta",
+    "source": "owner-supplied photograph (Jakarta CBD skyline with elevated toll road), cropped to 16:9 and resized to 1536x864 before the pipeline",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 266572,
+      "1536": 101110,
+      "768": 31826
+    },
+    "retouch": "tokopedia rooftop sign removed (no real brands)"
+  },
+  "CITY-KL": {
+    "slug": "city-kuala-lumpur",
+    "source": "CITY-KL_s1003",
+    "prompt": "Kuala Lumpur at night, the Petronas Twin Towers rising above a dense field of skyscrapers, light mist drifting between the buildings. Shot from a nearby rooftop with a 70mm telephoto lens at f/8, slightly elevated, compressed perspective stacking the city layers. The towers glow cool white and cyan, red aircraft warning lights blink on the rooftops, the mist softly diffuses the city glow into a teal haze. Cinematic night photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 188196,
+      "1536": 70510,
+      "768": 23068
+    }
+  },
+  "CITY-SG": {
+    "slug": "city-singapore",
+    "source": "owner-supplied photograph (Marina Bay: Marina Bay Sands, Gardens by the Bay, ArtScience Museum), cropped to 16:9 and resized to 1536x864 before the pipeline",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 193470,
+      "1536": 75702,
+      "768": 26098
+    }
+  },
+  "CONT-01": {
+    "slug": "contact-reception",
+    "source": "CONT-01_s1002",
+    "prompt": "A modern office reception and entrance at night, a long illuminated reception desk with a signal-red light strip along its base, glass entrance doors on both sides, polished dark floor with reflections, a plain blank wall behind the desk. Frontal symmetrical composition at eye level, 24mm lens at f/5.6, deep focus. A thin cyan light line runs across the ceiling, the red desk light reflects on the floor, the space is otherwise dark and calm. Cinematic architectural photograph, welcoming and premium, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no signage lettering, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 40738,
+      "1536": 14620,
+      "768": 5572
+    }
+  },
+  "HOME-01": {
+    "slug": "home-hero",
+    "source": "HOME-01_s102_d040",
+    "prompt": "An exploded view of a compact private AI server appliance floating in evenly spaced layers: a brushed aluminium lid on top, a cooling fan on a finned heatsink with copper heat pipes, a copper vapor chamber plate, a green mainboard with one large AI superchip and memory, slotted aluminium side grille panels, and an aluminium base plate at the bottom. It hovers above a wet black reflective floor in a dark industrial space. Three-quarter front view from slightly above, 50mm lens at f/5.6, every part in crisp focus. Low-key lighting: an acid-cyan glow from the left side, a signal-red glow from below on the right, thin haze catching the light, mirror-like reflections on the wet floor. Centered subject with generous dark space around it. Cinematic editorial product photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, gentle halation on highlights, photorealistic brushed metal and copper, no readable text or logos.",
+    "seed": 102,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 0.4,
+    "init_image": "monsters-rolodex deliverables/hero-source/hero-clean-1536.png",
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 81402,
+      "1536": 31600,
+      "768": 11412
+    }
+  },
+  "HOME-02": {
+    "slug": "home-intro",
+    "source": "HOME-02_owner",
+    "prompt": "An empty executive office at night on a high floor above a dense Southeast Asian city, floor-to-ceiling windows filling the frame, rain streaks running down the glass, a long dark desk with a closed laptop in the foreground, the city below glowing through the rain. Shot from the back of the room at eye level with a 24mm lens at f/2.8, one-point perspective toward the window, the left third of the frame calm and dark. The room itself is unlit: soft cyan glow from distant signage and red tail lights from the streets below spill across the desk and ceiling, out-of-focus bokeh on the wet glass. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, gentle halation, photorealistic, no readable text or logos.",
+    "seed": null,
+    "model": "flux1-krea-dev (owner test batch, local ComfyUI)",
+    "steps": 20,
+    "guidance": 3.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 128930,
+      "1536": 47388,
+      "768": 13736
+    }
+  },
+  "HOME-03": {
+    "slug": "home-control-room",
+    "source": "HOME-03_s1002",
+    "prompt": "A network operations control room in near darkness, a curved wall of large screens showing abstract data visualisations, network maps and graphs in cyan with a few red alert markers, rows of desks with monitors in front of it, a single operator seen from behind as a dark silhouette. Low camera angle from behind the last row of desks, 35mm lens at f/2, focus on the screen wall, foreground desks softly out of focus. The screens are the only key light, casting cyan light across the room, a red alert beacon adds a thin red accent on the ceiling, light haze makes the screen glow visible in the air. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 165954,
+      "1536": 66970,
+      "768": 24418
+    }
+  },
+  "HOME-04": {
+    "slug": "home-cta-boardroom",
+    "source": "HOME-04_s1002",
+    "prompt": "A small leadership team of four Southeast Asian business professionals in sharp dark business clothing gathered around a glass boardroom table at night, looking together at a glowing tablet, seen mostly in profile and from behind. Shot from outside the room through its glass wall with an 85mm lens at f/1.8 at eye level, faint reflections on the glass in the foreground, shallow depth of field. A cool cyan-white pendant light above the table lights their hands and faces softly, the city behind the window glows deep red and teal, the rest of the room falls into darkness. Cinematic editorial photograph, confident and calm, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic skin and fabrics, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 81612,
+      "1536": 34784,
+      "768": 14358
+    }
+  },
+  "HOME-05": {
+    "slug": "home-datacentre-aisle",
+    "source": "HOME-05_s1003",
+    "prompt": "A long data centre aisle between two rows of black server racks with perforated doors, thousands of tiny status LEDs glowing, overhead cable trays, raised floor tiles with a polished wet-look sheen. Centred one-point perspective straight down the aisle from waist height, 24mm lens at f/4, deep focus to the far end. Cyan LED strips along the base of the racks light the floor, a single red warning beacon glows at the far end of the aisle, thin haze hangs in the air and catches the light, reflections run along the floor. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 136410,
+      "1536": 55944,
+      "768": 18820
+    }
+  },
+  "HW-01": {
+    "slug": "hw-chip-wafer",
+    "source": "HW-01_s1001",
+    "prompt": "Extreme macro photograph of a bare silicon wafer covered in a grid of microchip dies, the surface showing iridescent interference colours that shift from acid cyan to deep signal red across the dies. Low raking camera angle of about 20 degrees across the surface, 100mm macro lens at f/8, focus-stacked so the near dies are razor sharp and the far edge softly falls off. A single hard raking light from the left in cyan reveals the fine circuit structures, a red bounce light from the right adds colour to the edges, pure black background. Cinematic scientific macro photography, dystopian near-future mood, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1001,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 200670,
+      "1536": 84832,
+      "768": 30286
+    }
+  },
+  "HW-02": {
+    "slug": "hw-superchip",
+    "source": "HW-02_s1003",
+    "prompt": "Close-up of a large AI processor package with an exposed mirror-like die mounted on a black mainboard, surrounded by memory modules, power stages and fine copper traces. Shot from a 45 degree high angle with a 100mm macro lens at f/5.6, sharp focus on the leading edge of the die, the rest of the board falling into soft blur. A soft cyan-white light from above reflects in the die, a signal-red rim light from behind outlines the components, light haze adds depth. Cinematic product macro photography, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 87308,
+      "1536": 36754,
+      "768": 15022
+    }
+  },
+  "HW-03": {
+    "slug": "hw-rack-interior",
+    "source": "HW-03_s1003",
+    "prompt": "Inside an open server rack: stacked rack-mounted servers with glowing front bezels, dense bundles of network cables, a fibre-optic patch panel, cooling fans visible through perforated panels. Low angle looking up into the rack with a 16mm ultra-wide lens at f/4, strong converging lines, everything sharp. The light comes from the hardware itself: cyan glow from cable LEDs and bezels, small signal-red status LEDs, a faint haze inside the rack. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 129078,
+      "1536": 53356,
+      "768": 17772
+    }
+  },
+  "HW-04": {
+    "slug": "hw-appliance-drawer",
+    "source": "HW-04_s1001",
+    "prompt": "A rack-mounted AI server appliance drawer pulled halfway out of a black server rack in a dark data centre, revealing the mainboard and a large processor glowing inside. Three-quarter side view along the rack front at eye level, 35mm lens at f/2.8, sharp focus on the open drawer, the rest of the rack row receding into soft darkness. Cyan light spills out from inside the drawer onto the rails and the floor, a small signal-red status LED glows on the drawer front, thin haze in the air catches the light. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1001,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 73010,
+      "1536": 27024,
+      "768": 8176
+    }
+  },
+  "HW-05": {
+    "slug": "hw-appliance-assembled",
+    "source": "HW-05_s102_d035r",
+    "prompt": "A compact private AI server appliance, fully assembled and closed: brushed aluminium lid and base, slotted aluminium grille panels on the sides, hovering just above a wet black reflective floor in a dark industrial space. Three-quarter front view from slightly above, 50mm lens at f/5.6, the whole appliance in crisp focus, centered with generous dark space around it. Low-key lighting: an acid-cyan glow from the left side, a signal-red glow from below on the right, thin haze catching the light, mirror-like reflections on the wet floor. Cinematic editorial product photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic materials, no readable text or logos.",
+    "seed": 102,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 0.35,
+    "init_image": "monsters-rolodex deliverables/hero-source/hero-assembled-1536.png",
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 40350,
+      "1536": 15072,
+      "768": 5278
+    }
+  },
+  "INV-01": {
+    "slug": "invest-boardroom",
+    "source": "INV-01_s1003",
+    "prompt": "An executive presenting growth charts on a large screen to a small group of investors in a dark boardroom at night, the investors seen from behind as silhouettes in the foreground. From the back of the room, 35mm lens at f/2, focus on the presenter beside the screen. The screen is the key light, showing abstract rising line charts in cyan and red, it rims the investors' shoulders in cyan, the city glows through the window on the side. Cinematic editorial photograph, confident and ambitious, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 72990,
+      "1536": 31268,
+      "768": 12518
+    }
+  },
+  "PART-01": {
+    "slug": "partners-handshake",
+    "source": "PART-01_s2002",
+    "prompt": "Two Southeast Asian business partners, a man and a woman, in dark suits shaking hands in a modern office lobby at night, their faces turned slightly away in soft profile, the handshake in the centre of the frame. Waist-level camera, 85mm lens at f/1.8, sharp focus on the handshake, the people softening into blur. A cyan key light from the side outlines their hands and sleeves, the city lights behind the glass wall glow signal red and teal as large bokeh. Cinematic editorial photograph, trust and agreement, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 2002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 57654,
+      "1536": 23612,
+      "768": 9838
+    }
+  },
+  "PROD-AP-CLOSE": {
+    "slug": "product-agents-close",
+    "source": "PROD-AP-CLOSE_s1003",
+    "prompt": "An automated warehouse at night, tall racking aisles stretching away, an autonomous mobile robot carrying a tote along the floor toward the camera, a robotic arm picking items at the end of the aisle. Low angle at floor level, 35mm lens at f/2.8, the robot sharp, the aisle receding into haze. Cyan light strips line the racking, a signal-red beacon glows on top of the robot, reflections on the polished concrete floor. Cinematic industrial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 114374,
+      "1536": 47868,
+      "768": 17758
+    }
+  },
+  "PROD-AP-WIDE": {
+    "slug": "product-agents-wide",
+    "source": "PROD-AP-WIDE_s1003",
+    "prompt": "A logistics operations room at night with a glass wall overlooking a large warehouse, two operators at desks with screens showing shipment maps and task queues, one leaning in to approve an item on screen. Eye level inside the room, 28mm lens at f/2.8, the operators and screens sharp, the warehouse beyond the glass softly lit. Screen glow lights the operators in cyan, the warehouse floor beyond is lit by rows of cool lights with red beacon lights on moving vehicles, reflections on the glass. Cinematic editorial photograph, efficient and in control, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 126734,
+      "1536": 54440,
+      "768": 20990
+    }
+  },
+  "PROD-CA-CLOSE": {
+    "slug": "product-coding-close",
+    "source": "PROD-CA-CLOSE_s1003",
+    "prompt": "Close-up of a curved monitor showing a dark-theme code editor with syntax highlighting in cyan and red, the code softly out of focus and unreadable, a developer's hands on a mechanical keyboard blurred in the foreground. Eye level, 85mm lens at f/1.8, very shallow depth of field, focus on a single highlighted line on the screen. The monitor is the only light, cyan glow on the keyboard and hands, a faint signal-red reflection on the desk. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 140000,
+      "1536": 60454,
+      "768": 22208
+    }
+  },
+  "PROD-CA-WIDE": {
+    "slug": "product-coding-wide",
+    "source": "PROD-CA-WIDE_s2002",
+    "prompt": "A software engineering team working late in a dark open-plan office, three young Southeast Asian developers at dual-monitor desks with dark-theme code editors, seen from behind and slightly to the side. Eye level from behind the row of desks, 35mm lens at f/2, depth running along the desk row, the nearest monitor in focus. The monitors are the only light source and wash the room in cyan, a red accent light strip runs along the far wall, the city at night glows through the windows. Cinematic editorial photograph, focused and calm, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 2002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 122826,
+      "1536": 50308,
+      "768": 18750
+    }
+  },
+  "PROD-IS-CLOSE": {
+    "slug": "product-image-studio-close",
+    "source": "PROD-IS-CLOSE_s1002",
+    "prompt": "Fabric swatches with bold, intricate generated textile prints draped side by side across a glowing light table, the fabric texture and weave clearly visible. High angle of about 30 degrees, 50mm macro lens at f/4, focus on the front swatch, the rest falling into soft blur. The light table glows cyan from below and shines through the thinner fabrics, a signal-red rim light skims the folds from the side, the studio around is dark. Cinematic product photograph, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic textiles, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 149162,
+      "1536": 59976,
+      "768": 20708
+    }
+  },
+  "PROD-IS-WIDE": {
+    "slug": "product-image-studio-wide",
+    "source": "PROD-IS-WIDE_s1002",
+    "prompt": "A fashion and textile designer in a dim studio at night, seated at a large colour-calibrated monitor showing a grid of generated textile print designs, rolls of fabric on shelves behind. Three-quarter view from behind the designer's shoulder, 35mm lens at f/2, the screen and the designer's hand on a pen tablet in focus. The monitor is the key light and casts cyan light across the desk, a signal-red rim light outlines the designer and the fabric rolls, the rest of the studio falls into darkness. Cinematic editorial photograph, creative and focused, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 103292,
+      "1536": 41502,
+      "768": 15138
+    }
+  },
+  "PROD-KA-CLOSE": {
+    "slug": "product-knowledge-close",
+    "source": "PROD-KA-CLOSE_s2001",
+    "prompt": "Close-up of hands on a laptop keyboard beside printed documents with highlighted passages, the screen showing a dark chat interface where every message is only a rounded cyan bubble filled with soft blurred grey bars, no letters or words anywhere, with tiny round citation dots. High angle of about 45 degrees, 50mm lens at f/1.8, focus on the hands and the edge of the screen, documents falling into soft blur. The screen glow is the only key light, cool cyan on the hands and paper, a thin signal-red rim light from the window behind. Cinematic editorial photograph, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 2001,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 121704,
+      "1536": 51750,
+      "768": 20154
+    }
+  },
+  "PROD-KA-WIDE": {
+    "slug": "product-knowledge-wide",
+    "source": "PROD-KA-WIDE_owner",
+    "prompt": "Two Southeast Asian lawyers working late in a law firm library, reviewing contracts at a long table with stacked binders and a laptop, one of them pointing at a passage on the screen. Over-the-shoulder three-quarter view at eye level, 35mm lens at f/2, focus on the laptop and the pointing hand. The laptop screen is the key light and casts cyan light on their faces, a dimmed desk lamp adds a little warmth, the window behind them glows signal red from the city at night, shelves of books fade into darkness. Cinematic editorial photograph, focused and trustworthy, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": null,
+    "model": "flux1-krea-dev (owner test batch, local ComfyUI)",
+    "steps": 20,
+    "guidance": 3.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 98910,
+      "1536": 42074,
+      "768": 17156
+    }
+  },
+  "PROD-VI-CLOSE": {
+    "slug": "product-vision-close",
+    "source": "PROD-VI-CLOSE_s1002",
+    "prompt": "A dome security camera mounted on a concrete wall at night, raindrops beading on its housing, a small signal-red indicator LED glowing beside the lens. Low angle looking up, 85mm lens at f/2, the camera sharp, the factory yard lights behind dissolved into large cyan bokeh circles. Rain streaks catch the light, the wet concrete reflects a faint red glow. Cinematic night photograph, watchful mood, dystopian near-future atmosphere, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 1.0,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 82102,
+      "1536": 33978,
+      "768": 12626
+    }
+  },
+  "PROD-VI-WIDE": {
+    "slug": "product-vision-wide",
+    "source": "PROD-VI-WIDE_s1002",
+    "prompt": "A garment factory floor during the night shift, long rows of sewing stations with operators at work, bolts of fabric and carts between the rows, ceiling-mounted dome security cameras clearly visible above the lines. High angle from a mezzanine walkway, 24mm lens at f/4, deep focus across the whole floor. Overhead fluorescent strips cast cool cyan-white light down the rows, red safety lights mark the exits, a light haze of fabric dust in the air. Cinematic industrial photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 188340,
+      "1536": 74938,
+      "768": 26894
+    }
+  },
+  "SERV-01": {
+    "slug": "services-install",
+    "source": "SERV-01_s2001",
+    "prompt": "A Southeast Asian field engineer in a dark work shirt with an ID lanyard sliding a server appliance into a rack in a client's server room, seen in profile, both hands on the appliance. Eye level, 35mm lens at f/2.8, focus on the hands and the appliance front. The rack LEDs and a small cyan work light clipped to the rack light the scene, a signal-red status light glows on the neighbouring server, haze in the air. Cinematic editorial photograph, competent and careful, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 2001,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 102022,
+      "1536": 42030,
+      "768": 15644
+    }
+  },
+  "SERV-02": {
+    "slug": "services-workshop",
+    "source": "SERV-02_s1003",
+    "prompt": "A consulting workshop in a dark meeting room, a facilitator standing beside a large screen showing an abstract process flow of glowing nodes and connecting lines, five client participants around the table seen from behind. From the back of the room, 28mm lens at f/2.8, focus on the facilitator. The screen is the key light and bathes the room in cyan, a signal-red accent from a wall light on the side, the participants are dark silhouettes against the screen. Cinematic editorial photograph, engaged and professional, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1003,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 63354,
+      "1536": 27306,
+      "768": 11190
+    }
+  },
+  "WP-01": {
+    "slug": "whitepapers-reading",
+    "source": "WP-01_s1002",
+    "prompt": "A professional in a dim executive lounge reading a technical report on a tablet, the tablet screen showing soft unreadable columns of text and a diagram. Slight high angle over the shoulder, 50mm lens at f/1.8, focus on the tablet and hands. The tablet screen lights the reader's face in cool cyan, a low signal-red lamp glows in the background, the lounge falls into darkness. Cinematic editorial photograph, thoughtful and focused, dystopian near-future mood, deep teal-black shadows, subtle film grain, photorealistic, no readable text or logos.",
+    "seed": 1002,
+    "model": "flux1-krea-dev_fp8_scaled",
+    "steps": 28,
+    "guidance": 4.5,
+    "sampler": "euler/simple",
+    "denoise": 1.0,
+    "init_image": null,
+    "upscale": "4x-UltraSharp to 3072x1728 (lanczos)",
+    "grade": {
+      "strength": 0.6,
+      "grain": 0.006
+    },
+    "webp_bytes": {
+      "3072": 80064,
+      "1536": 29962,
+      "768": 9522
+    }
+  },
+  "_videos": {
+    "VID-02": {
+      "start": "HOME-01_s102_d040",
+      "end": "HW-05_s102_d035r",
+      "prompt": "The floating parts of the server appliance glide together and lock into place one layer at a time, from the bottom up: mainboard, memory, cooling fins, fan and finally the chassis panels close around them. As the last panel seals, the front grille lights up with a soft cyan glow. Static camera, precise and smooth mechanical motion, haze drifting in the rim lights, reflections on the wet floor follow the parts. Cinematic product film.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "scroll story frames 44-91"
+    },
+    "VID-03": {
+      "start": "HW-04_s1001",
+      "prompt": "The appliance drawer slides further out of the server rack toward the camera on smooth rails, the cyan light from inside the drawer grows brighter and spills across the floor, the red status LED on the drawer front blinks twice. The camera slowly pushes in toward the glowing processor inside. Haze drifts through the light. Smooth, slow, cinematic, no cuts.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "scroll story frames 88-135"
+    },
+    "VID-04": {
+      "start": "HOME-02_owner",
+      "end": "HOME-02_owner",
+      "prompt": "Rain streaks run slowly down the window glass, droplets gather and slide away. Far below, traffic light trails move through the city streets and distant signage softly pulses. The room stays still and dark. Locked-off static camera, calm ambient motion, cinematic.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "public/video/loop-city-rain.mp4"
+    },
+    "VID-05": {
+      "start": "HOME-05_s1003",
+      "end": "HOME-05_s1003",
+      "prompt": "Thousands of tiny status LEDs on the server racks blink in random rhythms, thin haze drifts slowly down the aisle through the cyan light, the red warning beacon at the far end pulses gently. Locked-off static camera, calm ambient motion, cinematic.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "public/video/loop-datacentre.mp4"
+    },
+    "VID-06": {
+      "start": "HOME-03_s1002",
+      "end": "HOME-03_s1002",
+      "prompt": "The data visualisations on the screen wall animate: lines draw across network maps, graph values update, a red alert marker blinks and clears. The operator in silhouette shifts slightly in the chair. Light from the screens flickers softly across the room and haze. Locked-off static camera, calm ambient motion, cinematic.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "public/video/loop-control-room.mp4"
+    },
+    "VID-07": {
+      "start": "HOME-01_s102_d040",
+      "end": "HOME-01_s102_d040",
+      "prompt": "The floating parts of the server appliance hover with a tiny, slow drifting motion, as if weightless. Haze drifts slowly through the red and cyan rim lights, the rim lights breathe gently brighter and dimmer, faint ripples move across the reflections on the wet floor. Static camera, subtle and elegant ambient motion, cinematic product film.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "not used (hero stays a still); raw clip in session only"
+    },
+    "VID-08": {
+      "start": "CITY-SG_s2002",
+      "prompt": "A slow, smooth aerial drone push forward over the bay toward the skyline at night, the city lights twinkle, reflections ripple gently on the water, low clouds drift slowly above the towers. Steady cinematic drone movement, no shake, no cuts.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 7,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "not used yet (built on the flagged CITY-SG still)"
+    },
+    "VID-01": {
+      "start": "HW-01_s1001",
+      "prompt": "The camera steadily and clearly dollies backward and rises, pulling far away from the chip surface so the whole grid of dies shrinks into view and the dark edge of the wafer appears. A bright band of cyan light sweeps across the dies from left to right, turning the reflections from cyan to red as it passes. Fine dust drifts through the beam. Smooth continuous camera motion, macro lens, pure black background, cinematic.",
+      "negative": "overexposed, oversaturated, bright daylight, text, subtitles, captions, watermark, logo, low quality, blurry details, jpeg artifacts, deformed hands, extra fingers, distorted faces, morphing objects, melting shapes, flickering, sudden cuts, camera shake, cartoon, illustration",
+      "seed": 11,
+      "model": "wan2.2 i2v A14B fp8 (high+low noise)",
+      "steps": 20,
+      "cfg": 3.5,
+      "shift": 8.0,
+      "size": "1280x720",
+      "frames": 81,
+      "fps": 16,
+      "use": "scroll story frames 0-47 (public/images/story)"
+    }
+  }
+}

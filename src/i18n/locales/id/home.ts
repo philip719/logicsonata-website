@@ -18,6 +18,44 @@ export const home: HomeDict = {
     ],
     caption: 'Render ilustratif · tata letak internal disederhanakan',
     specsLabel: 'Keunggulan hardware',
+    scroll: 'Gulir untuk menjelajah',
+    partsLabel: 'Di dalam perangkat',
+    parts: ['Rangka aluminium', 'Kipas dan vapor chamber', 'Superchip AI', 'Kisi ventilasi berlubang', 'Penyimpanan NVMe lokal'],
+  },
+  intro: {
+    eyebrow: 'Pengantar',
+    statement:
+      'Tim Anda sudah memakai AI setiap hari. Logic Sonata membawanya *ke dalam lingkungan Anda*: hardware, model, pengetahuan perusahaan, dan kontrolnya, berjalan di tempat data Anda berada.',
+  },
+  story: {
+    counter: 'Bab',
+    chapters: [
+      {
+        label: 'Silikon',
+        title: 'AI kelas pusat data dalam satu superchip.',
+        text: 'CPU, GPU, dan mesin AI berbagi hingga 128 GB memori terpadu, sehingga model bahasa besar berjalan lokal dengan kecepatan penuh.',
+      },
+      {
+        label: 'Perangkat',
+        title: 'Dirancang sebagai satu unit yang senyap.',
+        text: 'Pendinginan kipas dan vapor chamber, penyimpanan NVMe lokal, dan jaringan berkecepatan tinggi dalam rangka aluminium ringkas yang cocok untuk kantor mana pun.',
+      },
+      {
+        label: 'Penerapan',
+        title: 'Terpasang di ruang server Anda.',
+        text: 'Pasang di lokasi Anda, jalankan secara hosted di kapasitas GPU privat, atau gabungkan keduanya. Mulai dari satu unit dan kembangkan menjadi klaster.',
+      },
+    ],
+  },
+  readout: {
+    eyebrow: 'Ringkasan',
+    title: 'AI privat yang tunduk pada Anda.',
+    items: [
+      { value: '100*%*', label: 'Prompt, file, dan jawaban tetap dalam kendali Anda' },
+      { value: '128 *GB*', label: 'Memori terpadu per perangkat untuk model besar' },
+      { value: '3', label: 'Model penerapan: on-premise, hosted, dan hybrid' },
+      { value: '5', label: 'Pasar Asia Tenggara dengan pengiriman dan dukungan lokal' },
+    ],
   },
   marqueeLabel: 'Industri yang kami layani',
   marquee: ['Manufaktur', 'Ritel', 'Desain', 'Pemasok', 'Grup regional', 'Garmen & tekstil', 'Logistik', 'Teknik', 'Jasa profesional', 'Tim software'],
@@ -67,6 +105,7 @@ export const home: HomeDict = {
     aside: 'Setiap sistem tersedia on-premise, hosted atau hybrid, dikonfigurasi lengkap dengan pengetahuan dan aturan akses Anda.',
     ctaTitle: 'Belum yakin mana yang cocok?',
     ctaText: 'Sebagian besar pelanggan memulai dengan Asesmen Kesiapan. Kami memetakan data Anda dan merekomendasikan sistem yang tepat.',
+    view: 'Lihat',
   },
   industries: {
     eyebrow: 'Siapa yang kami layani',
@@ -81,6 +120,7 @@ export const home: HomeDict = {
     eyebrow: 'Pasar',
     title: 'Melayani lima pasar di Asia Tenggara.',
     lead: 'Kami bekerja dengan bisnis di Singapura, Vietnam, Indonesia, Malaysia dan Thailand, dengan layanan implementasi, pelatihan dan dukungan terkelola di seluruh kawasan.',
+    swipe: 'Seret atau gulir',
   },
   faq: {
     eyebrow: 'FAQ',

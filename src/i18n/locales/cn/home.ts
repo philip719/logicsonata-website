@@ -18,6 +18,44 @@ export const home: HomeDict = {
     ],
     caption: '示意渲染图 · 内部结构已简化',
     specsLabel: '硬件亮点',
+    scroll: '向下滚动探索',
+    partsLabel: '设备内部',
+    parts: ['铝合金机身', '风扇与均热板', 'AI 超级芯片', '开槽散热格栅', '本地 NVMe 存储'],
+  },
+  intro: {
+    eyebrow: '简介',
+    statement:
+      '您的团队每天都在使用 AI。Logic Sonata 把它带进*您的围墙之内*：硬件、模型、企业知识和管控措施，全部运行在您的数据所在之处。',
+  },
+  story: {
+    counter: '章节',
+    chapters: [
+      {
+        label: '芯片',
+        title: '一颗超级芯片，数据中心级 AI。',
+        text: 'CPU、GPU 和 AI 引擎共享最高 128 GB 统一内存，大语言模型可在本地全速运行。',
+      },
+      {
+        label: '设备',
+        title: '一台安静的一体化设备。',
+        text: '风扇与均热板散热、本地 NVMe 存储和高速网络，集成在紧凑的铝合金机身中，适合任何办公室。',
+      },
+      {
+        label: '部署',
+        title: '部署在您的机房里。',
+        text: '可本地部署，可在私有 GPU 算力上托管运行，也可两者结合。从一台起步，按需扩展为集群。',
+      },
+    ],
+  },
+  readout: {
+    eyebrow: '数据一览',
+    title: '听命于您的私有 AI。',
+    items: [
+      { value: '100*%*', label: '提示词、文件和回答始终由您掌控' },
+      { value: '128 *GB*', label: '每台设备的统一内存，可运行大模型' },
+      { value: '3', label: '种部署模式：本地部署、托管和混合部署' },
+      { value: '5', label: '个东南亚市场，提供本地交付与支持' },
+    ],
   },
   marqueeLabel: '我们服务的行业',
   marquee: ['制造', '零售', '设计', '供应商', '区域性集团', '服装与纺织', '物流', '工程', '专业服务', '软件团队'],
@@ -67,6 +105,7 @@ export const home: HomeDict = {
     aside: '每套系统均可本地部署、托管或混合部署，并按您的知识和访问规则完成全面配置。',
     ctaTitle: '不确定哪套适合？',
     ctaText: '大多数客户从就绪度评估开始。我们梳理您的数据，并推荐合适的系统。',
+    view: '查看',
   },
   industries: {
     eyebrow: '服务对象',
@@ -81,6 +120,7 @@ export const home: HomeDict = {
     eyebrow: '市场',
     title: '服务东南亚五大市场。',
     lead: '我们服务新加坡、越南、印尼、马来西亚和泰国的企业，交付、培训和托管支持覆盖整个区域。',
+    swipe: '拖动或滚动',
   },
   faq: {
     eyebrow: '常见问题',
