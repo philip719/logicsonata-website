@@ -106,7 +106,7 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
    used. Mockups sent to the owner: `docs/mockups/` (2026-10-19). Owner approved the mockups (2026-10-19) and supplied the CITY-SG photo. Next: rollout (step 4).
    Rollout progress: homepage text translated (all 5 locales pass check-translations); photo heroes on About,
    Services, Partners, Investors, Careers, Solutions, Whitepapers, product pages; Contact uses a dimmed backdrop.
-   Jakarta: owner-supplied photo (tokopedia sign retouched out, card focus 22%). Bangkok: owner-supplied Wat Arun photo, graded at 0.6. Pending: owner's Ho Chi Minh City photo (file did not reach the session), full QA, zip.
+   Jakarta: owner-supplied photo (tokopedia sign retouched out, card focus 22%). Bangkok: owner-supplied Wat Arun photo, graded at 0.6. Ho Chi Minh City: owner-supplied Landmark 81 aerial photo (card focus 66%). All five market cards are real photos. Pending: full QA, zip.
 3. Build the new design system + homepage; screenshot desktop and phone mockups plus one inner page (Solutions or a
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,

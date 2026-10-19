@@ -111,12 +111,12 @@
   },
   "CITY-HCMC": {
     "slug": "city-ho-chi-minh",
-    "source": "CITY-HCMC_s1003",
-    "prompt": "Ho Chi Minh City at night, the Saigon River in the foreground with the Landmark 81 skyscraper and the downtown skyline beyond, a riverside road full of motorbike light trails. Shot from a bridge across the river at eye level, 50mm lens at f/8, long exposure on a tripod, the river surface smooth and reflective. The skyline glows cyan and white with signal-red accents, red and white light trails trace the road, a light haze sits over the water. Cinematic night photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
-    "seed": 1003,
-    "model": "flux1-krea-dev_fp8_scaled",
-    "steps": 28,
-    "guidance": 4.5,
+    "source": "owner-supplied aerial photograph (Landmark 81 and the Saigon River), cropped to 16:9 and resized to 1536x864 before the pipeline",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
     "sampler": "euler/simple",
     "denoise": 1.0,
     "init_image": null,
@@ -126,9 +126,9 @@
       "grain": 0.006
     },
     "webp_bytes": {
-      "3072": 181146,
-      "1536": 65662,
-      "768": 19798
+      "3072": 474364,
+      "1536": 176630,
+      "768": 54456
     }
   },
   "CITY-JKT": {
