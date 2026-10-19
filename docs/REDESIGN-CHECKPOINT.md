@@ -100,7 +100,10 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 ## 8. Next steps (in order)
 
 1. DONE: stills (section 6).
-2. Videos: 8 Wan 2.2 clips; VID-01..03 become the scroll-story frame sequence (~2-3 MB).
+2. DONE: videos. 9 Wan clips rendered (VID-01 rerolled). Real cost about $0.91 per 5 s clip (billing lags; the
+   first reading looked like $0.22). Balance after all imagery: $25.35 of $35.08. Story: 136 frames, 2.52 MB desktop,
+   1.08 MB phone. Loops in `public/video` (0.2 MB each). VID-07 (hero motion) and VID-08 (markets flyover) are not
+   used. Mockups sent to the owner: `docs/mockups/` (2026-10-19). WAITING FOR OWNER APPROVAL, open decision on CITY-SG.
 3. Build the new design system + homepage; screenshot desktop and phone mockups plus one inner page (Solutions or a
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,

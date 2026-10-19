@@ -24,7 +24,7 @@ const HERO_PARTS: Array<{ side: 'left' | 'right'; style: React.CSSProperties }> 
   { side: 'right', style: { '--x': '57.3%', '--y': '59.6%', '--len': '13cqw' } as React.CSSProperties },
 ]
 
-const STORY_FRAMES = 144;
+const STORY_FRAMES = 136;
 
 
 export function homeMeta(lang: Locale) {
