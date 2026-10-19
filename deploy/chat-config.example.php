@@ -15,8 +15,11 @@
 return [
     'api_key' => 'PASTE-YOUR-ANTHROPIC-API-KEY-HERE',
 
-    // claude-sonnet-5-5 gives the best answers; claude-haiku-5-5 is faster and costs less.
-    'model' => 'claude-sonnet-5-5',
+    // Which Claude model answers (USD per million tokens, input / output):
+    //   claude-opus-5-5    most capable                 $4 / $20  (default)
+    //   claude-sonnet-5-5  strong, about half the cost  $2 / $10
+    //   claude-haiku-5-5   fastest and lowest cost      $0.10 / $0.50
+    'model' => 'claude-opus-5-5',
 
     // Where demo requests and chat summaries are emailed, and the sender address (must be a real Hostinger mailbox).
     'sales_to' => 'sales@logicsonata.com',
