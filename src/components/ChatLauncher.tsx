@@ -58,16 +58,20 @@ export function ChatLauncher({ lang, t, countries }: { lang: Locale; t: CommonDi
         setOpen(true);
       }
     };
-    const cached = session(AVAILABLE_KEY);
-    if (cached === '1') enable();
-    if (cached !== null) return;
+    // Only a "yes" is remembered: if the assistant was unavailable, the next page checks again.
+    if (session(AVAILABLE_KEY) === '1') {
+      enable();
+      return;
+    }
     const check = () =>
       fetch(SITE.chatEndpoint, { cache: 'no-store' })
         .then((r) => (r.ok ? r.json() : null))
         .then((d) => {
           const ok = d?.available === true;
-          session(AVAILABLE_KEY, ok ? '1' : '0');
-          if (ok) enable();
+          if (ok) {
+            session(AVAILABLE_KEY, '1');
+            enable();
+          }
         })
         .catch(() => {});
     const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
