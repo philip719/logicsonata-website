@@ -140,7 +140,17 @@ function pages() {
   ].join('\n\n');
 }
 
+// Answers to questions visitors ask that the website pages do not cover. Add a line here
+// whenever the chat emails show the assistant guessing; it never invents these.
+const PRECISE_FACTS = `# Precise facts (state these exactly)
+
+- Hosted (managed private cloud) data location: agreed with each customer, including hosting in the
+  customer's own country where required. A specialist confirms the location in the consultation. Never
+  say data is or is not stored in a particular country.
+- Prices are not published: they depend on users, data and deployment model. The free consultation
+  produces a sizing and a recommended pilot.`;
+
 export function GET() {
-  const body = [company(), deployment(), products(), services(), consultation(), faq(), otherAudiences(), pages()].join('\n\n') + '\n';
+  const body = [company(), deployment(), products(), services(), consultation(), faq(), otherAudiences(), pages(), PRECISE_FACTS].join('\n\n') + '\n';
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }
