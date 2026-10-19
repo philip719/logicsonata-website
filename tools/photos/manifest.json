@@ -133,12 +133,12 @@
   },
   "CITY-JKT": {
     "slug": "city-jakarta",
-    "source": "CITY-JKT_s1002",
-    "prompt": "Jakarta's central business district at night, a wide multi-lane avenue running between tall glass office towers, traffic turned into long streaks of red tail lights and cyan-white headlights. Shot from a pedestrian bridge at a high angle looking down the avenue, 24mm lens at f/11, long exposure on a tripod, deep focus. The towers glow from their lit floors, wet asphalt reflects the light trails, a faint haze softens the far end. Cinematic night photograph, dystopian near-future mood, deep teal-black shadows, red and cyan as the only saturated colours, subtle film grain, photorealistic, no readable text or logos.",
-    "seed": 1002,
-    "model": "flux1-krea-dev_fp8_scaled",
-    "steps": 28,
-    "guidance": 4.5,
+    "source": "owner-supplied photograph (Jakarta CBD skyline with elevated toll road), cropped to 16:9 and resized to 1536x864 before the pipeline",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
     "sampler": "euler/simple",
     "denoise": 1.0,
     "init_image": null,
@@ -148,10 +148,11 @@
       "grain": 0.006
     },
     "webp_bytes": {
-      "3072": 185778,
-      "1536": 68732,
-      "768": 22118
-    }
+      "3072": 266572,
+      "1536": 101110,
+      "768": 31826
+    },
+    "retouch": "tokopedia rooftop sign removed (no real brands)"
   },
   "CITY-KL": {
     "slug": "city-kuala-lumpur",
