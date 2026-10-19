@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { BgVideo } from '@/components/BgVideo';
-import { DataFlow } from '@/components/graphics/DataFlow';
+import { FlowIllustration } from '@/components/graphics/FlowIllustration';
 import { StackIllustration } from '@/components/graphics/StackIllustration';
 import { HeroLoop } from '@/components/HeroLoop';
 import { Icon } from '@/components/Icon';
@@ -150,7 +150,7 @@ export function HomeView({ lang }: { lang: Locale }) {
           </div>
           <div className="panel panel-graphic" data-reveal>
             <Corners />
-            <DataFlow t={common.graphics} />
+            <FlowIllustration t={common.graphics} />
           </div>
         </div>
       </section>

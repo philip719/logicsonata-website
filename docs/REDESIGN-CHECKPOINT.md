@@ -118,3 +118,13 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,
    phones), commit, push, zip, owner uploads.
+
+## 9. Update 2 (2026-10-19, after launch)
+
+- Hero: looping explode/assemble animation (`HeroLoop`, `tools/photos/hero_loop.py`, VID-02 forward + reversed,
+  8.4 s, WebM 0.5 MB / MP4 0.9 MB). Still stays the LCP image and the reduced-motion / Save-Data fallback. Labels
+  show only while exploded. Owner approved.
+- Diagrams redrawn as coded illustrations (owner chose style A over AI-rendered): `StackIllustration` (glass slabs,
+  layer icons, climbing red highlight, particles) and `FlowIllustration` (documents leaking to a red cloud vs a
+  cyan dome around the appliance). Old `DataFlow` / `StackDiagram` removed. No new translation keys.
+- New zip prepared (36.5 MB, also carries the mp4 cache rule). After the owner uploads: merge `redesign/cyber` to main.

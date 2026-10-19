@@ -1202,6 +1202,17 @@ html:not(.js) .statement .w.hl,
   opacity: 0;
 }
 
+/* The diagram scales down on phones; keep its labels readable. */
+@media (max-width: 560px) {
+  .stackx-label {
+    font-size: 23px;
+  }
+
+  .stackx-num {
+    font-size: 17px;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   /* A highlight climbs the stack, one layer at a time (7 layers x 1.4 s). */
   .stackx-top-hot {
@@ -1222,18 +1233,42 @@ html:not(.js) .statement .w.hl,
 }
 
 @keyframes stackx-show {
-  0%, 16%, 100% { opacity: 0; }
-  4%, 11% { opacity: 1; }
+  0%,
+  16%,
+  100% {
+    opacity: 0;
+  }
+
+  4%,
+  11% {
+    opacity: 1;
+  }
 }
 
 @keyframes stackx-edge {
-  0%, 16%, 100% { stroke: rgba(62, 240, 224, 0.55); }
-  4%, 11% { stroke: #ff3b30; }
+  0%,
+  16%,
+  100% {
+    stroke: rgba(62, 240, 224, 0.55);
+  }
+
+  4%,
+  11% {
+    stroke: #ff3b30;
+  }
 }
 
 @keyframes stackx-icon {
-  0%, 16%, 100% { stroke: #3ef0e0; }
-  4%, 11% { stroke: #ff6a5f; }
+  0%,
+  16%,
+  100% {
+    stroke: #3ef0e0;
+  }
+
+  4%,
+  11% {
+    stroke: #ff6a5f;
+  }
 }
 
 @keyframes stackx-rise {
@@ -1249,6 +1284,176 @@ html:not(.js) .statement .w.hl,
   100% {
     opacity: 0;
     transform: translateY(-400px);
+  }
+}
+
+/* ---------- Illustrated public vs private flow ---------- */
+
+.fx .flow-svg {
+  overflow: visible;
+}
+
+.fx-floor {
+  stroke: rgba(62, 240, 224, 0.35);
+  stroke-width: 1;
+}
+
+.fx-sheet polygon {
+  fill: #dfe9e8;
+  fill-opacity: 0.92;
+  stroke: #ffffff;
+  stroke-width: 0.6;
+}
+
+.fx-sheet polyline {
+  fill: none;
+  stroke: #5d7472;
+  stroke-width: 1.2;
+}
+
+.fx-leak {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 5;
+  opacity: 0.75;
+}
+
+.fx-packet {
+  fill: #dfe9e8;
+  stroke: var(--red);
+  stroke-width: 1;
+  offset-rotate: 0deg;
+  offset-distance: 60%;
+}
+
+.fx-cloud {
+  stroke: var(--red);
+  stroke-width: 1.4;
+}
+
+.fx-blink {
+  fill: var(--red);
+}
+
+.fx-loop {
+  fill: none;
+  stroke: rgba(62, 240, 224, 0.45);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 4;
+}
+
+.fx-orbit {
+  fill: var(--cyan);
+  offset-rotate: 0deg;
+  offset-distance: calc(var(--k) * 33%);
+  filter: drop-shadow(0 0 4px var(--cyan));
+}
+
+.fx-box-l {
+  fill: #2a3a3d;
+}
+
+.fx-box-r {
+  fill: #1a2629;
+}
+
+.fx-box-t {
+  fill: #9fb2b1;
+}
+
+.fx-chip {
+  fill: var(--cyan);
+}
+
+.fx-ai {
+  fill: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.fx-dome {
+  stroke: none;
+}
+
+.fx-dome-rim {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+
+.fx-dome-base {
+  fill: none;
+  stroke: rgba(62, 240, 224, 0.5);
+  stroke-width: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-packet {
+    animation: fx-travel 3.6s calc(var(--k) * 1.2s) linear infinite;
+  }
+
+  .fx-orbit {
+    animation: fx-orbit 6s linear infinite;
+  }
+
+  .fx-blink {
+    animation: fx-blink 1.2s ease-in-out infinite;
+  }
+
+  .fx-dome-rim {
+    animation: fx-breathe 4s ease-in-out infinite;
+  }
+}
+
+@keyframes fx-travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+
+  10%,
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes fx-orbit {
+  from {
+    offset-distance: calc(var(--k) * 33.3%);
+  }
+
+  to {
+    offset-distance: calc(var(--k) * 33.3% + 100%);
+  }
+}
+
+@keyframes fx-blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fx-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
 
