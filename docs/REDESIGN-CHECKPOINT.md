@@ -127,4 +127,5 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 - Diagrams redrawn as coded illustrations (owner chose style A over AI-rendered): `StackIllustration` (glass slabs,
   layer icons, climbing red highlight, particles) and `FlowIllustration` (documents leaking to a red cloud vs a
   cyan dome around the appliance). Old `DataFlow` / `StackDiagram` removed. No new translation keys.
-- New zip prepared (36.5 MB, also carries the mp4 cache rule). After the owner uploads: merge `redesign/cyber` to main.
+- Uploaded and live 2026-10-19; merged to main. Production Lighthouse home: perf 88 to 92 (one cold run 69), a11y,
+  best practices, SEO 100, CLS 0. Pending for the next upload: webm cache rule, HeroLoop writes its phase only on change.

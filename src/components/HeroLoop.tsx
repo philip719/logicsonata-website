@@ -21,7 +21,9 @@ export function HeroLoop() {
     let raf = 0;
     const tick = () => {
       const t = v.currentTime;
-      box.dataset.phase = t < OPEN_UNTIL || t > OPEN_FROM ? 'open' : 'closed';
+      const phase = t < OPEN_UNTIL || t > OPEN_FROM ? 'open' : 'closed';
+      // Write only on a change: an attribute write every frame forces a style recalculation.
+      if (box.dataset.phase !== phase) box.dataset.phase = phase;
       raf = requestAnimationFrame(tick);
     };
     const start = () => {
