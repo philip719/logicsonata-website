@@ -136,12 +136,5 @@ Sales (`sales@logicsonata.com`) receives two kinds of email:
   provider to generate replies and summaries; the only record kept is the email to sales, sent with the consent
   given at the start of the chat. Contact details are remembered in the visitor's own browser so returning
   visitors only need to confirm them.
-- **Own AI first, Claude as backup:** with `own_ai_url` and `own_ai_token` set, the assistant asks the
-  company's DGX Spark first (Ollama serving `qwen3.6:35b`, published through a token gate and Tailscale
-  Funnel; setup and commands in `/home/philip/ai/website-ai/README.md` on the Spark). Claude answers
-  whenever the Spark is offline, busy or slower than `own_ai_timeout` seconds. Open-weight models follow
-  long instructions less strictly, so `OWN_MODEL_RULES` in `chat.php` adds explicit rules for them, and
-  `PRECISE_FACTS` in the knowledge route answers questions the pages do not cover. The chat response
-  includes `engine` (`own` or `claude`) for monitoring.
-- **Other servers:** set `provider` to `openai` and `api_url` to any OpenAI-compatible server to use it
-  instead of Claude.
+- **Own appliance:** set `provider` to `openai` and `api_url` to any OpenAI-compatible server (for example a
+  Logic Sonata appliance running vLLM or Ollama) to run the assistant on private infrastructure.

@@ -30,11 +30,9 @@ return [
     'messages_per_ip_hour' => 40,   // messages per visitor per hour
     'leads_per_ip_hour' => 5,       // demo requests per visitor per hour
 
-    // Your own AI on the DGX Spark answers first; Claude (api_key above) takes over whenever the
-    // Spark is offline, busy or slower than own_ai_timeout seconds. Leave own_ai_url empty to use
-    // Claude only. The token is in /home/philip/ai/website-ai/gate.env on the Spark.
-    'own_ai_url' => '',            // e.g. 'https://spark-2d83.tail3a8e4f.ts.net/api/chat'
-    'own_ai_token' => '',
-    'own_ai_model' => 'qwen3.6:35b',
-    'own_ai_timeout' => 25,
+    // Optional, for later: run the assistant on your own private AI appliance instead
+    // (any OpenAI-compatible server, such as vLLM or Ollama, reachable from Hostinger).
+    // 'provider' => 'openai',
+    // 'api_url' => 'https://your-appliance.example.com/v1/chat/completions',
+    // 'model' => 'your-model-name',
 ];
