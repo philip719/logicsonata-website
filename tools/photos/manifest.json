@@ -177,12 +177,12 @@
   },
   "CITY-SG": {
     "slug": "city-singapore",
-    "source": "CITY-SG_s2002",
-    "prompt": "Singapore's Raffles Place financial district at night just after rain, seen from across Marina Bay: a dense, even wall of flat-topped modern glass office towers of similar height, roughly sixty storeys each, with square crowns and no spires, no twin towers and no curved or domed buildings, their lit floors reflected in the still water. Shot from the waterfront promenade at eye level with a 35mm lens at f/8, long exposure on a tripod so the water is glassy smooth, wet paving and a low railing in the foreground, the skyline filling the middle third of the frame. Low clouds glow from the city lights below, the tower lights lean toward cool cyan-white with a few signal-red aircraft warning lights on the rooftops, the sky a deep teal-black. Cinematic night photograph, dystopian near-future mood, subtle film grain, gentle halation around lights, photorealistic, no readable text or logos.",
-    "seed": 2002,
-    "model": "flux1-krea-dev_fp8_scaled",
-    "steps": 28,
-    "guidance": 4.5,
+    "source": "owner-supplied photograph (Marina Bay: Marina Bay Sands, Gardens by the Bay, ArtScience Museum), cropped to 16:9 and resized to 1536x864 before the pipeline",
+    "prompt": null,
+    "seed": null,
+    "model": "photograph (not generated)",
+    "steps": null,
+    "guidance": null,
     "sampler": "euler/simple",
     "denoise": 1.0,
     "init_image": null,
@@ -192,9 +192,9 @@
       "grain": 0.006
     },
     "webp_bytes": {
-      "3072": 305766,
-      "1536": 110472,
-      "768": 31728
+      "3072": 193470,
+      "1536": 75702,
+      "768": 26098
     }
   },
   "CONT-01": {

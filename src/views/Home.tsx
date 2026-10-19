@@ -12,7 +12,7 @@ import { Corners, SectionHead } from '@/components/ui';
 import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, pageMeta } from '@/i18n/seo';
-import { MARKET_PHOTOS, productPhoto } from '@/lib/photos';
+import { MARKET_FOCUS, MARKET_PHOTOS, productPhoto } from '@/lib/photos';
 import { MARKET_NAMES_EN, MARKETS, SITE } from '@/lib/site';
 
 // Part label anchors on the hero photo, as a share of its width and height (tools/photos/README.md).
@@ -298,7 +298,7 @@ export function HomeView({ lang }: { lang: Locale }) {
           {MARKETS.map((m, i) => (
             <li key={m.code} className="xm-card chamfer">
               <div className="photo" aria-hidden="true">
-                <Photo name={MARKET_PHOTOS[m.code]} sizes="(max-width: 640px) 80vw, 30vw" />
+                <Photo name={MARKET_PHOTOS[m.code]} position={MARKET_FOCUS[m.code]} sizes="(max-width: 640px) 80vw, 30vw" />
               </div>
               <p className="hud">
                 <b>{m.code}</b>

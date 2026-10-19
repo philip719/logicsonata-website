@@ -80,7 +80,7 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   Raw takes live only in the session (`/home/user/comfy/raw`), not in the repo.
 - Decisions: HOME-01 = img2img seed 102 denoise 0.40 (0.45 deforms screws/grilles). HW-05 = assembled source, seed
   102, denoise 0.35, mangled lid logo retouched out (HOME-01 lid is blank too). CITY-SG: Flux always invents spires;
-  s2002 is the most generic, flagged to owner. CITY-BKK: reprompted without shops (sign gibberish). CITY-SZ: all
+  replaced by an owner-supplied Marina Bay photograph (card focal point 64% in `src/lib/photos.ts`). CITY-BKK: reprompted without shops (sign gibberish). CITY-SZ: all
   takes show wrong landmarks; parked (not in the five-market carousel). SERV-01, PART-01, CAR-02, PROD-CA-WIDE
   re-prompted as Southeast Asian people. PROD-KA-CLOSE re-prompted for a text-free screen.
 
@@ -103,7 +103,7 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 2. DONE: videos. 9 Wan clips rendered (VID-01 rerolled). Real cost about $0.91 per 5 s clip (billing lags; the
    first reading looked like $0.22). Balance after all imagery: $25.35 of $35.08. Story: 136 frames, 2.52 MB desktop,
    1.08 MB phone. Loops in `public/video` (0.2 MB each). VID-07 (hero motion) and VID-08 (markets flyover) are not
-   used. Mockups sent to the owner: `docs/mockups/` (2026-10-19). WAITING FOR OWNER APPROVAL, open decision on CITY-SG.
+   used. Mockups sent to the owner: `docs/mockups/` (2026-10-19). Owner approved the mockups (2026-10-19) and supplied the CITY-SG photo. Next: rollout (step 4).
 3. Build the new design system + homepage; screenshot desktop and phone mockups plus one inner page (Solutions or a
    product page) and send them to the owner for approval BEFORE deploying.
 4. After approval: roll out to all pages and languages, QA (tsc, build, translations check, Lighthouse, reduced motion,

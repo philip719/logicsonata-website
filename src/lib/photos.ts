@@ -16,3 +16,6 @@ export const MARKET_PHOTOS: Record<string, string> = {
   MY: 'city-kuala-lumpur',
   TH: 'city-bangkok',
 };
+
+// Focal points for the 3:4 market cards (default: centre).
+export const MARKET_FOCUS: Partial<Record<string, string>> = { SG: '64% 50%' };
