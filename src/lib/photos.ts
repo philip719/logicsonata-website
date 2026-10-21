@@ -19,3 +19,23 @@ export const MARKET_PHOTOS: Record<string, string> = {
 
 // Focal points for the 3:4 market cards (default: centre).
 export const MARKET_FOCUS: Partial<Record<string, string>> = { SG: '64% 50%', VN: '66% 50%', ID: '22% 50%' };
+
+// Product architecture worlds (tools/photos/pipeline_base.py); pins are station positions as shares of width and height.
+// The platform is level, so every station sits at the same height on its even column.
+const LEVEL_PINS: Array<[number, number]> = [[0.1, 0.27], [0.3, 0.27], [0.5, 0.27], [0.7, 0.27], [0.9, 0.27]];
+export const PIPELINE_ART: Partial<Record<string, { name: string; pins: Array<[number, number]> }>> = {
+  'knowledge-assistant': { name: 'pipeline-knowledge', pins: LEVEL_PINS },
+  'vision-intelligence': { name: 'pipeline-vision', pins: LEVEL_PINS },
+  'coding-assistant': { name: 'pipeline-coding', pins: LEVEL_PINS },
+  'agent-platform': { name: 'pipeline-agents', pins: LEVEL_PINS },
+  'image-studio': { name: 'pipeline-image-studio', pins: LEVEL_PINS },
+};
+
+// Step-card scenes on each product page: /images/photos/card-<prefix><n>-768.webp plus a /video/card-<prefix><n> loop.
+export const STEP_CARD_PREFIX: Partial<Record<string, string>> = {
+  'knowledge-assistant': 'ka',
+  'vision-intelligence': 'vi',
+  'coding-assistant': 'ca',
+  'agent-platform': 'ap',
+  'image-studio': 'is',
+};

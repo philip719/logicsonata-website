@@ -1380,6 +1380,256 @@ html:not(.js) .statement .w.hl,
   overflow: visible;
 }
 
+/* ---------- Product pipeline worlds ---------- */
+
+.pw {
+  margin: 0;
+}
+
+.pw-media {
+  position: relative;
+  overflow: hidden;
+  border: 1px dashed rgba(255, 59, 48, 0.45);
+  background: radial-gradient(ellipse at 50% 60%, rgba(255, 59, 48, 0.06), transparent 70%), #05090b;
+}
+
+.pw-track {
+  position: relative;
+}
+
+.pw-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pw-media .bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.pw-media .bg-video[src] {
+  opacity: 1;
+}
+
+.pw-tag {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.pw-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  background: rgba(5, 9, 11, 0.75);
+  color: var(--cyan);
+  font-size: 11px;
+  box-shadow: 0 0 14px rgba(62, 240, 224, 0.45);
+}
+
+.pw-stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.pw-stages li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 18px 16px 20px;
+  border-left: 1px solid var(--line);
+}
+
+.pw-stages li:first-child {
+  border-left: 0;
+}
+
+.pw-stage-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--red);
+  font-size: 12px;
+}
+
+.pw-stages strong {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.pw-stages li > span:last-child {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.pw-stages li {
+  position: relative;
+}
+
+.pw-stages li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Steps light up in order, 1.5 s each: the pin over the station and its text column together. */
+  .pw-pin {
+    animation: pw-pin 7.5s calc(var(--i) * 1.5s) infinite;
+  }
+
+  .pw-stages li {
+    animation: pw-step 7.5s calc(var(--i) * 1.5s) infinite;
+  }
+
+  .pw-stages li::before {
+    animation: pw-bar 7.5s calc(var(--i) * 1.5s) infinite;
+  }
+}
+
+@keyframes pw-pin {
+  0%,
+  20%,
+  100% {
+    background: rgba(5, 9, 11, 0.75);
+    color: var(--cyan);
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  3%,
+  17% {
+    background: var(--cyan);
+    color: #031012;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
+@keyframes pw-step {
+  0%,
+  20%,
+  100% {
+    background: transparent;
+  }
+
+  3%,
+  17% {
+    background: rgba(62, 240, 224, 0.06);
+  }
+}
+
+@keyframes pw-bar {
+  0%,
+  20%,
+  100% {
+    opacity: 0;
+  }
+
+  3%,
+  17% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  /* The scene scrolls sideways on phones so the stations stay readable. */
+  .pw-media {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cyan) transparent;
+  }
+
+  .pw-track {
+    flex: none;
+    width: 1040px;
+  }
+
+  .pw-tag {
+    position: sticky;
+    top: auto;
+    left: 0;
+    display: block;
+    padding: 14px 14px 6px;
+    order: -1;
+  }
+
+  .pw-pin {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+
+  .pw-stages {
+    grid-template-columns: 1fr;
+  }
+
+  .pw-stages li {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .pw-stages li:first-child {
+    border-top: 0;
+  }
+}
+
+/* ---------- Step-card scenes (product pages) ---------- */
+
+.step-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: -4px -4px 18px;
+  overflow: hidden;
+  background: #05090b;
+}
+
+.step-media img,
+.step-media .bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.step-media .bg-video {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.step-media .bg-video[src] {
+  opacity: 1;
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
