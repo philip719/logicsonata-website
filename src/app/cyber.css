@@ -534,6 +534,11 @@ h4 {
     linear-gradient(180deg, var(--studio), rgba(228, 231, 234, 0) 12%, rgba(228, 231, 234, 0) 70%, var(--studio));
 }
 
+.xh--studio .xh-media {
+  width: 64vw;
+  right: -7vw;
+}
+
 .xh--studio .xh-copy .lead {
   color: #36454a;
 }
@@ -546,6 +551,13 @@ h4 {
 @media (max-width: 960px) {
   .xh--studio {
     padding-top: 0;
+  }
+
+  .xh--studio .xh-media {
+    width: auto;
+    right: auto;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 8px;
   }
 
   .xh--studio .xh-media::after {
