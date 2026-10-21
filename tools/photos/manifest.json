@@ -784,7 +784,7 @@
       "size": "1280x720",
       "frames": 81,
       "fps": 16,
-      "use": "scroll story frames 44-91"
+      "use": "retired 2026-10-21: scroll story frames 44-91 now come from tools/hero-orbit (orbit.py scene=story)"
     },
     "VID-03": {
       "start": "HW-04_s1001",
