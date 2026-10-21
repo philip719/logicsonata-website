@@ -141,3 +141,13 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 - Live 2026-10-21, merged to main.
 - Also open from the owner (2026-10-20): real demo near the top, delivery evidence on About, privacy boundaries
   page + privacy policy + chat disclosure. Proposal sent; waiting for the owner's answers and facts.
+
+## 11. Update 4 (2026-10-21): product architecture as 3D-world pipelines
+
+- `PipelineWorld` (src/components/graphics/PipelineWorld.tsx) replaces the flow cards on all five product pages.
+  Layout from `tools/photos/pipeline_base.py` (stations at 10/30/50/70/90% so the five live text columns line up),
+  Flux img2img per product (`PIPE-*` takes), band crop + upscale + grade via `pipeline_stills.py`, Wan loops cropped
+  with `vfinish.py --crop=0,96,1536,544`. Pins per product in `PIPELINE_ART` (src/lib/photos.ts).
+- Each step (pin + text column with title and detail) lights up in turn (7.5 s cycle) so the sequence reads without
+  the video; off under reduced motion. Phones: the scene scrolls sideways, steps stack below.
+- Comfy balance after this round: $15.75. Owner approved style and motion; previews sent, zip pending approval.
