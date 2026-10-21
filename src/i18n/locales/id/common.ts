@@ -150,7 +150,7 @@ export const common: CommonDict = {
     deployOnprem: 'AI privat on-premise yang berjalan di hardware di dalam gedung Anda sendiri',
     deployHybrid: 'AI privat hybrid yang menghubungkan hardware on-premise dengan private cloud hosted',
     heroRender:
-      'Render fotorealistik perangkat AI privat dengan komponen yang terpisah: sasis aluminium, panel aliran udara berlubang, pendingin kipas dan vapor chamber, superchip AI, unified memory hingga 128 GB, penyimpanan NVMe lokal dan jaringan berkecepatan tinggi.',
+      'Render 3D perangkat AI privat yang terurai menjadi komponennya: sasis aluminium, kipas pendingin, heatsink tembaga dengan heat pipe, superchip AI dengan unified memory hingga 128 GB, mainboard dengan penyimpanan NVMe lokal, serta dasar dengan port I/O berkecepatan tinggi.',
   },
   chat: {
     launcher: 'Tanya AI kami',

@@ -20,7 +20,7 @@ export const home = {
     specsLabel: 'Hardware highlights',
     scroll: 'Scroll to discover',
     partsLabel: 'Inside the appliance',
-    parts: ['Aluminium chassis', 'Fan and vapor chamber', 'AI superchip', 'Slotted airflow grilles', 'Local NVMe storage'],
+    parts: ['Aluminium chassis', 'Cooling fans', 'Copper heatsink', 'AI superchip', 'Mainboard and NVMe', 'Base with I/O ports'],
   },
   intro: {
     eyebrow: 'Introduction',

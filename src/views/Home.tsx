@@ -15,15 +15,6 @@ import { absoluteUrl, pageMeta } from '@/i18n/seo';
 import { MARKET_FOCUS, MARKET_PHOTOS, productPhoto } from '@/lib/photos';
 import { MARKET_NAMES_EN, MARKETS, SITE } from '@/lib/site';
 
-// Part label anchors on the hero photo, as a share of its width and height (tools/photos/README.md).
-const HERO_PARTS: Array<{ side: 'left' | 'right'; style: React.CSSProperties }> = [
-  { side: 'right', style: { '--x': '61.2%', '--y': '19.7%', '--len': '9cqw' } as React.CSSProperties },
-  { side: 'right', style: { '--x': '58.3%', '--y': '37%', '--len': '12cqw' } as React.CSSProperties },
-  { side: 'right', style: { '--x': '50.1%', '--y': '53.5%', '--len': '20cqw' } as React.CSSProperties },
-  { side: 'right', style: { '--x': '65.1%', '--y': '44%', '--len': '5cqw' } as React.CSSProperties },
-  { side: 'right', style: { '--x': '57.3%', '--y': '59.6%', '--len': '13cqw' } as React.CSSProperties },
-]
-
 const STORY_FRAMES = 136;
 
 
@@ -65,13 +56,13 @@ export function HomeView({ lang }: { lang: Locale }) {
       <JsonLd data={serviceSchema} />
 
       {/* HERO */}
-      <section className="xh">
+      <section className="xh xh--studio">
         <div className="xh-media">
           <Photo name="home-hero" alt={common.graphics.heroRender} sizes="(max-width: 960px) 100vw, 82vw" priority />
           <HeroLoop />
           <ul className="xh-labels" aria-label={t.hero.partsLabel}>
-            {t.hero.parts.map((part, i) => (
-              <li key={part} className="xh-label" data-side={HERO_PARTS[i].side} style={HERO_PARTS[i].style}>
+            {t.hero.parts.map((part) => (
+              <li key={part} className="xh-label">
                 <span>{part}</span>
               </li>
             ))}

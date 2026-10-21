@@ -152,7 +152,7 @@ export const common: CommonDict = {
     deployOnprem: 'AI peribadi on-premise yang berjalan pada perkakasan di dalam bangunan anda sendiri',
     deployHybrid: 'AI peribadi hibrid yang menghubungkan perkakasan on-premise dengan cloud peribadi yang dihoskan',
     heroRender:
-      'Render fotorealistik peranti AI peribadi dengan komponennya dipisahkan: casis aluminium, panel aliran udara berlubang, penyejukan kipas dan ruang wap, cip super AI, memori bersatu sehingga 128 GB, storan NVMe setempat dan rangkaian berkelajuan tinggi.',
+      'Render 3D peranti AI peribadi yang terurai kepada komponennya: casis aluminium, kipas penyejuk, penyerap haba kuprum dengan paip haba, cip super AI dengan memori bersatu sehingga 128 GB, papan induk dengan storan NVMe setempat, dan tapak dengan port I/O berkelajuan tinggi.',
   },
   chat: {
     launcher: 'Tanya AI kami',

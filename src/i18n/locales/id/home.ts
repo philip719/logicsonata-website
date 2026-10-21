@@ -20,7 +20,7 @@ export const home: HomeDict = {
     specsLabel: 'Keunggulan hardware',
     scroll: 'Gulir untuk menjelajah',
     partsLabel: 'Di dalam perangkat',
-    parts: ['Rangka aluminium', 'Kipas dan vapor chamber', 'Superchip AI', 'Kisi ventilasi berlubang', 'Penyimpanan NVMe lokal'],
+    parts: ['Sasis aluminium', 'Kipas pendingin', 'Heatsink tembaga', 'Superchip AI', 'Mainboard dan NVMe', 'Dasar dengan port I/O'],
   },
   intro: {
     eyebrow: 'Pengantar',

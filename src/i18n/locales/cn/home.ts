@@ -20,7 +20,7 @@ export const home: HomeDict = {
     specsLabel: '硬件亮点',
     scroll: '向下滚动探索',
     partsLabel: '设备内部',
-    parts: ['铝合金机身', '风扇与均热板', 'AI 超级芯片', '开槽散热格栅', '本地 NVMe 存储'],
+    parts: ['铝合金机身', '散热风扇', '铜制散热器', 'AI 超级芯片', '主板与 NVMe', '底座与接口'],
   },
   intro: {
     eyebrow: '简介',
