@@ -129,3 +129,14 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   cyan dome around the appliance). Old `DataFlow` / `StackDiagram` removed. No new translation keys.
 - Uploaded and live 2026-10-19; merged to main. Production Lighthouse home: perf 88 to 92 (one cold run 69), a11y,
   best practices, SEO 100, CLS 0. Pending for the next upload: webm cache rule, HeroLoop writes its phase only on change.
+
+## 10. Update 3 (2026-10-21): diagrams as 3D worlds
+
+- Owner asked for the two diagrams as "3D worlds" and chose option 1 (calm) with looping motion, stack included.
+- `src/components/graphics/WorldDiagrams.tsx` (`FlowWorld`, `StackWorld`) replaces the coded illustrations. Stills
+  `public/images/photos/world-{public,private,stack}-{1024,2048}.webp`, loops `public/video/world-*.{webm,mp4}`.
+  Stack labels use the same isometric constants as `tools/photos/stack_world_base.py`; keep them in sync.
+- Problem section restructured: heading and exposure list side by side, comparison panel full width below.
+- BgVideo now prefers VP9 WebM (all loops have .webm and .mp4). Comfy balance after this round: $21.08.
+- Also open from the owner (2026-10-20): real demo near the top, delivery evidence on About, privacy boundaries
+  page + privacy policy + chat disclosure. Proposal sent; waiting for the owner's answers and facts.

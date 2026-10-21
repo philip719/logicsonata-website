@@ -888,5 +888,22 @@
       "fps": 16,
       "use": "scroll story frames 0-47 (public/images/story)"
     }
+  },
+  "_worlds": {
+    "world-public": {
+      "source": "FLOW-PUBW_s7001_d075",
+      "method": "Flux Krea img2img from the coded FlowIllustration layout, denoise 0.75",
+      "loop": "VID-FLOW-PUB seed 7, first-last-frame, 1024x784"
+    },
+    "world-private": {
+      "source": "FLOW-PRIW_s7001_d075",
+      "method": "Flux Krea img2img from the coded FlowIllustration layout, denoise 0.75",
+      "loop": "VID-FLOW-PRI seed 7, first-last-frame, 1024x784"
+    },
+    "world-stack": {
+      "source": "STACK-WORLD_s8205_d078",
+      "method": "Flux Krea img2img from tools/photos/stack_world_base.py layout (floors listed top-first in the prompt), denoise 0.78",
+      "loop": "VID-STACK seed 7, first-last-frame, 1024x1216"
+    }
   }
 }
