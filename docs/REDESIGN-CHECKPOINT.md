@@ -164,10 +164,30 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   assets. Every loop checked mid-clip for text artifacts (KA3 rerolled: Wan had written fake text in the bubble).
 - Owner topped up Comfy credits; balance after this round about $33.
 
-## 13. State and next steps (read this first in a new session)
+## 13. Update 6 (2026-10-21): studio orbit hero (LIVE 2026-10-21, merged to main)
+
+- New hero video rendered in Blender, not Comfy: `tools/hero-orbit/orbit.py` (bpy 4.2 in
+  `/home/user/blender-venv`, Cycles CPU, about 18 s per frame at 1440x810, 40 samples). Six-part LS-branded
+  appliance (shell, fans, heatsink, module, mainboard, base), 336 frames at 24 fps: 2 s assembled, explode,
+  one full orbit from high three-quarter to eye level to underside, reassemble; seamless loop.
+- Labels follow the parts: `orbit.py labels_only=1` writes the right-hand silhouette edge of each part per frame;
+  `tools/hero-orbit/finish.py frames=... labels=...` composites on #e4e7ea, encodes
+  `public/video/hero-orbit.{webm,mp4}`, writes `hero-orbit.json` and the still `home-hero-*.webp`.
+  `HeroLoop.tsx` moves the labels each frame and shows them only while the parts are apart.
+- Hero is now a light studio band (`.xh--studio` in cyber.css, local colour tokens). Six part labels and the hero
+  alt text translated in all locales.
+- ChatGPT design review (owner shared 2026-10-21): owner chose a refinement pass (keep the dark identity, calm effects,
+  sentence case, demo-led hero with headline "Private AI that runs inside your business.", appliance moved to an
+  "Explore the appliance" section, three-group stack, light Deployment section, Investors/Careers out of main nav,
+  compact chat launcher). ON HOLD until the lab RAG is ready. Lab rules: never open port 12000; demo captures
+  come from 12002/12003 ("Provisional Apparel Demo") only when the owner says so; never create accounts.
+
+## 14. State and next steps (read this first in a new session)
 
 - Branch `redesign/cyber` holds everything; `main` = last live (3D-world homepage diagrams, 2026-10-21).
-  LIVE 2026-10-21 and merged to main: straight-line product pipelines + step-card scenes. Zip was built
+  LIVE 2026-10-21 and merged to main: straight-line product pipelines + step-card scenes.
+  LIVE 2026-10-21 and merged to main: studio orbit hero (light band, tracked labels). Old
+  `video/hero-loop.*` may still sit on the server unused; safe to delete. Zip was built
   2026-10-21 and sent to the owner. After the owner uploads: verify live, then merge `redesign/cyber` into `main`.
 - Session-only files (lost when the container ends): `/home/user/comfy/raw` (all takes), `/home/user/comfy/vid`
   (raw Wan clips), `/home/user/shots/*.js` (Playwright capture scripts: sections.js, overflow.js, recp.js).

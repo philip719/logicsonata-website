@@ -152,7 +152,7 @@ export const common: CommonDict = {
     deployOnprem: 'AI riêng tư on-premise, chạy trên phần cứng đặt ngay trong tòa nhà của bạn',
     deployHybrid: 'AI riêng tư kết hợp, liên kết phần cứng on-premise với đám mây riêng được quản lý',
     heroRender:
-      'Ảnh kết xuất chân thực một thiết bị AI riêng tư được tách rời các linh kiện: vỏ nhôm, tấm thông gió có khe, quạt và buồng hơi tản nhiệt, siêu chip AI, bộ nhớ hợp nhất lên đến 128 GB, ổ lưu trữ NVMe cục bộ và kết nối mạng tốc độ cao.',
+      'Ảnh kết xuất 3D một thiết bị AI riêng tư tách rời thành các linh kiện: vỏ nhôm, quạt làm mát, tản nhiệt đồng với ống dẫn nhiệt, siêu chip AI với bộ nhớ hợp nhất lên đến 128 GB, bo mạch chủ với ổ lưu trữ NVMe cục bộ và đế với các cổng I/O tốc độ cao.',
   },
   chat: {
     launcher: 'Hỏi AI của chúng tôi',

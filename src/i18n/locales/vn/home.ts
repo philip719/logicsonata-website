@@ -20,7 +20,7 @@ export const home: HomeDict = {
     specsLabel: 'Điểm nổi bật về phần cứng',
     scroll: 'Cuộn để khám phá',
     partsLabel: 'Bên trong thiết bị',
-    parts: ['Vỏ nhôm', 'Quạt và buồng hơi tản nhiệt', 'Siêu chip AI', 'Lưới tản nhiệt xẻ rãnh', 'Lưu trữ NVMe cục bộ'],
+    parts: ['Vỏ nhôm', 'Quạt làm mát', 'Tản nhiệt đồng', 'Siêu chip AI', 'Bo mạch chủ và NVMe', 'Đế với cổng I/O'],
   },
   intro: {
     eyebrow: 'Giới thiệu',

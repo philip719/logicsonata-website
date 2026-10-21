@@ -20,7 +20,7 @@ export const home: HomeDict = {
     specsLabel: 'Sorotan perkakasan',
     scroll: 'Tatal untuk meneroka',
     partsLabel: 'Di dalam peranti',
-    parts: ['Casis aluminium', 'Kipas dan ruang wap', 'Supercip AI', 'Gril aliran udara berlubang', 'Storan NVMe tempatan'],
+    parts: ['Casis aluminium', 'Kipas penyejuk', 'Penyerap haba kuprum', 'Cip super AI', 'Papan induk dan NVMe', 'Tapak dengan port I/O'],
   },
   intro: {
     eyebrow: 'Pengenalan',
