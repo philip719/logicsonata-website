@@ -22,7 +22,7 @@ export const MARKET_FOCUS: Partial<Record<string, string>> = { SG: '64% 50%', VN
 
 // Product architecture worlds (tools/photos/pipeline_base.py); pins are station positions as shares of width and height.
 // The platform is level, so every station sits at the same height on its even column.
-const LEVEL_PINS: Array<[number, number]> = [[0.1, 0.18], [0.3, 0.18], [0.5, 0.18], [0.7, 0.18], [0.9, 0.18]];
+const LEVEL_PINS: Array<[number, number]> = [[0.1, 0.27], [0.3, 0.27], [0.5, 0.27], [0.7, 0.27], [0.9, 0.27]];
 export const PIPELINE_ART: Partial<Record<string, { name: string; pins: Array<[number, number]> }>> = {
   'knowledge-assistant': { name: 'pipeline-knowledge', pins: LEVEL_PINS },
   'vision-intelligence': { name: 'pipeline-vision', pins: LEVEL_PINS },
