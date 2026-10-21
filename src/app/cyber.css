@@ -317,6 +317,12 @@ h4 {
   opacity: 1;
 }
 
+/* Once the loop has faded in, drop the still beneath it. */
+.xh-media:has(.hero-loop.on) > img {
+  visibility: hidden;
+  transition: visibility 0s 0.6s;
+}
+
 /* Labels sit on the parts: HeroLoop moves each one to its part every frame and shows them only while apart. */
 .xh-labels {
   position: absolute;
