@@ -138,5 +138,6 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   Stack labels use the same isometric constants as `tools/photos/stack_world_base.py`; keep them in sync.
 - Problem section restructured: heading and exposure list side by side, comparison panel full width below.
 - BgVideo now prefers VP9 WebM (all loops have .webm and .mp4). Comfy balance after this round: $21.08.
+- Live 2026-10-21, merged to main.
 - Also open from the owner (2026-10-20): real demo near the top, delivery evidence on About, privacy boundaries
   page + privacy policy + chat disclosure. Proposal sent; waiting for the owner's answers and facts.
