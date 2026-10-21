@@ -150,4 +150,6 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   with `vfinish.py --crop=0,96,1536,544`. Pins per product in `PIPELINE_ART` (src/lib/photos.ts).
 - Each step (pin + text column with title and detail) lights up in turn (7.5 s cycle) so the sequence reads without
   the video; off under reduced motion. Phones: the scene scrolls sideways, steps stack below.
-- Comfy balance after this round: $15.75. Owner approved style and motion; previews sent, zip pending approval.
+- Owner asked for a straight line instead of ascending: `pipeline_base.py` now has a level x axis (A = 0); takes
+  `PIPE2-*`, band crop (0, 224, 1536, 512) to 1536 x 288, pins share one height (`LEVEL_PINS`). Garbled sign text
+  retouched in PIPE2-AP and PIPE2-KA (the `...r` raw frames) before the stills and videos were made.

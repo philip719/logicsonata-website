@@ -31,7 +31,7 @@ export function PipelineWorld({
             srcSet={`${src(768)} 768w, ${src(1536)} 1536w, ${src(3072)} 3072w`}
             sizes="(max-width: 1320px) 100vw, 1320px"
             width={1536}
-            height={448}
+            height={288}
             alt=""
             loading="lazy"
             decoding="async"

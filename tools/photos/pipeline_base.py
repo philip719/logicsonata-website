@@ -5,7 +5,7 @@ import math, sys
 from PIL import Image, ImageDraw, ImageFilter
 
 W, H = 1536, 640
-A, B = math.radians(8), math.radians(38)   # x axis nearly horizontal, y axis receding up-left
+A, B = 0.0, math.radians(38)   # x axis level (stations in a straight line), y axis receding up-left
 KX = W * 0.8 / 4 / math.cos(A) / 200        # station spacing 200 world units -> 20% of the width
 
 
