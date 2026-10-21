@@ -25,6 +25,7 @@ SAMPLES = int(ARGS.get('samples', 48))
 EXPOSURE = float(ARGS.get('exp', -0.4))
 TEX = HERE / 'tex'
 S = 0.001
+STORY = ARGS.get('scene') == 'story'   # scroll-story chapter 2: dark set, parts settle into one unit
 FPS, END = 24, 336          # 14 s loop
 OPEN_AT, OPEN_END = 48, 108  # explode
 SHUT_AT, SHUT_END = 276, 324  # reassemble
@@ -398,18 +399,19 @@ def area(name, loc3, size, power, color=(1, 1, 1), size_y=None):
     return ob
 
 
-area('top', (0, 900, 100), 900, 150)
-area('key', (-650, 760, 520), 1000, 110)
-area('fill', (700, 560, 400), 900, 45)
-area('rim', (300, 760, -700), 600, 90)
-area('under', (0, -700, 200), 700, 45)
+if not STORY:
+    area('top', (0, 900, 100), 900, 150)
+    area('key', (-650, 760, 520), 1000, 110)
+    area('fill', (700, 560, 400), 900, 45)
+    area('rim', (300, 760, -700), 600, 90)
+    area('under', (0, -700, 200), 700, 45)
 
 scene.render.engine = 'CYCLES'
 scene.cycles.device = 'CPU'
 scene.cycles.samples = SAMPLES
 scene.cycles.use_denoising = True
 scene.cycles.max_bounces = 6
-scene.render.film_transparent = True
+scene.render.film_transparent = not STORY
 scene.render.resolution_x = W
 scene.render.resolution_y = H
 scene.render.fps = FPS
@@ -418,6 +420,40 @@ scene.render.image_settings.color_mode = 'RGBA'
 scene.view_settings.view_transform = 'AgX'
 scene.view_settings.look = 'AgX - Medium High Contrast'
 scene.view_settings.exposure = EXPOSURE
+
+
+# ---------------------------------------------------------------- scroll-story chapter (scene=story)
+# 48 frames scrubbed by scroll: the parts start apart above the base and settle into one unit on a dark, glossy
+# floor lit teal from the left and red from behind, matching the neighbouring chapters.
+if STORY:
+    END = 48
+    for info in PARTS.values():
+        info['lift'] = (info['lift'] + 62) * 0.8          # base rests on the floor; the rest stack above it
+
+    def openness(f):
+        return 1.0 - smooth(f / 40)
+
+    def camera_at(f):
+        t = smooth(f / (END - 1))
+        az = math.radians(18 + 34 * t)
+        el = math.radians(27 - 9 * t)
+        d = 1080 - 420 * t
+        cy = 30 + openness(f) * 85
+        pos = (d * math.cos(el) * math.sin(az), cy + d * math.sin(el), d * math.cos(el) * math.cos(az))
+        return V(*pos), V(0, cy, 0)
+
+    bg.inputs['Color'].default_value = (0.004, 0.006, 0.007, 1)
+    bg.inputs['Strength'].default_value = 1.0
+    floor_mat = principled('floor', (0.012, 0.015, 0.017), rough=0.55)
+    CURRENT = None
+    plane('floor', 6000, 6000, (0, -3, 0), floor_mat)
+    lights = [area('teal', (-520, 420, 220), 260, 24, color=(0.12, 0.95, 0.85)),
+              area('red', (150, 140, -230), 220, 4, color=(1.0, 0.08, 0.05)),
+              area('key', (0, 900, 300), 500, 7),
+              area('rim', (300, 500, -700), 400, 10)]
+    for li in lights:
+        li.visible_camera = False                      # light the set without showing the panels
+    scene.view_settings.exposure = -0.3
 
 # ---------------------------------------------------------------- label tracks + render
 
