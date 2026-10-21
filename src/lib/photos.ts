@@ -30,3 +30,12 @@ export const PIPELINE_ART: Partial<Record<string, { name: string; pins: Array<[n
   'agent-platform': { name: 'pipeline-agents', pins: LEVEL_PINS },
   'image-studio': { name: 'pipeline-image-studio', pins: LEVEL_PINS },
 };
+
+// Step-card scenes on each product page: /images/photos/card-<prefix><n>-768.webp plus a /video/card-<prefix><n> loop.
+export const STEP_CARD_PREFIX: Partial<Record<string, string>> = {
+  'knowledge-assistant': 'ka',
+  'vision-intelligence': 'vi',
+  'coding-assistant': 'ca',
+  'agent-platform': 'ap',
+  'image-studio': 'is',
+};

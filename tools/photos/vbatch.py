@@ -15,14 +15,14 @@ def run(j):
     up = lambda n: comfy.upload(f'{RAW}/{n}.png', f'ls-vid-{n}.png')
     start = up(j['start']); end = up(j['end']) if j.get('end') else None
     prompt = j.get('prompt') or P[j['id']][1]
-    jid = comfy.submit(wan.video(prompt, j['seed'], start, end=end, prefix=f"video/{j['id']}", width=j.get('width', 1280), height=j.get('height', 720)))
+    jid = comfy.submit(wan.video(prompt, j['seed'], start, end=end, prefix=f"video/{j['id']}", width=j.get('width', 1280), height=j.get('height', 720), lightning=j.get('lightning', False)))
     s, dt = comfy.wait(jid, every=15)
     if s['status'] not in ('success', 'completed'): return j['id'], f'FAILED {s}'
     files, _ = comfy.outputs(jid)
     comfy.download(files[0], dst)
     with open(f'{OUT}/videos.jsonl', 'a') as f:
         f.write(json.dumps({**j, 'prompt': prompt, 'negative': wan.NEG, 'job': jid, 'secs': round(dt), 'model': 'wan2.2 i2v A14B fp8 (high+low noise)',
-                            'steps': 20, 'cfg': 3.5, 'shift': 8.0, 'size': f"{j.get('width', 1280)}x{j.get('height', 720)}", 'frames': 81, 'fps': 16}) + '\n')
+                            'steps': 6 if j.get('lightning') else 20, 'cfg': 1.0 if j.get('lightning') else 3.5, 'shift': 5.0 if j.get('lightning') else 8.0, 'lightx2v': bool(j.get('lightning')), 'size': f"{j.get('width', 1280)}x{j.get('height', 720)}", 'frames': 81, 'fps': 16}) + '\n')
     return j['id'], f'ok {round(dt)}s'
 
 

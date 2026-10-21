@@ -1602,6 +1602,34 @@ html:not(.js) .statement .w.hl,
   }
 }
 
+/* ---------- Step-card scenes (product pages) ---------- */
+
+.step-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: -4px -4px 18px;
+  overflow: hidden;
+  background: #05090b;
+}
+
+.step-media img,
+.step-media .bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.step-media .bg-video {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.step-media .bg-video[src] {
+  opacity: 1;
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

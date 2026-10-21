@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FlowDiagram } from '@/components/graphics/FlowDiagram';
 import { PipelineWorld } from '@/components/graphics/PipelineWorld';
+import { BgVideo } from '@/components/BgVideo';
 import { Icon } from '@/components/Icon';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
 import { LeadNudge } from '@/components/LeadNudge';
@@ -13,7 +14,7 @@ import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, pageMeta } from '@/i18n/seo';
 import type { Product } from '@/lib/products';
-import { PIPELINE_ART, productPhoto } from '@/lib/photos';
+import { PIPELINE_ART, productPhoto, STEP_CARD_PREFIX } from '@/lib/photos';
 import { MARKET_NAMES_EN, SITE } from '@/lib/site';
 
 export function productMeta(lang: Locale, p: Product) {
@@ -160,6 +161,12 @@ export function ProductView({ lang, product: p }: { lang: Locale; product: Produ
           <ol className={`steps steps-${p.steps.length}`} style={{ marginTop: 40 }} data-reveal>
             {p.steps.map((s, i) => (
               <li key={s.title}>
+                {STEP_CARD_PREFIX[p.id] && (
+                  <div className="step-media" aria-hidden="true">
+                    <img src={`/images/photos/card-${STEP_CARD_PREFIX[p.id]}${i + 1}-768.webp`} width={768} height={432} alt="" loading="lazy" decoding="async" />
+                    <BgVideo name={`card-${STEP_CARD_PREFIX[p.id]}${i + 1}`} />
+                  </div>
+                )}
                 <span className="service-num">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{s.title}</h3>
                 <p>{s.detail}</p>

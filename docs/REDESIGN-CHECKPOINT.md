@@ -1,4 +1,4 @@
-# Redesign checkpoint (2026-10-19: redesign LIVE)
+# Redesign checkpoint (redesign LIVE since 2026-10-19; last update 2026-10-21)
 
 Read this first when continuing the Logic Sonata website redesign in a new session.
 
@@ -153,3 +153,26 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 - Owner asked for a straight line instead of ascending: `pipeline_base.py` now has a level x axis (A = 0); takes
   `PIPE2-*`, band crop (0, 224, 1536, 512) to 1536 x 288, pins share one height (`LEVEL_PINS`). Garbled sign text
   retouched in PIPE2-AP and PIPE2-KA (the `...r` raw frames) before the stills and videos were made.
+
+## 12. Update 5 (2026-10-21): animated 3D scenes in every product step card
+
+- 26 step cards (Knowledge 6, Vision, Coding, Agents, Image Studio 5 each) now open with a miniature 3D scene:
+  still `public/images/photos/card-<ka|vi|ca|ap|is><n>-768.webp`, loop `public/video/card-<...>.{webm,mp4}`
+  (Wan 2.2 with the lightx2v 6-step LoRA at 768x432: about $0.03 and 25 s per loop, quality fine at card size).
+  Mapping in `STEP_CARD_PREFIX` (src/lib/photos.ts); markup in `src/views/Product.tsx` (`.step-media`).
+- QA: build, check-translations x5, 60 page/language combinations at 360 px (no overflow, 0 JS errors), no missing
+  assets. Every loop checked mid-clip for text artifacts (KA3 rerolled: Wan had written fake text in the bubble).
+- Owner topped up Comfy credits; balance after this round about $33.
+
+## 13. State and next steps (read this first in a new session)
+
+- Branch `redesign/cyber` holds everything; `main` = last live (3D-world homepage diagrams, 2026-10-21).
+  NOT YET LIVE: straight-line product pipelines + step-card scenes. Zip `logicsonata-site-redesign.zip` built
+  2026-10-21 and sent to the owner. After the owner uploads: verify live, then merge `redesign/cyber` into `main`.
+- Session-only files (lost when the container ends): `/home/user/comfy/raw` (all takes), `/home/user/comfy/vid`
+  (raw Wan clips), `/home/user/shots/*.js` (Playwright capture scripts: sections.js, overflow.js, recp.js).
+  Regenerate captures by rebuilding (`npm run build`, serve `out/` on :8080) and re-writing those small scripts.
+- Open owner requests (waiting for owner facts): real demo near the top, delivery evidence on About, privacy
+  boundaries section + privacy policy page + chat disclosure that the website chat uses a public AI (Claude).
+- Workflow rules that worked: show previews before any zip; check takes at 100% for faces, hands, garbled text and
+  landmark accuracy; log every still and loop in `tools/photos/manifest.json`; never use em dashes in copy.

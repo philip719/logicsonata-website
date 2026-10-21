@@ -905,5 +905,154 @@
       "method": "Flux Krea img2img from tools/photos/stack_world_base.py layout (floors listed top-first in the prompt), denoise 0.78",
       "loop": "VID-STACK seed 7, first-last-frame, 1024x1216"
     }
+  },
+  "_step_cards": {
+    "ka1": {
+      "still": "CARD-KA1_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ka2": {
+      "still": "CARD-KA2_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ka3": {
+      "still": "CARD-KA3_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 11 (text-free reroll)"
+    },
+    "ka4": {
+      "still": "CARD-KA4_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ka5": {
+      "still": "CARD-KA5_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ka6": {
+      "still": "CARD-KA6_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "vi1": {
+      "still": "CARD-VI1_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "vi2": {
+      "still": "CARD-VI2_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "vi3": {
+      "still": "CARD-VI3_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "vi4": {
+      "still": "CARD-VI4_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "vi5": {
+      "still": "CARD-VI5_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ca1": {
+      "still": "CARD-CA1_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ca2": {
+      "still": "CARD-CA2_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ca3": {
+      "still": "CARD-CA3_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ca4": {
+      "still": "CARD-CA4_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ca5": {
+      "still": "CARD-CA5_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ap1": {
+      "still": "CARD-AP1_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ap2": {
+      "still": "CARD-AP2_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ap3": {
+      "still": "CARD-AP3_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ap4": {
+      "still": "CARD-AP4_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "ap5": {
+      "still": "CARD-AP5_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "is1": {
+      "still": "CARD-IS1_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "is2": {
+      "still": "CARD-IS2_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "is3": {
+      "still": "CARD-IS3_s9501",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "is4": {
+      "still": "CARD-IS4_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    },
+    "is5": {
+      "still": "CARD-IS5_s9502",
+      "method": "Flux Krea text-to-image 768x432, prompt in /home/user/comfy/jobs16.json pattern (scene + shared miniature-tile style)",
+      "loop": "Wan 2.2 FLF lightx2v 6 steps 768x432 seed 7"
+    }
+  },
+  "_pipelines": {
+    "layout": "tools/photos/pipeline_base.py (level, A=0)",
+    "takes": {
+      "vision": "PIPE2-VI_s9401_d078",
+      "knowledge": "PIPE2-KA_s9401_d078r (screen text retouched)",
+      "coding": "PIPE2-CA_s9401_d078",
+      "agents": "PIPE2-AP_s9401_d078r (sign text retouched)",
+      "image-studio": "PIPE2-IS_s9402_d078"
+    },
+    "band": [
+      0,
+      224,
+      1536,
+      512
+    ],
+    "loops": "Wan 2.2 FLF 20 steps 1536x640, cropped to the band"
   }
 }
