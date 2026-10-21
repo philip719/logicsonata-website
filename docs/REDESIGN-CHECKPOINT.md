@@ -174,6 +174,9 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   `tools/hero-orbit/finish.py frames=... labels=...` composites on #e4e7ea, encodes
   `public/video/hero-orbit.{webm,mp4}`, writes `hero-orbit.json` and the still `home-hero-*.webp`.
   `HeroLoop.tsx` moves the labels each frame and shows them only while the parts are apart.
+- Scroll story chapter 2 (frames 44-91) re-rendered with the same appliance: `orbit.py scene=story` (dark set,
+  teal and red pools, parts settle into one unit, 48 frames, about 35 s each), then
+  `python tools/photos/story.py vid/VID-01_s11.mp4 story-ch2.mp4 vid/VID-03_s7.mp4`. Chapters 1 and 3 unchanged.
 - Hero is now a light studio band (`.xh--studio` in cyber.css, local colour tokens). Six part labels and the hero
   alt text translated in all locales.
 - ChatGPT design review (owner shared 2026-10-21): owner chose a refinement pass (keep the dark identity, calm effects,
