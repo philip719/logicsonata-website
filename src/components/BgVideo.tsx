@@ -16,7 +16,7 @@ export function BgVideo({ name }: { name: string }) {
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          if (!v.src) v.src = `/video/${name}.mp4`;
+          if (!v.src) v.src = `/video/${name}.${v.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4'}`;
           v.play().catch(() => {});
         } else v.pause();
       },

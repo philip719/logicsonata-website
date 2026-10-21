@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { BgVideo } from '@/components/BgVideo';
-import { FlowIllustration } from '@/components/graphics/FlowIllustration';
-import { StackIllustration } from '@/components/graphics/StackIllustration';
+import { FlowWorld, StackWorld } from '@/components/graphics/WorldDiagrams';
 import { HeroLoop } from '@/components/HeroLoop';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
@@ -134,8 +133,8 @@ export function HomeView({ lang }: { lang: Locale }) {
 
       {/* PROBLEM */}
       <section className="section">
-        <div className="container split">
-          <div>
+        <div className="container">
+          <div className="split split--top">
             <SectionHead index="01" eyebrow={t.problem.eyebrow} title={<Rich text={t.problem.title} lang={lang} />} lead={t.problem.lead} />
             <ul className="exposure-list" data-reveal>
               {t.problem.exposure.map((e) => (
@@ -148,9 +147,9 @@ export function HomeView({ lang }: { lang: Locale }) {
               ))}
             </ul>
           </div>
-          <div className="panel panel-graphic" data-reveal>
+          <div className="panel panel-graphic panel-wide" data-reveal>
             <Corners />
-            <FlowIllustration t={common.graphics} />
+            <FlowWorld t={common.graphics} />
           </div>
         </div>
       </section>
@@ -160,7 +159,7 @@ export function HomeView({ lang }: { lang: Locale }) {
         <div className="container split split--reverse">
           <div className="panel panel-graphic" data-reveal>
             <Corners />
-            <StackIllustration layers={data.stack.map((l) => l.name)} title={common.graphics.stackTitle} />
+            <StackWorld layers={data.stack.map((l) => l.name)} title={common.graphics.stackTitle} />
           </div>
           <div>
             <SectionHead index="02" eyebrow={t.stack.eyebrow} title={t.stack.title} lead={t.stack.lead} />

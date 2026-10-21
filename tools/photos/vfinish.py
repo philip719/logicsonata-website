@@ -1,6 +1,6 @@
 """Grade and encode a Wan clip as a web background loop. Usage: python vfinish.py in.mp4 name [--loop]
 Grades every frame like the stills (no grain), drops the duplicate end frame of first-last-frame loops, interpolates
-16 to 32 fps (ffmpeg minterpolate) and writes public/video/<name>.mp4 (H.264, muted, faststart)."""
+16 to 32 fps (ffmpeg minterpolate) and writes public/video/<name>.mp4 (H.264, muted, faststart) and <name>.webm (VP9)."""
 import glob, os, subprocess, sys, tempfile
 from PIL import Image
 from grade import grade
@@ -20,4 +20,5 @@ dst = f'{OUT}/{name}.mp4'
 subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-framerate', '16', '-i', f'{tmp}/%03d.png',
                 '-vf', 'minterpolate=fps=32:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1', '-an',
                 '-c:v', 'libx264', '-preset', 'slow', '-crf', '27', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', dst], check=True)
-print(name, f'{os.path.getsize(dst) / 1e6:.2f} MB')
+subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', dst, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '36', '-row-mt', '1', '-an', dst.replace('.mp4', '.webm')], check=True)
+print(name, f'{os.path.getsize(dst) / 1e6:.2f} MB mp4, {os.path.getsize(dst.replace(".mp4", ".webm")) / 1e6:.2f} MB webm')
