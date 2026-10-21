@@ -189,7 +189,8 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 
 - Branch `redesign/cyber` holds everything; `main` = last live (3D-world homepage diagrams, 2026-10-21).
   LIVE 2026-10-21 and merged to main: straight-line product pipelines + step-card scenes.
-  LIVE 2026-10-21 and merged to main: studio orbit hero (light band, tracked labels). Old
+  LIVE 2026-10-21 and merged to main: studio orbit hero (light band, tracked labels) and scroll story
+  chapter 2 re-rendered with the same appliance. Old
   `video/hero-loop.*` may still sit on the server unused; safe to delete. Zip was built
   2026-10-21 and sent to the owner. After the owner uploads: verify live, then merge `redesign/cyber` into `main`.
 - Session-only files (lost when the container ends): `/home/user/comfy/raw` (all takes), `/home/user/comfy/vid`
