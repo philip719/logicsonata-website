@@ -164,7 +164,7 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
   assets. Every loop checked mid-clip for text artifacts (KA3 rerolled: Wan had written fake text in the bubble).
 - Owner topped up Comfy credits; balance after this round about $33.
 
-## 13. Update 6 (2026-10-21): studio orbit hero (in progress)
+## 13. Update 6 (2026-10-21): studio orbit hero (LIVE 2026-10-21, merged to main)
 
 - New hero video rendered in Blender, not Comfy: `tools/hero-orbit/orbit.py` (bpy 4.2 in
   `/home/user/blender-venv`, Cycles CPU, about 18 s per frame at 1440x810, 40 samples). Six-part LS-branded
@@ -185,7 +185,9 @@ the `X-API-Key` header on cloud.comfy.org; no key lives in the repo or the envir
 ## 14. State and next steps (read this first in a new session)
 
 - Branch `redesign/cyber` holds everything; `main` = last live (3D-world homepage diagrams, 2026-10-21).
-  LIVE 2026-10-21 and merged to main: straight-line product pipelines + step-card scenes. Zip was built
+  LIVE 2026-10-21 and merged to main: straight-line product pipelines + step-card scenes.
+  LIVE 2026-10-21 and merged to main: studio orbit hero (light band, tracked labels). Old
+  `video/hero-loop.*` may still sit on the server unused; safe to delete. Zip was built
   2026-10-21 and sent to the owner. After the owner uploads: verify live, then merge `redesign/cyber` into `main`.
 - Session-only files (lost when the container ends): `/home/user/comfy/raw` (all takes), `/home/user/comfy/vid`
   (raw Wan clips), `/home/user/shots/*.js` (Playwright capture scripts: sections.js, overflow.js, recp.js).
