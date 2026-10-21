@@ -1380,6 +1380,154 @@ html:not(.js) .statement .w.hl,
   overflow: visible;
 }
 
+/* ---------- Product pipeline worlds ---------- */
+
+.pw {
+  margin: 0;
+}
+
+.pw-media {
+  position: relative;
+  overflow: hidden;
+  border: 1px dashed rgba(255, 59, 48, 0.45);
+  background: radial-gradient(ellipse at 50% 60%, rgba(255, 59, 48, 0.06), transparent 70%), #05090b;
+}
+
+.pw-track {
+  position: relative;
+}
+
+.pw-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pw-media .bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.pw-media .bg-video[src] {
+  opacity: 1;
+}
+
+.pw-tag {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.pw-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  background: rgba(5, 9, 11, 0.75);
+  color: var(--cyan);
+  font-size: 11px;
+  box-shadow: 0 0 14px rgba(62, 240, 224, 0.45);
+}
+
+.pw-stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.pw-stages li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 18px 16px 20px;
+  border-left: 1px solid var(--line);
+}
+
+.pw-stages li:first-child {
+  border-left: 0;
+}
+
+.pw-stage-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--red);
+  font-size: 12px;
+}
+
+.pw-stages strong {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.pw-stages li > span:last-child {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  /* The scene scrolls sideways on phones so the stations stay readable. */
+  .pw-media {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cyan) transparent;
+  }
+
+  .pw-track {
+    flex: none;
+    width: 820px;
+  }
+
+  .pw-tag {
+    position: sticky;
+    top: auto;
+    left: 0;
+    display: block;
+    padding: 14px 14px 6px;
+    order: -1;
+  }
+
+  .pw-pin {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+
+  .pw-stages {
+    grid-template-columns: 1fr;
+  }
+
+  .pw-stages li {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .pw-stages li:first-child {
+    border-top: 0;
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

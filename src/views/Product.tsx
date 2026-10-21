@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FlowDiagram } from '@/components/graphics/FlowDiagram';
+import { PipelineWorld } from '@/components/graphics/PipelineWorld';
 import { Icon } from '@/components/Icon';
 import { breadcrumbs, JsonLd } from '@/components/JsonLd';
 import { LeadNudge } from '@/components/LeadNudge';
@@ -12,7 +13,7 @@ import { lp, type Locale } from '@/i18n/config';
 import { getDict } from '@/i18n/dictionaries';
 import { absoluteUrl, pageMeta } from '@/i18n/seo';
 import type { Product } from '@/lib/products';
-import { productPhoto } from '@/lib/photos';
+import { PIPELINE_ART, productPhoto } from '@/lib/photos';
 import { MARKET_NAMES_EN, SITE } from '@/lib/site';
 
 export function productMeta(lang: Locale, p: Product) {
@@ -150,7 +151,11 @@ export function ProductView({ lang, product: p }: { lang: Locale; product: Produ
             lead={p.builtOn}
           />
           <div data-reveal>
-            <FlowDiagram stages={p.flow} label={fmt(t.architecture, { name: p.name })} inside={common.flow.inside} foot={common.flow.foot} />
+            {PIPELINE_ART[p.id] ? (
+              <PipelineWorld stages={p.flow} art={PIPELINE_ART[p.id]!} label={fmt(t.architecture, { name: p.name })} inside={common.flow.inside} foot={common.flow.foot} />
+            ) : (
+              <FlowDiagram stages={p.flow} label={fmt(t.architecture, { name: p.name })} inside={common.flow.inside} foot={common.flow.foot} />
+            )}
           </div>
           <ol className={`steps steps-${p.steps.length}`} style={{ marginTop: 40 }} data-reveal>
             {p.steps.map((s, i) => (

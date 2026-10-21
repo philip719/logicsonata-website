@@ -19,3 +19,8 @@ export const MARKET_PHOTOS: Record<string, string> = {
 
 // Focal points for the 3:4 market cards (default: centre).
 export const MARKET_FOCUS: Partial<Record<string, string>> = { SG: '64% 50%', VN: '66% 50%', ID: '22% 50%' };
+
+// Product architecture worlds (tools/photos/pipeline_base.py); pins are station positions as shares of width and height.
+export const PIPELINE_ART: Partial<Record<string, { name: string; pins: Array<[number, number]> }>> = {
+  'vision-intelligence': { name: 'pipeline-vision', pins: [[0.11, 0.26], [0.29, 0.3], [0.49, 0.26], [0.68, 0.12], [0.88, 0.04]] },
+};
